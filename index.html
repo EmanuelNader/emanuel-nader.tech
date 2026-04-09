@@ -25,19 +25,7 @@
 
       <!-- Windows XP Logo -->
       <div class="xp-logo-block">
-        <!-- 4-color Windows flag SVG -->
-        <div class="xp-flag">
-          <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-            <!-- Red pane -->
-            <path d="M2 2 L38 6 L38 38 L2 38 Z" fill="#E83030" />
-            <!-- Green pane -->
-            <path d="M42 6 L78 2 L78 38 L42 38 Z" fill="#37B14B" />
-            <!-- Blue pane -->
-            <path d="M2 42 L38 42 L38 74 L2 78 Z" fill="#2B5FD9" />
-            <!-- Yellow pane -->
-            <path d="M42 42 L78 42 L78 78 L42 74 Z" fill="#F5C518" />
-          </svg>
-        </div>
+        <img src="assets/startup.png" alt="Windows XP" style="max-height: 120px;" />
         <div class="xp-wordmark">
           <span class="xp-microsoft">Microsoft<sup>®</sup></span>
           <div class="xp-windows-xp">
@@ -137,16 +125,10 @@
     <!-- Taskbar -->
     <div class="taskbar" id="taskbar">
       <div class="taskbar-left">
-        <button class="start-btn" id="start-btn" onclick="toggleStartMenu()" aria-label="Start">
-          <svg class="start-flag" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1 L9.5 2.5 L9.5 9.5 L1 9.5 Z" fill="#E83030" />
-            <path d="M10.5 2.5 L19 1 L19 9.5 L10.5 9.5 Z" fill="#37B14B" />
-            <path d="M1 10.5 L9.5 10.5 L9.5 17.5 L1 19 Z" fill="#2B5FD9" />
-            <path d="M10.5 10.5 L19 10.5 L19 19 L10.5 17.5 Z" fill="#F5C518" />
-          </svg>
-          <span>start</span>
+        <button class="start-btn start-img-btn" id="start-btn" onclick="toggleStartMenu()" aria-label="Start"
+          style="padding: 0; border: none; background: transparent; cursor: pointer;">
+          <img src="assets/start.png" alt="Start" style="height: 30px; display: block;" />
         </button>
-        <!-- Active windows in taskbar -->
         <div class="taskbar-windows" id="taskbar-windows"></div>
       </div>
       <div class="taskbar-right systray">
