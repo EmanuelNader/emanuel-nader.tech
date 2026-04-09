@@ -71,7 +71,10 @@ function doLogin() {
 // ==========================================================================
 // START MENU
 // ==========================================================================
-function toggleStartMenu() {
+function toggleStartMenu(e) {
+  if (e) {
+    e.stopPropagation();
+  }
   const menu = document.getElementById('start-menu');
   const btn = document.getElementById('start-btn');
   if (menu.classList.contains('hidden')) {

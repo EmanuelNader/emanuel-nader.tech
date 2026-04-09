@@ -184,13 +184,9 @@ a:hover { text-decoration: underline; }
 
 /* Icons Grid */
 .desktop-icons {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  position: relative;
   height: 100%;
   padding: 5px;
-  gap: 20px;
 }
 
 .desktop-icon {
@@ -198,10 +194,20 @@ a:hover { text-decoration: underline; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2px 2px 10px 2px;
   cursor: pointer;
-  position: relative;
+  position: absolute;
 }
+
+/* Scattering 9 explicit desktop icons */
+.desktop-icon:nth-child(1) { top: 20px; left: 20px; }
+.desktop-icon:nth-child(2) { top: 120px; left: 45px; }
+.desktop-icon:nth-child(3) { top: 210px; left: 15px; }
+.desktop-icon:nth-child(4) { top: 315px; left: 60px; }
+.desktop-icon:nth-child(5) { top: 35px; left: 130px; }
+.desktop-icon:nth-child(6) { top: 140px; left: 125px; }
+.desktop-icon:nth-child(7) { top: 250px; left: 140px; }
+.desktop-icon:nth-child(8) { top: 340px; left: 155px; }
+.desktop-icon:nth-child(9) { top: 80px; left: 230px; }
 .desktop-icon:hover .icon-label {
   background: rgba(0, 88, 238, 0.5); /* XP focus bg */
 }
