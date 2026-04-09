@@ -177,7 +177,7 @@ a:hover { text-decoration: underline; }
    ========================================================================== */
 .desktop {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 30px; /* leaves 30px for taskbar */
+  top: 0; left: 0; right: 0; bottom: 45px; /* leaves 45px for taskbar */
   background: #004E98 url('assets/icons/bliss.jpg') center/cover no-repeat;
   z-index: 1;
 }
@@ -249,7 +249,7 @@ a:hover { text-decoration: underline; }
    ========================================================================== */
 .taskbar {
   position: fixed;
-  bottom: 0; left: 0; width: 100vw; height: 30px;
+  bottom: 0; left: 0; width: 100vw; height: 45px;
   background: linear-gradient(to bottom, #245EDC 0%, #3f8cf3 9%, #245EDC 18%, #245EDC 92%, #1B4FB5 100%);
   display: flex;
   justify-content: space-between;
@@ -262,11 +262,11 @@ a:hover { text-decoration: underline; }
 .start-btn {
   background: linear-gradient(to bottom, #3E9A4D 0%, #44AA55 10%, #368542 90%, #2A6633 100%);
   border: none;
-  height: 30px;
-  padding: 0 15px 0 10px;
-  border-radius: 0 15px 15px 0;
+  height: 45px;
+  padding: 0 20px 0 15px;
+  border-radius: 0 22px 22px 0;
   color: white;
-  font-family: inherit; font-size: 15px; font-weight: bold; font-style: italic;
+  font-family: inherit; font-size: 20px; font-weight: bold; font-style: italic;
   display: flex; align-items: center;
   box-shadow: 1px 0 2px rgba(0,0,0,0.4), inset 1px 1px 1px rgba(255,255,255,0.4);
   cursor: pointer;
@@ -277,26 +277,27 @@ a:hover { text-decoration: underline; }
   background: linear-gradient(to top, #3E9A4D 0%, #44AA55 10%, #368542 90%, #2A6633 100%);
   box-shadow: inset 1px 2px 3px rgba(0,0,0,0.4);
 }
-.start-flag { margin-right: 5px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
+.start-flag { margin-right: 8px; width: 20px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
 
 .taskbar-windows {
   display: flex;
   margin-left: 10px;
   flex: 1;
+  align-items: center; /* Center horizontally within taskbar */
 }
 .taskbar-win-btn {
   background: #3A6EA5;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 2px;
   color: white;
-  height: 24px;
+  height: 30px;
   min-width: 120px;
   max-width: 160px;
   margin: 0 2px;
   padding: 0 8px;
   display: flex;
   align-items: center;
-  font-size: 11px;
+  font-size: 13px;
   cursor: pointer;
   box-shadow: inset 1px 1px 1px rgba(255,255,255,0.1), inset -1px -1px 1px rgba(0,0,0,0.2);
 }
@@ -326,7 +327,7 @@ a:hover { text-decoration: underline; }
    ========================================================================== */
 .start-menu {
   position: fixed;
-  bottom: 30px; left: 0;
+  bottom: 45px; left: 0;
   width: 380px;
   background: white;
   border: 1px solid #0831D9;
@@ -362,38 +363,25 @@ a:hover { text-decoration: underline; }
 .sm-item:hover, .sm-right-item:hover {
   background: #2F71CD; color: white;
 }
-.sm-icon, .sm-right-icon {
-  width: 24px; height: 24px; margin-right: 10px;
-  background-image: url('assets/icons/icon_sheet.png'); background-size: 72px 72px; /* scaled */
-}
+.sm-icon { width: 32px; height: 32px; margin-right: 12px; object-fit: contain; }
+.sm-right-icon { width: 24px; height: 24px; margin-right: 12px; object-fit: contain; }
+
 .sm-item:hover .sm-icon { filter: brightness(1.2); }
 .sm-divider, .sm-right-sep { height: 1px; background: #D0D0D0; margin: 4px 6px; }
 
 .sm-right-item { font-weight: bold; color: #00136C; }
 .sm-right-item:hover { color: white; }
-/* Reusing sprite positions */
-.sm-icon-about { background-position: 0 0; }
-.sm-icon-projects { background-position: -24px 0; }
-.sm-icon-resume { background-position: 0 -48px; }
-.sm-icon-github { background-position: -24px -48px; }
-.sm-icon-linkedin { background-position: -48px -48px; }
-.sm-icon-experience { background-position: -48px 0; }
-.sm-icon-skills { background-position: 0 -24px; }
-.sm-icon-contact { background-position: -24px -24px; }
-.sm-icon-hobbies { background-position: -48px -24px; }
-/* Generic right icons mock */
-.sm-right-icon { background: #555; border-radius: 2px; }
-
+/* Remove old sprite positions for start menu visually causing artifacts if active */
 .sm-footer {
-  height: 38px;
+  height: 50px;
   background: linear-gradient(to right, #245EDC 0%, #164AC4 100%);
-  display: flex; justify-content: flex-end; align-items: center; padding: 0 10px;
+  display: flex; justify-content: flex-end; align-items: center; padding: 0 20px;
 }
 .sm-footer-btn {
   display: flex; align-items: center; background: transparent; border: none;
-  color: white; font-size: 11px; margin-left: 15px; cursor: pointer;
+  color: white; font-size: 14px; font-weight: bold; margin-left: 20px; cursor: pointer;
 }
-.sm-footer-btn svg { margin-right: 5px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
+.sm-footer-btn svg { margin-right: 6px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
 .sm-footer-btn:hover { text-decoration: underline; }
 
 /* ==========================================================================

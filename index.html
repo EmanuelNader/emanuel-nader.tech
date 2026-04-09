@@ -103,11 +103,11 @@
         <div class="icon-img icon-resume"></div>
         <span class="icon-label">Resume</span>
       </div>
-      <div class="desktop-icon" onclick="openExternal('https://github.com/emanader')">
+      <div class="desktop-icon" onclick="openExternal('https://github.com/EmanuelNader')">
         <div class="icon-img icon-github"></div>
         <span class="icon-label">GitHub</span>
       </div>
-      <div class="desktop-icon" onclick="openExternal('https://linkedin.com/in/emanader')">
+      <div class="desktop-icon" onclick="openExternal('https://linkedin.com/in/emanuelnader')">
         <div class="icon-img icon-linkedin"></div>
         <span class="icon-label">LinkedIn</span>
       </div>
@@ -117,8 +117,8 @@
     <div class="taskbar" id="taskbar">
       <div class="taskbar-left">
         <button class="start-btn start-img-btn" id="start-btn" onclick="toggleStartMenu()" aria-label="Start"
-          style="padding: 0; border: none; background: transparent; cursor: pointer;">
-          <img src="assets/icons/start.png" alt="Start" style="height: 30px; display: block;" />
+          style="padding: 0; border: none; background: transparent; cursor: pointer; height: 45px;">
+          <img src="assets/icons/start.png" alt="Start" style="height: 100%; display: block; object-fit: contain;" />
         </button>
         <div class="taskbar-windows" id="taskbar-windows"></div>
       </div>
@@ -138,7 +138,7 @@
           <line x1="8" y1="6" x2="3" y2="9" stroke="#8BB0EE" stroke-width="1" />
           <line x1="8" y1="6" x2="13" y2="9" stroke="#8BB0EE" stroke-width="1" />
         </svg>
-        <span class="systray-clock" id="systray-clock">12:00 PM</span>
+        <span class="systray-clock" id="systray-clock" style="font-size: 16px;">12:00 PM</span>
       </div>
     </div>
 
@@ -157,87 +157,50 @@
         <!-- Left column: white -->
         <div class="sm-left">
           <div class="sm-section-label sr-only">Pinned</div>
-          <div class="sm-item" onclick="startMenuOpen('about')">
-            <div class="sm-icon sm-icon-about"></div>
-            About Me
+          <div class="sm-item" onclick="openWindow('about')"><img class="sm-icon" src="assets/icons/people.png" />About
+            Me</div>
+          <div class="sm-item" onclick="openWindow('projects')"><img class="sm-icon" src="assets/icons/folder.png" />My
+            Projects</div>
+          <div class="sm-item" onclick="openWindow('resume')"><img class="sm-icon" src="assets/icons/paper.png" />Resume
           </div>
-          <div class="sm-item" onclick="startMenuOpen('projects')">
-            <div class="sm-icon sm-icon-projects"></div>
-            My Projects
-          </div>
-          <div class="sm-item" onclick="startMenuOpen('resume')">
-            <div class="sm-icon sm-icon-resume"></div>
-            Resume
-          </div>
-          <div class="sm-item" onclick="openExternal('https://github.com/emanader')">
-            <div class="sm-icon sm-icon-github"></div>
-            GitHub
-          </div>
-          <div class="sm-item" onclick="openExternal('https://linkedin.com/in/emanader')">
-            <div class="sm-icon sm-icon-linkedin"></div>
-            LinkedIn
-          </div>
+          <div class="sm-item" onclick="window.open('https://github.com/EmanuelNader', '_blank')"><img class="sm-icon"
+              src="assets/icons/local disk.png" />GitHub</div>
+          <div class="sm-item" onclick="window.open('https://linkedin.com/in/EmanuelNader', '_blank')"><img
+              class="sm-icon" src="assets/icons/people.png" />LinkedIn</div>
+
           <div class="sm-divider"></div>
-          <div class="sm-item" onclick="startMenuOpen('experience')">
-            <div class="sm-icon sm-icon-experience"></div>
-            Experience
-          </div>
-          <div class="sm-item" onclick="startMenuOpen('skills')">
-            <div class="sm-icon sm-icon-skills"></div>
-            Skills
-          </div>
-          <div class="sm-item" onclick="startMenuOpen('contact')">
-            <div class="sm-icon sm-icon-contact"></div>
-            Contact
-          </div>
-          <div class="sm-item" onclick="startMenuOpen('hobbies')">
-            <div class="sm-icon sm-icon-hobbies"></div>
-            Hobbies
-          </div>
+
+          <div class="sm-item" onclick="openWindow('experience')"><img class="sm-icon"
+              src="assets/icons/bag.png" />Experience</div>
+          <div class="sm-item" onclick="openWindow('skills')"><img class="sm-icon"
+              src="assets/icons/settings.png" />Skills</div>
+          <div class="sm-item" onclick="openWindow('contact')"><img class="sm-icon"
+              src="assets/icons/mail.png" />Contact</div>
+          <div class="sm-item" onclick="openWindow('hobbies')"><img class="sm-icon"
+              src="assets/icons/paint.png" />Hobbies</div>
         </div>
         <!-- Right column: light blue -->
         <div class="sm-right">
-          <div class="sm-right-item">
-            <div class="sm-right-icon sm-icon-mycomp"></div>
-            <span>My Computer</span>
-          </div>
-          <div class="sm-right-item">
-            <div class="sm-right-icon sm-icon-mydocs"></div>
-            <span>My Documents</span>
-          </div>
-          <div class="sm-right-item">
-            <div class="sm-right-icon sm-icon-mypics"></div>
-            <span>My Pictures</span>
-          </div>
+          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
+          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
+          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
+          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
+
           <div class="sm-right-sep"></div>
-          <div class="sm-right-item" onclick="startMenuOpen('skills')">
-            <div class="sm-right-icon sm-icon-control"></div>
-            <span>Control Panel</span>
-          </div>
-          <div class="sm-right-item" onclick="startMenuOpen('contact')">
-            <div class="sm-right-icon sm-icon-search"></div>
-            <span>Search</span>
-          </div>
-          <div class="sm-right-item" onclick="startMenuOpen('about')">
-            <div class="sm-right-icon sm-icon-run"></div>
-            <span>Run...</span>
-          </div>
+
+          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
+          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
         </div>
       </div>
       <!-- Footer -->
       <div class="sm-footer">
         <button class="sm-footer-btn sm-logoff" onclick="doLogoff()">
-          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="9" cy="9" r="7" fill="none" stroke="#ffaa00" stroke-width="2" />
-            <line x1="9" y1="2" x2="9" y2="9" stroke="#ffaa00" stroke-width="2" stroke-linecap="round" />
-          </svg>
+          <img src="assets/icons/shut_down.png"
+            style="width:20px;height:20px;filter:hue-rotate(180deg); margin-right:6px; border-radius:3px;" />
           Log Off
         </button>
         <button class="sm-footer-btn sm-shutdown" onclick="doShutdown()">
-          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="9" cy="9" r="7" fill="none" stroke="#cc3300" stroke-width="2" />
-            <line x1="9" y1="2" x2="9" y2="9" stroke="#cc3300" stroke-width="2" stroke-linecap="round" />
-          </svg>
+          <img src="assets/icons/shut_down.png" style="width:20px;height:20px;margin-right:6px; border-radius:3px;" />
           Shut Down
         </button>
       </div>
@@ -292,23 +255,17 @@
               <div class="about-avatar">EN</div>
               <div class="about-intro">
                 <h1>Emanuel Nader</h1>
-                <p class="about-subtitle">Software Engineering Student &bull; UC San Diego</p>
+                <p class="about-subtitle">Mathematics-Computer Science Student &bull; UC San Diego</p>
               </div>
             </div>
             <div class="about-body">
-              <p>Hey! I'm Emanuel — a Software Engineering student at <strong>UC San Diego</strong>, passionate about
-                building products that people actually love to use.</p>
-              <p>I specialize in full-stack development, with a focus on clean system design, real-time applications,
-                and developer tooling. When I'm not coding, I'm probably hiking, hacking on side projects, or exploring
-                new technologies.</p>
+              <p>Hey! I'm Emanuel — a student at <strong>UC San Diego</strong>, passionate about building products that people actually love to use.</p>
+              <p>I focus on full-stack development, modern system design, AI pipelines, and cloud tooling. When I'm not coding, I'm exploring side projects and learning new tech stacks.</p>
               <div class="about-facts">
                 <div class="fact-row"><span class="fact-label">📍 Location</span><span>San Diego, CA</span></div>
-                <div class="fact-row"><span class="fact-label">🎓 School</span><span>UC San Diego — B.S. Software
-                    Engineering</span></div>
-                <div class="fact-row"><span class="fact-label">💼 Status</span><span>Open to internships &amp;
-                    opportunities</span></div>
-                <div class="fact-row"><span class="fact-label">📧 Email</span><span><a
-                      href="mailto:enader@ucsd.edu">enader@ucsd.edu</a></span></div>
+                <div class="fact-row"><span class="fact-label">🎓 School</span><span>UC San Diego — B.S. Mathematics-Computer Science</span></div>
+                <div class="fact-row"><span class="fact-label">💼 Status</span><span>Open to internships &amp; opportunities</span></div>
+                <div class="fact-row"><span class="fact-label">📧 Email</span><span><a href="mailto:EmanuelSNader@gmail.com">EmanuelSNader@gmail.com</a></span></div>
               </div>
             </div>
           </div>
@@ -358,46 +315,52 @@
 
             <div class="project-card">
               <div class="project-icon-bar">
-                <div class="project-folder-icon"></div>
-                <div class="project-header-text">
-                  <div class="project-name">Garnett</div>
-                  <div class="project-type">Web Application</div>
-                </div>
-              </div>
-              <p class="project-desc">A full-stack course planning and review platform for UCSD students. Enables
-                students to track academic progress, discover courses, and read peer reviews — all in one place.</p>
-              <div class="project-tags">
-                <span class="tag">React</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">PostgreSQL</span>
-                <span class="tag">AWS</span>
-              </div>
-              <div class="project-links">
-                <a href="#" class="proj-link">&#128279; Live Demo</a>
-                <a href="#" class="proj-link">&#128196; GitHub</a>
-              </div>
-            </div>
-
-            <div class="project-card">
-              <div class="project-icon-bar">
                 <div class="project-folder-icon project-folder-green"></div>
                 <div class="project-header-text">
                   <div class="project-name">HealthBook 2.0</div>
                   <div class="project-type">AI + Automation</div>
                 </div>
               </div>
-              <p class="project-desc">An AI-powered medical appointment booking assistant with voice interaction,
-                browser automation, and SMS notifications. Built for a hackathon and designed to reduce friction in
-                healthcare access.</p>
+              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+                <li>Reduced medical appointment booking time 90% via Browser Use SDK and OpenAI Realtime API Twilio calls.</li>
+                <li>Eliminated repeated health history entry via pgvector semantic memory pipeline in Supabase.</li>
+              </ul>
               <div class="project-tags">
-                <span class="tag">Next.js</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">Browser Use</span>
-                <span class="tag">Twilio</span>
+                <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">pgvector</span><span class="tag">Supabase</span>
               </div>
-              <div class="project-links">
-                <a href="#" class="proj-link">&#128279; Live Demo</a>
-                <a href="#" class="proj-link">&#128196; GitHub</a>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon-bar">
+                <div class="project-folder-icon"></div>
+                <div class="project-header-text">
+                  <div class="project-name">LockedIn</div>
+                  <div class="project-type">IoT & Fullstack</div>
+                </div>
+              </div>
+              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+                <li>Reduced device event latency by 35%+ by architecting an IoT pipeline (ESP32 &rarr; REST &rarr; MongoDB).</li>
+                <li>Optimized database schemas cutting data retrieval latency by 40% across modular REST services.</li>
+              </ul>
+              <div class="project-tags">
+                <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-icon-bar">
+                <div class="project-folder-icon project-folder-orange"></div>
+                <div class="project-header-text">
+                  <div class="project-name">Nutribase</div>
+                  <div class="project-type">IoT Tracking</div>
+                </div>
+              </div>
+              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+                <li>Engineered a MERN-stack Smart Fridge Tracker, reducing food waste tracking errors by 60%.</li>
+                <li>Programmed custom ESP32 firmware in C++ to stream high-frequency real-time weight payloads.</li>
+              </ul>
+              <div class="project-tags">
+                <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span class="tag">C++</span>
               </div>
             </div>
 
@@ -406,20 +369,15 @@
                 <div class="project-folder-icon project-folder-orange"></div>
                 <div class="project-header-text">
                   <div class="project-name">ShortStack</div>
-                  <div class="project-type">Developer Tool</div>
+                  <div class="project-type">Platform Architecture</div>
                 </div>
               </div>
-              <p class="project-desc">A URL shortener and link analytics platform built for teams. Features custom
-                slugs, click tracking dashboards, QR code generation, and team workspaces with role-based access.</p>
+              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+                <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx replicas.</li>
+                <li>Achieved 84% test coverage via GitHub Actions CI pipeline orchestrating 7 Docker containers.</li>
+              </ul>
               <div class="project-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">Redis</span>
-                <span class="tag">Express</span>
-                <span class="tag">React</span>
-              </div>
-              <div class="project-links">
-                <a href="#" class="proj-link">&#128279; Live Demo</a>
-                <a href="#" class="proj-link">&#128196; GitHub</a>
+                <span class="tag">Flask</span><span class="tag">Redis</span><span class="tag">Docker</span><span class="tag">Prometheus</span>
               </div>
             </div>
 
@@ -465,41 +423,19 @@
             <div class="exp-item">
               <div class="exp-dot"></div>
               <div class="exp-content">
-                <div class="exp-role">Software Engineering Intern</div>
-                <div class="exp-company">Tech Company &bull; San Diego, CA</div>
-                <div class="exp-date">Summer 2024</div>
-                <p class="exp-desc">Built internal tooling for developer productivity, reducing deployment times by 40%.
-                  Worked closely with senior engineers on distributed systems architecture.</p>
+                <div class="exp-role">Software Engineering Extern (Technical Analyst)</div>
+                <div class="exp-company">HP Tech Ventures &bull; Remote</div>
+                <div class="exp-date">Feb 2026 – Apr 2026</div>
+                <p class="exp-desc">Cut due diligence cycle time by 40% building Python scrapers; performed architecture audits on 20+ startups to improve screening efficiency by 25%; built an LLM-powered NLP research tool halving technical risk analysis time.</p>
               </div>
             </div>
             <div class="exp-item">
               <div class="exp-dot"></div>
               <div class="exp-content">
-                <div class="exp-role">Undergraduate Researcher</div>
-                <div class="exp-company">UCSD CSE Department</div>
-                <div class="exp-date">2023 – Present</div>
-                <p class="exp-desc">Researching automated program analysis and software reliability under Professor XYZ.
-                  Published a workshop paper on static analysis tooling.</p>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-dot"></div>
-              <div class="exp-content">
-                <div class="exp-role">Teaching Assistant — CSE 110</div>
-                <div class="exp-company">UC San Diego</div>
-                <div class="exp-date">2023 – 2024</div>
-                <p class="exp-desc">Led weekly lab sections for Software Engineering (CSE 110), helping 30+ students
-                  with agile development, testing, and system design concepts.</p>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-dot"></div>
-              <div class="exp-content">
-                <div class="exp-role">Hackathon Organizer</div>
-                <div class="exp-company">HackUCSD</div>
-                <div class="exp-date">2022 – 2023</div>
-                <p class="exp-desc">Co-organized UCSD's annual hackathon with 400+ participants. Managed sponsor
-                  relations, logistics, and workshop programming.</p>
+                <div class="exp-role">Software Project Lead</div>
+                <div class="exp-company">Theta Tau - Professional Engineering Fraternity</div>
+                <div class="exp-date">May 2025 – Present</div>
+                <p class="exp-desc">Led Agile delivery of Garnett holding 99%+ uptime for 70+ members; reduced real-time notification latency by 30% via Firebase integrations; drove 100% on-time delivery mentoring 12 engineers across 2 full-stack projects.</p>
               </div>
             </div>
           </div>
@@ -544,48 +480,33 @@
             <div class="skills-category">
               <div class="skills-cat-title">Languages</div>
               <div class="skills-tags">
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">C/C++</span>
-                <span class="skill-tag">SQL</span>
-                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">Python</span><span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">JavaScript</span><span class="skill-tag">Java</span>
+                <span class="skill-tag">C</span><span class="skill-tag">C++</span><span class="skill-tag">HTML/CSS</span>
               </div>
             </div>
             <div class="skills-category">
               <div class="skills-cat-title">Frameworks & Libraries</div>
               <div class="skills-tags">
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Next.js</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">FastAPI</span>
-                <span class="skill-tag">Express</span>
-                <span class="skill-tag">Redux</span>
-                <span class="skill-tag">Tailwind</span>
+                <span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span>
+                <span class="skill-tag">FastAPI</span><span class="skill-tag">Selenium</span><span class="skill-tag">Google Gemini API</span>
+                <span class="skill-tag">OpenAI API</span>
               </div>
             </div>
             <div class="skills-category">
-              <div class="skills-cat-title">Tools & Infrastructure</div>
+              <div class="skills-cat-title">Cloud & Databases</div>
               <div class="skills-tags">
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">AWS</span>
-                <span class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">Redis</span>
-                <span class="skill-tag">Linux</span>
-                <span class="skill-tag">CI/CD</span>
+                <span class="skill-tag">AWS</span><span class="skill-tag">MongoDB</span><span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">Redis</span><span class="skill-tag">Firebase</span><span class="skill-tag">Supabase</span>
+                <span class="skill-tag">pgvector</span><span class="skill-tag">Vercel</span><span class="skill-tag">SQL</span>
               </div>
             </div>
             <div class="skills-category">
-              <div class="skills-cat-title">Concepts</div>
+              <div class="skills-cat-title">DevOps & Tools</div>
               <div class="skills-tags">
-                <span class="skill-tag">REST APIs</span>
-                <span class="skill-tag">System Design</span>
-                <span class="skill-tag">Agile/Scrum</span>
-                <span class="skill-tag">TDD</span>
-                <span class="skill-tag">Data Structures</span>
-                <span class="skill-tag">Algorithms</span>
+                <span class="skill-tag">Docker</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">Prometheus</span>
+                <span class="skill-tag">Grafana</span><span class="skill-tag">Locust</span><span class="skill-tag">CI/CD</span>
+                <span class="skill-tag">Git/GitHub</span><span class="skill-tag">Agile/Scrum</span><span class="skill-tag">System Design</span>
               </div>
             </div>
           </div>
@@ -631,22 +552,22 @@
               <div class="contact-icon">📧</div>
               <div class="contact-detail">
                 <div class="contact-label">Email</div>
-                <a href="mailto:enader@ucsd.edu" class="contact-value">enader@ucsd.edu</a>
+                <a href="mailto:EmanuelSNader@gmail.com" class="contact-value">EmanuelSNader@gmail.com</a>
               </div>
             </div>
             <div class="contact-item">
               <div class="contact-icon">🔗</div>
               <div class="contact-detail">
                 <div class="contact-label">LinkedIn</div>
-                <a href="https://linkedin.com/in/emanader" class="contact-value"
-                  target="_blank">linkedin.com/in/emanader</a>
+                <a href="https://linkedin.com/in/emanuelnader" class="contact-value"
+                  target="_blank">linkedin.com/in/emanuelnader</a>
               </div>
             </div>
             <div class="contact-item">
               <div class="contact-icon">🐙</div>
               <div class="contact-detail">
                 <div class="contact-label">GitHub</div>
-                <a href="https://github.com/emanader" class="contact-value" target="_blank">github.com/emanader</a>
+                <a href="https://github.com/EmanuelNader" class="contact-value" target="_blank">github.com/EmanuelNader</a>
               </div>
             </div>
             <div class="contact-item">
@@ -777,51 +698,103 @@
             <div class="resume-paper">
               <div class="resume-header">
                 <h2>Emanuel Nader</h2>
-                <p>enader@ucsd.edu &bull; github.com/emanader &bull; linkedin.com/in/emanader</p>
-                <p>San Diego, CA</p>
+                <p style="font-size:12px; margin-top:5px;">818-624-7395 &bull; EmanuelSNader@gmail.com &bull;
+                  in/emanuelnader &bull; gh/EmanuelNader</p>
+                <p style="font-size:12px;">emanuelnader.tech</p>
               </div>
               <div class="resume-section">
                 <div class="resume-section-title">EDUCATION</div>
                 <div class="resume-entry">
                   <div class="resume-entry-header">
                     <strong>University of California, San Diego</strong>
-                    <span>Expected June 2026</span>
+                    <span>Expected June 2027</span>
                   </div>
-                  <div>B.S. Software Engineering &bull; GPA: 3.7/4.0</div>
-                  <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Algorithms, Software
-                    Engineering, Operating Systems, Databases</div>
+                  <div>B.S. in Mathematics-Computer Science &bull; La Jolla, CA</div>
+                  <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Design & Analysis of
+                    Algorithms, Systems Programming, Software Tools, Discrete Math & Graph Theory</div>
+                </div>
+              </div>
+              <div class="resume-section">
+                <div class="resume-section-title">TECHNICAL SKILLS</div>
+                <div style="font-size:11px;line-height:1.8;">
+                  <strong>Languages:</strong> Python, TypeScript, JavaScript, Java, C, C++, HTML/CSS<br>
+                  <strong>Frameworks/Libraries:</strong> React, Node.js, Express.js, FastAPI, Selenium, Google Gemini
+                  API, OpenAI API<br>
+                  <strong>Cloud & Databases:</strong> AWS, MongoDB, PostgreSQL, Redis, Firebase, Supabase, pgvector,
+                  Vercel, SQL<br>
+                  <strong>DevOps & Tools:</strong> Docker, GitHub Actions, Prometheus, Grafana, Locust, CI/CD, REST
+                  APIs, System Design
                 </div>
               </div>
               <div class="resume-section">
                 <div class="resume-section-title">EXPERIENCE</div>
                 <div class="resume-entry">
                   <div class="resume-entry-header">
-                    <strong>Software Engineering Intern</strong>
-                    <span>Summer 2024</span>
+                    <strong>HP Tech Ventures</strong>
+                    <span>Feb 2026 – Apr 2026</span>
                   </div>
-                  <div style="font-size:11px;color:#555;">Tech Company &bull; San Diego, CA</div>
+                  <div style="font-size:11px;color:#555;">Software Engineering Extern (Technical Analyst) &bull; Remote
+                  </div>
                   <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Built internal developer tools, reducing deployment time by 40%</li>
-                    <li>Designed distributed systems architecture for high-traffic endpoints</li>
+                    <li>Cut due diligence cycle time by 40%, saving >15 hours/week, by building Python scrapers that
+                      aggregated >10,000 market records.</li>
+                    <li>Improved investment screening efficiency by 25% via architecture audits on 20+ startup stacks.
+                    </li>
+                    <li>Halved technical risk analysis time by building an LLM-powered research tool using NLP
+                      pipelines.</li>
+                  </ul>
+                </div>
+                <div class="resume-entry">
+                  <div class="resume-entry-header">
+                    <strong>Theta Tau - Professional Engineering Fraternity</strong>
+                    <span>May 2025 – Present</span>
+                  </div>
+                  <div style="font-size:11px;color:#555;">Software Project Lead &bull; San Diego, CA</div>
+                  <ul style="font-size:11px;margin:4px 0 0 16px;">
+                    <li>Led Agile delivery of Garnett, a production React/Node.js app for 70+ members maintaining 99%+
+                      uptime.</li>
+                    <li>Reduced real-time notification latency by 30% by architecting full-stack solutions with
+                      Firebase.</li>
+                    <li>Drove 100% on-time delivery across 2 full-stack projects by mentoring 12 engineers.</li>
                   </ul>
                 </div>
               </div>
               <div class="resume-section">
                 <div class="resume-section-title">PROJECTS</div>
                 <div class="resume-entry">
-                  <div class="resume-entry-header"><strong>Garnett</strong> &bull; React, Node.js, PostgreSQL</div>
-                  <div style="font-size:11px;color:#555;">Course planning platform for UCSD students</div>
+                  <div class="resume-entry-header"><strong>HealthBook 2.0</strong> &bull; <em>Next.js, FastAPI, Browser
+                      Use SDK, OpenAI API</em></div>
+                  <ul style="font-size:11px;margin:4px 0 0 16px;">
+                    <li>Reduced medical appointment booking time 90% via a Browser Use SDK agent and AI phone calls via
+                      Twilio.</li>
+                    <li>Eliminated repeated health history entry by engineering a pgvector semantic memory pipeline in
+                      Supabase.</li>
+                  </ul>
                 </div>
                 <div class="resume-entry">
-                  <div class="resume-entry-header"><strong>HealthBook 2.0</strong> &bull; Next.js, FastAPI, Browser
-                    Automation</div>
-                  <div style="font-size:11px;color:#555;">AI-powered medical appointment booking assistant</div>
+                  <div class="resume-entry-header"><strong>LockedIn</strong> &bull; <em>React, Node.js, Express,
+                      MongoDB, ESP32</em></div>
+                  <ul style="font-size:11px;margin:4px 0 0 16px;">
+                    <li>Reduced device event latency by 35% by architecting an IoT pipeline for real-time monitoring of
+                      50+ concurrent devices.</li>
+                  </ul>
                 </div>
-              </div>
-              <div class="resume-section">
-                <div class="resume-section-title">SKILLS</div>
-                <div style="font-size:11px;line-height:1.8;">JavaScript, TypeScript, Python, Java, C/C++, React,
-                  Next.js, Node.js, FastAPI, PostgreSQL, Redis, Docker, AWS, Git</div>
+                <div class="resume-entry">
+                  <div class="resume-entry-header"><strong>Nutribase</strong> &bull; <em>MongoDB, Express.js, React,
+                      C++</em></div>
+                  <ul style="font-size:11px;margin:4px 0 0 16px;">
+                    <li>Reduced food waste tracking errors by 60% by engineering a Smart Fridge Tracker with role-based
+                      auth.</li>
+                  </ul>
+                </div>
+                <div class="resume-entry">
+                  <div class="resume-entry-header"><strong>ShortStack</strong> &bull; <em>Flask, PostgreSQL, Redis,
+                      Docker</em></div>
+                  <ul style="font-size:11px;margin:4px 0 0 16px;">
+                    <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx
+                      replicas.</li>
+                  </ul>
+                </div>
               </div>
               <div class="resume-download-btn">
                 <a href="#" class="btn-download">📄 Download Full Resume (PDF)</a>
