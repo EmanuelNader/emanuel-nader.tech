@@ -22,35 +22,34 @@
 
     <!-- Center content -->
     <div class="login-body">
-
-      <!-- Windows XP Logo -->
-      <div class="xp-logo-block">
-        <img src="assets/icons/startup.png" alt="Windows XP" style="max-height: 120px;" />
-        <div class="xp-wordmark">
-          <span class="xp-microsoft">Microsoft<sup>®</sup></span>
-          <div class="xp-windows-xp">
-            <span class="xp-windows">Windows</span>
-            <span class="xp-xp">xp</span>
-          </div>
-        </div>
-      </div>
-
+      <div class="login-left-pane"></div>
+      
       <!-- Divider -->
       <div class="login-divider"></div>
-
-      <!-- Instruction -->
-      <p class="login-instruction">To begin, click your user name</p>
-
-      <!-- User card -->
-      <div id="user-card" class="user-card" role="button" tabindex="0" aria-label="Log in as Emanuel Nader"
-        onclick="doLogin()">
-        <div class="user-avatar-xp">
-          <!-- Classic XP-style avatar placeholder: yellow background with icon -->
-          <div class="avatar-inner">EN</div>
+      
+      <!-- Right Side -->
+      <div class="login-right-pane">
+        <!-- Windows XP Logo -->
+        <div class="xp-logo-block">
+          <img src="assets/icons/startup.png" alt="Windows XP" style="max-height: 80px;" />
         </div>
-        <div class="user-info-xp">
-          <div class="user-name-xp">Emanuel Nader</div>
-          <div class="user-sub-xp">Software Engineer &bull; UCSD</div>
+
+        <!-- Instruction -->
+        <p class="login-instruction">To begin, click your user name</p>
+
+        <!-- User list -->
+        <div class="user-list">
+          <div id="user-card" class="user-card" role="button" tabindex="0" aria-label="Log in as Emanuel Nader"
+            onclick="doLogin()">
+            <div class="user-avatar-xp">
+              <!-- Classic XP-style avatar placeholder -->
+              <div class="avatar-inner">EN</div>
+            </div>
+            <div class="user-info-xp">
+              <div class="user-name-xp">Emanuel Nader</div>
+              <div class="user-sub-xp">Software Engineer &bull; UCSD</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
