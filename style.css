@@ -17,6 +17,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  zoom: 1.5; /* Dynamically multiplies physical layout geometry for high-DPI scaling */
 }
 
 a { color: #0000FF; cursor: pointer; text-decoration: none; }
