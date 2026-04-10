@@ -56,17 +56,17 @@ a:hover { text-decoration: underline; }
 .xp-logo-block {
   display: flex;
   align-items: center;
-  margin-bottom: 60px; /* Pushes it closer to the top */
-  margin-left: 140px;  /* Indents it to the right exactly like the reference */
+  margin-bottom: 30px; 
+  margin-left: 90px;
 }
 
 /* Divider & Instruction */
 .login-divider {
-  width: 1px;
-  height: 55%;
-  margin-top: 15vh;
+  width: 2px;
+  height: 60%;
+  margin-top: 10vh;
   margin-right: 25px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8) 15%, rgba(255,255,255,0.8) 85%, rgba(255,255,255,0));
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.9) 20%, rgba(255,255,255,0.9) 80%, rgba(255,255,255,0));
   box-shadow: 1px 0 2px rgba(0,0,0,0.1);
 }
 
@@ -80,10 +80,11 @@ a:hover { text-decoration: underline; }
 
 .login-instruction {
   color: white;
-  font-size: 26px;
-  margin-left: 50px;
-  margin-bottom: 45px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  font-family: Arial, Tahoma, sans-serif;
+  font-size: 22px;
+  margin-left: 55px;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
   font-weight: normal;
 }
 
@@ -96,10 +97,10 @@ a:hover { text-decoration: underline; }
 .user-card {
   display: flex;
   align-items: center;
-  background: linear-gradient(to right, #356AD3 0%, #4078E0 25%, rgba(64,120,224,0) 100%);
+  background: linear-gradient(to right, #3A6EA5 0%, rgba(64,120,224,0.4) 30%, rgba(64,120,224,0) 100%);
   border: none;
-  border-radius: 8px 0 0 8px; 
-  padding: 8px 0;
+  border-radius: 5px 0 0 5px; 
+  padding: 6px 0;
   transition: all 0.2s;
   cursor: pointer;
   position: relative;
@@ -108,39 +109,41 @@ a:hover { text-decoration: underline; }
   max-width: 650px;
 }
 .user-card:hover {
-  background: linear-gradient(to right, #4078E0 0%, #4f85e8 25%, rgba(79,133,232,0) 100%);
+  background: linear-gradient(to right, #4078E0 0%, rgba(79,133,232,0.6) 30%, rgba(79,133,232,0) 100%);
 }
 .user-card * { cursor: pointer; }
 
 .user-avatar-xp {
-  width: 76px; height: 76px;
+  width: 70px; height: 70px;
   background: #FFCF11;
   border: 2px solid white;
   border-radius: 5px;
   margin-right: 15px;
-  margin-left: 8px; /* Padding inside the background strip */
+  margin-left: 15px; 
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 .avatar-inner {
-  font-size: 30px;
+  font-size: 26px;
   font-weight: bold;
   color: #082C6E;
+  font-family: Arial, Tahoma, sans-serif;
 }
 .user-info-xp { display: flex; flex-direction: column; justify-content: center; margin-top: -2px; }
 .user-name-xp {
   color: white;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: normal;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  margin-bottom: 4px;
+  font-family: Arial, Tahoma, sans-serif;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+  margin-bottom: 2px;
 }
 .user-sub-xp {
   color: #D3E5FA;
-  font-size: 16px;
-  font-style: italic;
+  font-size: 14px;
+  font-family: Arial, Tahoma, sans-serif;
   opacity: 0.9;
 }
 
@@ -198,16 +201,16 @@ a:hover { text-decoration: underline; }
   position: absolute;
 }
 
-/* Scattering 9 explicit desktop icons */
-.desktop-icon:nth-child(1) { top: 20px; left: 20px; }
-.desktop-icon:nth-child(2) { top: 120px; left: 45px; }
-.desktop-icon:nth-child(3) { top: 210px; left: 15px; }
-.desktop-icon:nth-child(4) { top: 315px; left: 60px; }
-.desktop-icon:nth-child(5) { top: 35px; left: 130px; }
-.desktop-icon:nth-child(6) { top: 140px; left: 125px; }
-.desktop-icon:nth-child(7) { top: 250px; left: 140px; }
-.desktop-icon:nth-child(8) { top: 340px; left: 155px; }
-.desktop-icon:nth-child(9) { top: 80px; left: 230px; }
+/* Scattering 9 explicit desktop icons horizontally/vertically */
+.desktop-icon:nth-child(1) { top: 30px; left: 30px; }
+.desktop-icon:nth-child(2) { top: 150px; left: 140px; }
+.desktop-icon:nth-child(3) { top: 210px; left: 30px; }
+.desktop-icon:nth-child(4) { top: 350px; left: 80px; }
+.desktop-icon:nth-child(5) { top: 60px; left: 240px; }
+.desktop-icon:nth-child(6) { top: 280px; left: 220px; }
+.desktop-icon:nth-child(7) { top: 460px; left: 160px; }
+.desktop-icon:nth-child(8) { top: 80px; left: 450px; }
+.desktop-icon:nth-child(9) { top: 200px; left: 350px; }
 .desktop-icon:hover .icon-label {
   background: rgba(0, 88, 238, 0.5); /* XP focus bg */
 }
@@ -379,16 +382,22 @@ a:hover { text-decoration: underline; }
 .sm-right-item:hover { color: white; }
 /* Remove old sprite positions for start menu visually causing artifacts if active */
 .sm-footer {
-  height: 50px;
-  background: linear-gradient(to right, #245EDC 0%, #164AC4 100%);
-  display: flex; justify-content: flex-end; align-items: center; padding: 0 20px;
+  background: linear-gradient(to bottom, #4282D6 0%, #3B75C9 100%);
+  height: 48px; display: flex; justify-content: flex-end; align-items: center; padding: 0 10px; gap: 20px;
+  border-top: 1px solid #95BEEF;
 }
 .sm-footer-btn {
-  display: flex; align-items: center; background: transparent; border: none;
-  color: white; font-size: 14px; font-weight: bold; margin-left: 20px; cursor: pointer;
+  display: flex; align-items: center; cursor: pointer; background: transparent; border: none; color: white;
+  font-family: Tahoma, Arial, sans-serif; font-size: 12px;
 }
-.sm-footer-btn svg { margin-right: 6px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
 .sm-footer-btn:hover { text-decoration: underline; }
+.sm-footer-icon {
+  width: 26px; height: 26px; margin-right: 8px; border-radius: 4px; border: 1px solid white;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3); background: #D5433C; padding: 4px; object-fit: contain;
+}
+.sm-footer-icon.logoff-variant {
+  background: #EBBF30;
+}
 
 /* ==========================================================================
    EXPLORER WINDOW CHROME
@@ -548,21 +557,51 @@ p { margin-bottom: 12px; line-height: 1.5; color: #333; }
    ========================================================================== */
 .shutdown-overlay {
   position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5); z-index: 100000;
+  background: rgba(0,0,0,0.4); 
+  backdrop-filter: grayscale(100%);
+  z-index: 100000;
   display: flex; justify-content: center; align-items: center;
 }
-.shutdown-dialog {
-  background: #ECE9D8; border: 1px solid #0055EA; border-radius: 6px 6px 0 0;
-  width: 320px; box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+
+.shutdown-dialog-xp {
+  width: 480px;
+  background: transparent;
+  display: flex; flex-direction: column;
 }
-.shutdown-title {
-  background: linear-gradient(to right, #0058EE 0%, #0050ee 100%);
-  border-radius: 5px 5px 0 0; height: 30px; display: flex; align-items: center; padding: 0 10px;
-  color: white; font-weight: bold; font-size: 13px;
+.shutdown-header-xp {
+  background: #003399;
+  color: white; font-family: Tahoma, Arial, sans-serif; font-size: 26px; font-style: italic;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 15px; 
 }
-.xp-flag-small svg { width: 16px; height: 16px; margin-right: 8px; }
-.shutdown-dialog p { padding: 15px; margin: 0; }
-.shutdown-select { margin: 0 15px 15px 15px; width: calc(100% - 30px); padding: 4px; font-family: inherit; }
-.shutdown-btns { display: flex; justify-content: flex-end; padding: 10px; border-top: 1px solid #ACA899; }
-.shutdown-btn { background: #E0DFE3; border: 1px solid; border-color: #f8f8f8 #525252 #525252 #f8f8f8; padding: 4px 15px; margin-left: 10px; cursor: pointer; font-family: inherit; font-size: 11px; }
-.shutdown-btn:active { border-color: #525252 #f8f8f8 #f8f8f8 #525252; padding: 5px 14px 3px 16px; }
+.shutdown-body-xp {
+  background: linear-gradient(to right, #5A7FDE 0%, #A3BAED 50%, #5A7FDE 100%);
+  border-top: 1px solid white; border-bottom: 1px solid white;
+  display: flex; justify-content: center; align-items: center; gap: 45px;
+  padding: 40px 0;
+}
+.shutdown-action {
+  display: flex; flex-direction: column; align-items: center; cursor: pointer;
+}
+.shutdown-action span {
+  color: white; font-family: Tahoma, Arial, sans-serif; font-size: 13px; margin-top: 8px;
+}
+.shutdown-btn-icon {
+  width: 44px; height: 44px; border-radius: 4px; border: 2px solid white;
+  display: flex; justify-content: center; align-items: center;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3), 1px 1px 3px rgba(0,0,0,0.5);
+  transition: all 0.2s;
+}
+.shutdown-btn-icon:hover { filter: brightness(1.2); }
+.shutdown-btn-icon.standby { background: #EBBF30; }
+.shutdown-btn-icon.turnoff { background: #D5433C; }
+.shutdown-btn-icon.restart { background: #4AA43B; }
+
+.shutdown-footer-xp {
+  background: #003399; display: flex; justify-content: flex-end; padding: 12px 15px;
+}
+.shutdown-cancel-btn {
+  background: #EBEBEB; border: 1px solid #CCC; border-radius: 2px;
+  padding: 4px 20px; cursor: pointer; font-family: Tahoma, Arial, sans-serif;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}

@@ -28,7 +28,7 @@
       <div class="login-right-pane">
         <!-- Windows XP Logo -->
         <div class="xp-logo-block">
-          <img src="assets/icons/startup.png" alt="Windows XP" style="max-height: 220px;" />
+          <img src="assets/icons/startup.png" alt="Windows XP" style="max-height: 170px;" />
         </div>
 
         <!-- Instruction -->
@@ -117,7 +117,7 @@
     <div class="taskbar" id="taskbar">
       <div class="taskbar-left">
         <button class="start-btn start-img-btn" id="start-btn" onclick="toggleStartMenu(event)" aria-label="Start"
-          style="padding: 0; border: none; background: transparent; cursor: pointer; height: 45px; width: 140px;">
+          style="padding: 0; border: none; background: transparent; cursor: pointer; height: 45px; width: 85px;">
           <img src="assets/icons/start.png" alt="Start" style="height: 100%; width: 100%; display: block; object-fit: fill;" />
         </button>
         <div class="taskbar-windows" id="taskbar-windows"></div>
@@ -157,7 +157,7 @@
         <!-- Left column: white -->
         <div class="sm-left">
           <div class="sm-section-label sr-only">Pinned</div>
-          <div class="sm-item" onclick="openWindow('about')"><img class="sm-icon" src="assets/icons/people.png" />About
+          <div class="sm-item" onclick="openWindow('about')"><img class="sm-icon" src="assets/icons/computer.png" />About
             Me</div>
           <div class="sm-item" onclick="openWindow('projects')"><img class="sm-icon" src="assets/icons/folder.png" />My
             Projects</div>
@@ -192,17 +192,15 @@
           <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
         </div>
       </div>
-      <!-- Footer -->
       <div class="sm-footer">
-        <button class="sm-footer-btn sm-logoff" onclick="doLogoff()">
-          <img src="assets/icons/shut_down.png"
-            style="width:20px;height:20px;filter:hue-rotate(180deg); margin-right:6px; border-radius:3px;" />
-          Log Off
-        </button>
-        <button class="sm-footer-btn sm-shutdown" onclick="doShutdown()">
-          <img src="assets/icons/shut_down.png" style="width:20px;height:20px;margin-right:6px; border-radius:3px;" />
-          Shut Down
-        </button>
+        <div class="sm-footer-btn sm-logoff" onclick="doLogoff()">
+          <img src="assets/icons/shut_down.png" class="sm-footer-icon logoff-variant" />
+          <span>Log Off</span>
+        </div>
+        <div class="sm-footer-btn sm-shutdown" onclick="doShutdown()">
+          <img src="assets/icons/shut_down.png" class="sm-footer-icon" />
+          <span>Turn Off Computer</span>
+        </div>
       </div>
     </div>
 
@@ -806,29 +804,35 @@
       <div class="win-statusbar">1 object — Resume.pdf (148 KB)</div>
     </div>
 
-    <!-- Shutdown overlay -->
+    <!-- Shutdown overlay (Authentic XP Mode) -->
     <div class="shutdown-overlay hidden" id="shutdown-overlay">
-      <div class="shutdown-dialog">
-        <div class="shutdown-title">
-          <div class="xp-flag-small">
-            <svg width="24" height="24" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 1 L9.5 2.5 L9.5 9.5 L1 9.5 Z" fill="#E83030" />
-              <path d="M10.5 2.5 L19 1 L19 9.5 L10.5 9.5 Z" fill="#37B14B" />
-              <path d="M1 10.5 L9.5 10.5 L9.5 17.5 L1 19 Z" fill="#2B5FD9" />
-              <path d="M10.5 10.5 L19 10.5 L19 19 L10.5 17.5 Z" fill="#F5C518" />
-            </svg>
-          </div>
-          <span>Shut Down Windows</span>
+      <div class="shutdown-dialog-xp">
+        <div class="shutdown-header-xp">
+          <span>Turn off computer</span>
+          <img src="assets/icons/startup.png" style="height: 24px; max-width: 40px; object-fit: contain;" />
         </div>
-        <p>What do you want the computer to do?</p>
-        <select class="shutdown-select">
-          <option>Shut down</option>
-          <option>Restart</option>
-          <option>Stand by</option>
-        </select>
-        <div class="shutdown-btns">
-          <button class="shutdown-btn" onclick="hideShutdown()">Cancel</button>
-          <button class="shutdown-btn shutdown-ok" onclick="doRestart()">OK</button>
+        <div class="shutdown-body-xp">
+          <div class="shutdown-action" onclick="hideShutdown()">
+            <div class="shutdown-btn-icon standby">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-width="2" d="M12 2v6" /><path fill="none" stroke="white" stroke-width="2" d="M16 4a10 10 0 1 1-8 0" /></svg>
+            </div>
+            <span>Stand By</span>
+          </div>
+          <div class="shutdown-action" onclick="doRestart()">
+            <div class="shutdown-btn-icon turnoff">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-width="2" d="M12 2v10" /><path fill="none" stroke="white" stroke-width="2" d="M16 6a8 8 0 1 1-8 0" /></svg>
+            </div>
+            <span>Turn Off</span>
+          </div>
+          <div class="shutdown-action" onclick="doRestart()">
+            <div class="shutdown-btn-icon restart">
+              <svg width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-width="2" d="M12 2v4l3 3-3 3V8a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6v4z" /></svg>
+            </div>
+            <span>Restart</span>
+          </div>
+        </div>
+        <div class="shutdown-footer-xp">
+          <button class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
         </div>
       </div>
     </div>
