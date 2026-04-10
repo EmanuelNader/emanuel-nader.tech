@@ -412,37 +412,22 @@ a:hover {
 }
 
 .start-btn {
-  background: linear-gradient(to bottom, #3E9A4D 0%, #44AA55 10%, #368542 90%, #2A6633 100%);
   border: none;
-  height: 55px;
-  padding: 0 28px 0 20px;
-  border-radius: 0 27px 27px 0;
-  color: white;
-  font-family: inherit;
-  font-size: 24px;
-  font-weight: bold;
-  font-style: italic;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.4), inset 1px 1px 1px rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  z-index: 10001;
 }
 
 .start-btn:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.05);
 }
 
 .start-btn:active,
 .start-btn.active {
-  background: linear-gradient(to top, #3E9A4D 0%, #44AA55 10%, #368542 90%, #2A6633 100%);
-  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.4);
-}
-
-.start-flag {
-  margin-right: 8px;
-  width: 26px;
-  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+  filter: brightness(0.9);
 }
 
 .taskbar-windows {
@@ -501,7 +486,9 @@ a:hover {
 }
 
 .systray-clock {
-  margin-left: 5px;
+  margin-left: 12px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* ==========================================================================
