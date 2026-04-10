@@ -1,6 +1,13 @@
 /* ==========================================================================
    GLOBAL RESET & FONTS
    ========================================================================== */
+@font-face {
+  font-family: 'XP Tahoma';
+  src: url('assets/fs-tahoma-8px.otf.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,8 +17,8 @@
 }
 
 body {
-  font-family: Tahoma, 'Trebuchet MS', sans-serif;
-  font-size: 11px; /* XP base font size */
+  font-family: 'XP Tahoma', Tahoma, 'Trebuchet MS', sans-serif;
+  font-size: 24px; /* XP base font size */
   background-color: #000;
   color: #000;
   width: 100vw;
@@ -80,10 +87,10 @@ a:hover { text-decoration: underline; }
 
 .login-instruction {
   color: white;
-  font-family: Tahoma, sans-serif;
-  font-size: 22px;
+  font-family: 'XP Tahoma', Tahoma, sans-serif;
+  font-size: 36px;
   margin-left: 55px;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
   font-weight: normal;
 }
@@ -126,24 +133,24 @@ a:hover { text-decoration: underline; }
   box-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 .avatar-inner {
-  font-size: 26px;
+  font-size: 40px;
   font-weight: bold;
   color: #082C6E;
-  font-family: Tahoma, sans-serif;
+  font-family: 'XP Tahoma', Tahoma, sans-serif;
 }
 .user-info-xp { display: flex; flex-direction: column; justify-content: center; margin-top: -2px; }
 .user-name-xp {
   color: white;
-  font-size: 26px;
+  font-size: 40px;
   font-weight: normal;
-  font-family: Tahoma, sans-serif;
+  font-family: 'XP Tahoma', Tahoma, sans-serif;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-  margin-bottom: 2px;
+  margin-bottom: 8px;
 }
 .user-sub-xp {
   color: #D3E5FA;
-  font-size: 14px;
-  font-family: Tahoma, sans-serif;
+  font-size: 20px;
+  font-family: 'XP Tahoma', Tahoma, sans-serif;
   opacity: 0.9;
 }
 
@@ -247,7 +254,7 @@ a:hover { text-decoration: underline; }
 .icon-label {
   color: white;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-  font-size: 11px;
+  font-size: 24px;
   text-align: center;
   padding: 1px 3px;
   margin: 0 auto;
@@ -306,7 +313,7 @@ a:hover { text-decoration: underline; }
   padding: 0 8px;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 20px;
   cursor: pointer;
   box-shadow: inset 1px 1px 1px rgba(255,255,255,0.1), inset -1px -1px 1px rgba(0,0,0,0.2);
 }
@@ -325,7 +332,7 @@ a:hover { text-decoration: underline; }
   display: flex;
   align-items: center;
   color: white;
-  font-size: 11px;
+  font-size: 24px;
   box-shadow: inset 1px 0 1px rgba(255,255,255,0.4);
 }
 .tray-icon { margin-right: 8px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.4)); }
@@ -357,9 +364,9 @@ a:hover { text-decoration: underline; }
   width: 40px; height: 40px; background: #FFD521;
   border: 2px solid white; border-radius: 4px;
   display: flex; justify-content: center; align-items: center;
-  font-weight: bold; color: #082C6E; font-size: 16px; margin-right: 10px;
+  font-weight: bold; color: #082C6E; font-size: 24px; margin-right: 10px;
 }
-.sm-user-name { color: white; font-size: 16px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+.sm-user-name { color: white; font-size: 24px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
 .sm-body { display: flex; height: 350px; background: white; }
 .sm-left { flex: 1; padding: 5px; background: white; }
@@ -388,7 +395,7 @@ a:hover { text-decoration: underline; }
 }
 .sm-footer-btn {
   display: flex; align-items: center; cursor: pointer; background: transparent; border: none; color: white;
-  font-family: Tahoma, Arial, sans-serif; font-size: 12px;
+  font-family: 'XP Tahoma', Tahoma, Arial, sans-serif; font-size: 18px;
 }
 .sm-footer-btn:hover { text-decoration: underline; }
 .sm-footer-icon {
@@ -429,7 +436,7 @@ a:hover { text-decoration: underline; }
 .win-titlebar-left { display: flex; align-items: center; }
 .win-icon { width: 16px; height: 16px; margin-right: 5px; background-size: cover; border-radius: 2px; }
 .win-icon-about { background: #ccc; } /* Provide defaults or mappings if sprites missing size */
-.win-title { color: white; font-weight: bold; font-size: 13px; text-shadow: 1px 1px 1px rgba(0,0,0,0.6); }
+.win-title { color: white; font-weight: bold; font-size: 20px; text-shadow: 1px 1px 1px rgba(0,0,0,0.6); }
 
 /* Controls (Min, Max, Close) */
 .win-controls { display: flex; }
@@ -437,7 +444,7 @@ a:hover { text-decoration: underline; }
   width: 21px; height: 21px;
   margin-left: 2px; border-radius: 3px;
   border: 1px solid white;
-  font-family: inherit; font-size: 12px; font-weight: bold; color: white;
+  font-family: inherit; font-size: 18px; font-weight: bold; color: white;
   cursor: default;
   display: flex; justify-content: center; align-items: center; padding-bottom: 2px;
 }
@@ -446,7 +453,7 @@ a:hover { text-decoration: underline; }
 .win-btn:active { border-color: #525252 #f8f8f8 #f8f8f8 #525252; box-shadow: inset 1px 1px 1px rgba(0,0,0,0.4); }
 
 /* Toolbars */
-.win-menubar { font-size: 11px; padding: 2px 4px; border-bottom: 1px solid #ACA899; }
+.win-menubar { font-size: 24px; padding: 2px 4px; border-bottom: 1px solid #ACA899; }
 .win-menubar span { margin-right: 15px; cursor: default; }
 
 .win-toolbar {
@@ -454,7 +461,7 @@ a:hover { text-decoration: underline; }
 }
 .toolbar-btn {
   background: transparent; border: 1px solid transparent; border-radius: 3px;
-  padding: 3px 8px; font-family: inherit; font-size: 11px; color: #000;
+  padding: 3px 8px; font-family: inherit; font-size: 24px; color: #000;
   display: flex; align-items: center;
 }
 .toolbar-btn:hover { border: 1px solid #ACA899; background: #fff; box-shadow: inset 1px 1px 1px white, inset -1px -1px 1px rgba(0,0,0,0.1); }
@@ -464,14 +471,14 @@ a:hover { text-decoration: underline; }
   display: flex; align-items: center; flex: 1; border: 1px solid #ACA899; background: white; margin-left: 10px; height: 22px;
 }
 .address-label { color: #555; padding: 0 5px; border-right: 1px solid #ACA899; background: #ECE9D8; height: 100%; display: flex; align-items: center;}
-.address-bar input { border: none; flex: 1; padding: 0 5px; font-family: inherit; font-size: 11px; outline: none; }
+.address-bar input { border: none; flex: 1; padding: 0 5px; font-family: inherit; font-size: 24px; outline: none; }
 
 /* Layout */
 .win-body { display: flex; flex: 1; overflow: hidden; background: white; }
 .win-sidebar { width: 180px; background: #7BA2E7; padding: 10px; border-right: 1px solid #ACA899; overflow-y: auto; background: linear-gradient(to right, #7BA2E7 0%, #638DE4 100%); }
 .sidebar-section { background: white; border: 1px solid #fff; border-radius: 3px 3px 0 0; margin-bottom: 15px; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 .sidebar-title { background: linear-gradient(to right, #fff 0%, #E3EFFF 100%); color: #002D96; font-weight: bold; padding: 4px 8px; border-bottom: 1px solid #D6DFF7; border-radius: 3px 3px 0 0;}
-.sidebar-link { padding: 4px 8px; color: #002D96; cursor: pointer; font-size: 10px; display: flex; align-items: center; gap: 5px; }
+.sidebar-link { padding: 4px 8px; color: #002D96; cursor: pointer; font-size: 20px; display: flex; align-items: center; gap: 5px; }
 .sidebar-link:hover { text-decoration: underline; color: #0058EE; }
 
 .win-content { flex: 1; padding: 15px; overflow-y: auto; position: relative; }
@@ -483,13 +490,13 @@ a:hover { text-decoration: underline; }
    ========================================================================== */
 /* Typography */
 h1 { font-size: 24px; font-weight: normal; margin-bottom: 5px; color: #000; }
-h2 { font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+h2 { font-size: 24px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
 p { margin-bottom: 12px; line-height: 1.5; color: #333; }
 
 /* About Content */
 .about-header { display: flex; align-items: center; margin-bottom: 20px; }
 .about-avatar { width: 80px; height: 80px; background: #FFD521; border: 4px solid white; border-radius: 8px; box-shadow: 1px 1px 4px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; font-size: 30px; font-weight: bold; color: #082C6E; margin-right: 20px; }
-.about-subtitle { color: #666; font-style: italic; font-size: 14px; }
+.about-subtitle { color: #666; font-style: italic; font-size: 20px; }
 .about-facts { background: #f8f8f8; border: 1px solid #ddd; padding: 10px; border-radius: 4px; margin-top: 20px; }
 .fact-row { display: flex; margin-bottom: 5px; }
 .fact-label { font-weight: bold; width: 100px; color: #555; }
@@ -502,50 +509,50 @@ p { margin-bottom: 12px; line-height: 1.5; color: #333; }
 .project-folder-icon::after { content: ''; position: absolute; top: -4px; left: 0; width: 10px; height: 4px; background: inherit; border-radius: 2px 2px 0 0; }
 .project-folder-green { background: #44AA55; }
 .project-folder-orange { background: #E87828; }
-.project-name { font-weight: bold; font-size: 13px; }
-.project-type { font-size: 10px; color: #888; }
-.project-desc { font-size: 11px; margin-bottom: 10px; color: #555; }
+.project-name { font-weight: bold; font-size: 20px; }
+.project-type { font-size: 20px; color: #888; }
+.project-desc { font-size: 24px; margin-bottom: 10px; color: #555; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
-.tag { background: #eee; padding: 2px 5px; border-radius: 2px; font-size: 9px; color: #333; }
+.tag { background: #eee; padding: 2px 5px; border-radius: 2px; font-size: 20px; color: #333; }
 .project-links { display: flex; justify-content: space-between; }
-.proj-link { font-size: 11px; color: #0058EE; }
+.proj-link { font-size: 24px; color: #0058EE; }
 
 /* Experience List */
 .experience-list { border-left: 2px solid #ccc; margin-left: 10px; padding-left: 20px; }
 .exp-item { position: relative; margin-bottom: 25px; }
 .exp-dot { position: absolute; left: -26px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: #0058EE; border: 2px solid white; box-shadow: 0 0 0 1px #ccc; }
-.exp-role { font-weight: bold; font-size: 14px; color: #000; }
+.exp-role { font-weight: bold; font-size: 20px; color: #000; }
 .exp-company { font-weight: bold; color: #555; }
-.exp-date { font-style: italic; color: #888; margin-bottom: 5px; font-size: 10px; }
+.exp-date { font-style: italic; color: #888; margin-bottom: 5px; font-size: 20px; }
 
 /* Skills Grid */
 .skills-content { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .skills-category { margin-bottom: 15px; }
 .skills-cat-title { font-weight: bold; margin-bottom: 8px; color: #002D96; border-bottom: 1px dotted #ccc; }
 .skills-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.skill-tag { background: #E3EFFF; border: 1px solid #7BA2E7; padding: 3px 8px; border-radius: 2px; font-size: 11px; }
+.skill-tag { background: #E3EFFF; border: 1px solid #7BA2E7; padding: 3px 8px; border-radius: 2px; font-size: 24px; }
 
 /* Contact Specific */
 .contact-item { display: flex; align-items: flex-start; margin-bottom: 15px; padding: 10px; background: #f9f9f9; border: 1px solid #e0e0e0; }
 .contact-icon { font-size: 24px; margin-right: 15px; }
-.contact-label { font-weight: bold; color: #666; font-size: 10px; text-transform: uppercase; }
-.contact-value { font-size: 14px; font-weight: bold; }
+.contact-label { font-weight: bold; color: #666; font-size: 20px; text-transform: uppercase; }
+.contact-value { font-size: 20px; font-weight: bold; }
 .contact-message { margin-top: 20px; padding: 15px; background: #E3EFFF; border-left: 4px solid #0058EE; }
 
 /* Hobbies Specific */
 .hobbies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 .hobby-card { background: white; border: 1px solid #ddd; padding: 15px; text-align: center; border-radius: 4px; box-shadow: 1px 1px 3px rgba(0,0,0,0.05); }
 .hobby-emoji { font-size: 32px; margin-bottom: 10px; }
-.hobby-name { font-weight: bold; margin-bottom: 5px; font-size: 13px; }
-.hobby-desc { color: #666; font-size: 11px; }
+.hobby-name { font-weight: bold; margin-bottom: 5px; font-size: 20px; }
+.hobby-desc { color: #666; font-size: 24px; }
 
 /* Resume Paper */
 .resume-paper { background: white; padding: 30px; border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); max-width: 500px; margin: 0 auto; }
 .resume-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px; }
 .resume-header h2 { font-size: 20px; border: none; margin: 0; padding: 0; }
-.resume-header p { margin: 2px 0; color: #444; font-size: 11px; }
+.resume-header p { margin: 2px 0; color: #444; font-size: 24px; }
 .resume-section { margin-bottom: 15px; }
-.resume-section-title { font-weight: bold; border-bottom: 1px solid #666; margin-bottom: 8px; font-size: 12px; }
+.resume-section-title { font-weight: bold; border-bottom: 1px solid #666; margin-bottom: 8px; font-size: 18px; }
 .resume-entry { margin-bottom: 10px; }
 .resume-entry-header { display: flex; justify-content: space-between; }
 .resume-download-btn { text-align: center; margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 15px; }
@@ -569,7 +576,7 @@ p { margin-bottom: 12px; line-height: 1.5; color: #333; }
 }
 .shutdown-header-xp {
   background: #003399;
-  color: white; font-family: Tahoma, sans-serif; font-size: 26px; font-style: italic;
+  color: white; font-family: 'XP Tahoma', Tahoma, sans-serif; font-size: 26px; font-style: italic;
   display: flex; justify-content: space-between; align-items: center;
   padding: 10px 15px; 
 }
@@ -583,7 +590,7 @@ p { margin-bottom: 12px; line-height: 1.5; color: #333; }
   display: flex; flex-direction: column; align-items: center; cursor: pointer;
 }
 .shutdown-action span {
-  color: white; font-family: Tahoma, Arial, sans-serif; font-size: 13px; margin-top: 8px;
+  color: white; font-family: 'XP Tahoma', Tahoma, Arial, sans-serif; font-size: 20px; margin-top: 8px;
 }
 .shutdown-btn-icon {
   width: 44px; height: 44px; border-radius: 4px; border: 2px solid white;
@@ -601,6 +608,6 @@ p { margin-bottom: 12px; line-height: 1.5; color: #333; }
 }
 .shutdown-cancel-btn {
   background: #EBEBEB; border: 1px solid #CCC; border-radius: 2px;
-  padding: 4px 20px; cursor: pointer; font-family: Tahoma, Arial, sans-serif;
+  padding: 4px 20px; cursor: pointer; font-family: 'XP Tahoma', Tahoma, Arial, sans-serif;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
