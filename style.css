@@ -9,21 +9,9 @@
   user-select: none;
 }
 
-@font-face {
-  font-family: 'XP Tahoma';
-  src: url('assets/fs-tahoma-8px.otf.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
-  size-adjust: 250%;
-}
-
 body {
-  font-family: 'XP Tahoma', Tahoma, 'Trebuchet MS', sans-serif;
+  font-family: Tahoma, 'Trebuchet MS', sans-serif;
   font-size: 11px; /* XP base font size */
-  image-rendering: pixelated;
-  -webkit-font-smoothing: none;
-  font-smooth: never;
   background-color: #000;
   color: #000;
   width: 100vw;
