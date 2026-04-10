@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -157,727 +157,722 @@
       </div>
       <!-- Body: two columns -->
       <div class="sm-body">
-        <!-- Left column: white -->
-        <div class="sm-left">
-          <div class="sm-section-label sr-only">Pinned</div>
-          <div class="sm-item" onclick="openWindow('about')"><img class="sm-icon"
-              src="assets/icons/computer.png" />About
-            Me</div>
-          <div class="sm-item" onclick="openWindow('projects')"><img class="sm-icon" src="assets/icons/folder.png" />My
-            Projects</div>
-          <div class="sm-item" onclick="openWindow('resume')"><img class="sm-icon" src="assets/icons/paper.png" />Resume
-          </div>
-          <div class="sm-item" onclick="window.open('https://github.com/EmanuelNader', '_blank')"><img class="sm-icon"
-              src="assets/icons/local disk.png" />GitHub</div>
-          <div class="sm-item" onclick="window.open('https://linkedin.com/in/EmanuelNader', '_blank')"><img
-              class="sm-icon" src="assets/icons/people.png" />LinkedIn</div>
-
-          <div class="sm-divider"></div>
-
-          <div class="sm-item" onclick="openWindow('experience')"><img class="sm-icon"
-              src="assets/icons/bag.png" />Experience</div>
-          <div class="sm-item" onclick="openWindow('skills')"><img class="sm-icon"
-              src="assets/icons/settings.png" />Skills</div>
-          <div class="sm-item" onclick="openWindow('contact')"><img class="sm-icon"
-              src="assets/icons/mail.png" />Contact
-          </div>
-          <div class="sm-item" onclick="openWindow('hobbies')"><img class="sm-icon"
-              src="assets/icons/paint.png" />Hobbies
-          </div>
+      <!-- Left column: white -->
+      <div class="sm-left">
+        <div class="sm-section-label sr-only">Pinned</div>
+        <div class="sm-item" onclick="openWindow('about')"><img class="sm-icon" src="assets/icons/computer.png" />About
+          Me</div>
+        <div class="sm-item" onclick="openWindow('projects')"><img class="sm-icon" src="assets/icons/folder.png" />My
+          Projects</div>
+        <div class="sm-item" onclick="openWindow('resume')"><img class="sm-icon" src="assets/icons/paper.png" />Resume
         </div>
-        <!-- Right column: light blue -->
-        <div class="sm-right">
-          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
-          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
-          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
-          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
+        <div class="sm-item" onclick="window.open('https://github.com/EmanuelNader', '_blank')"><img class="sm-icon"
+            src="assets/icons/local disk.png" />GitHub</div>
+        <div class="sm-item" onclick="window.open('https://linkedin.com/in/EmanuelNader', '_blank')"><img
+            class="sm-icon" src="assets/icons/people.png" />LinkedIn</div>
 
-          <div class="sm-right-sep"></div>
+        <div class="sm-divider"></div>
 
-          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
-          <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
+        <div class="sm-item" onclick="openWindow('experience')"><img class="sm-icon"
+            src="assets/icons/bag.png" />Experience</div>
+        <div class="sm-item" onclick="openWindow('skills')"><img class="sm-icon"
+            src="assets/icons/settings.png" />Skills</div>
+        <div class="sm-item" onclick="openWindow('contact')"><img class="sm-icon" src="assets/icons/mail.png" />Contact
+        </div>
+        <div class="sm-item" onclick="openWindow('hobbies')"><img class="sm-icon" src="assets/icons/paint.png" />Hobbies
         </div>
       </div>
-      <div class="sm-footer">
-        <div class="sm-footer-btn sm-logoff" onclick="doLogoff()">
-          <img src="assets/icons/shut_down.png" class="sm-footer-icon logoff-variant" />
-          <span>Log Off</span>
+      <!-- Right column: light blue -->
+      <div class="sm-right">
+        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
+        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
+        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
+        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
+
+        <div class="sm-right-sep"></div>
+
+        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
+        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
+      </div>
+    </div>
+    <div class="sm-footer">
+      <div class="sm-footer-btn sm-logoff" onclick="doLogoff()">
+        <img src="assets/icons/shut_down.png" class="sm-footer-icon logoff-variant" />
+        <span>Log Off</span>
+      </div>
+      <div class="sm-footer-btn sm-shutdown" onclick="doShutdown()">
+        <img src="assets/icons/shut_down.png" class="sm-footer-icon" />
+        <span>Turn Off Computer</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- EXPLORER WINDOWS                               -->
+  <!-- ══════════════════════════════════════════════ -->
+
+  <!-- ABOUT Window -->
+  <div class="xp-window hidden" id="win-about" style="left:80px;top:40px;width:680px;height:520px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-about')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-about"></div>
+        <span class="win-title">About Emanuel — My Documents</span>
+      </div>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-about')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-about')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-about')" title="Close">&#10005;</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+    </div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn" onclick="">&#9664; Back</button>
+      <button class="toolbar-btn" onclick="">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\My Documents\About" readonly /></div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">File and Folder Tasks</div>
+          <div class="sidebar-link">&#128462; Make a new folder</div>
+          <div class="sidebar-link">&#128190; Publish this folder</div>
+          <div class="sidebar-link">&#128231; Share this folder</div>
         </div>
-        <div class="sm-footer-btn sm-shutdown" onclick="doShutdown()">
-          <img src="assets/icons/shut_down.png" class="sm-footer-icon" />
-          <span>Turn Off Computer</span>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Other Places</div>
+          <div class="sidebar-link">&#128193; My Documents</div>
+          <div class="sidebar-link">&#128450; My Computer</div>
+          <div class="sidebar-link">&#127760; Network</div>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="about-content">
+          <div class="about-header">
+            <div class="about-avatar">EN</div>
+            <div class="about-intro">
+              <h1>Emanuel Nader</h1>
+              <p class="about-subtitle">Mathematics-Computer Science Student &bull; UC San Diego</p>
+            </div>
+          </div>
+          <div class="about-body">
+            <p>Hey! I'm Emanuel — a student at <strong>UC San Diego</strong>, passionate about building products that
+              people actually love to use.</p>
+            <p>I focus on full-stack development, modern system design, AI pipelines, and cloud tooling. When I'm not
+              coding, I'm exploring side projects and learning new tech stacks.</p>
+            <div class="about-facts">
+              <div class="fact-row"><span class="fact-label">📍 Location</span><span>San Diego, CA</span></div>
+              <div class="fact-row"><span class="fact-label">🎓 School</span><span>UC San Diego — B.S.
+                  Mathematics-Computer Science</span></div>
+              <div class="fact-row"><span class="fact-label">💼 Status</span><span>Open to internships &amp;
+                  opportunities</span></div>
+              <div class="fact-row"><span class="fact-label">📧 Email</span><span><a
+                    href="mailto:EmanuelSNader@gmail.com">EmanuelSNader@gmail.com</a></span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="win-statusbar">1 object selected</div>
+  </div>
 
-
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- EXPLORER WINDOWS                               -->
-    <!-- ══════════════════════════════════════════════ -->
-
-    <!-- ABOUT Window -->
-    <div class="xp-window hidden" id="win-about" style="left:80px;top:40px;width:680px;height:520px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-about')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-about"></div>
-          <span class="win-title">About Emanuel — My Documents</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-about')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-about')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-about')" title="Close">&#10005;</button>
-        </div>
+  <!-- PROJECTS Window -->
+  <div class="xp-window hidden" id="win-projects" style="left:120px;top:60px;width:760px;height:580px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-projects')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-projects"></div>
+        <span class="win-title">My Projects</span>
       </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-projects')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-projects')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-projects')" title="Close">&#10005;</button>
       </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn" onclick="">&#9664; Back</button>
-        <button class="toolbar-btn" onclick="">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\My Documents\About" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">File and Folder Tasks</div>
-            <div class="sidebar-link">&#128462; Make a new folder</div>
-            <div class="sidebar-link">&#128190; Publish this folder</div>
-            <div class="sidebar-link">&#128231; Share this folder</div>
-          </div>
-          <div class="sidebar-section">
-            <div class="sidebar-title">Other Places</div>
-            <div class="sidebar-link">&#128193; My Documents</div>
-            <div class="sidebar-link">&#128450; My Computer</div>
-            <div class="sidebar-link">&#127760; Network</div>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="about-content">
-            <div class="about-header">
-              <div class="about-avatar">EN</div>
-              <div class="about-intro">
-                <h1>Emanuel Nader</h1>
-                <p class="about-subtitle">Mathematics-Computer Science Student &bull; UC San Diego</p>
-              </div>
-            </div>
-            <div class="about-body">
-              <p>Hey! I'm Emanuel — a student at <strong>UC San Diego</strong>, passionate about building products that
-                people actually love to use.</p>
-              <p>I focus on full-stack development, modern system design, AI pipelines, and cloud tooling. When I'm not
-                coding, I'm exploring side projects and learning new tech stacks.</p>
-              <div class="about-facts">
-                <div class="fact-row"><span class="fact-label">📍 Location</span><span>San Diego, CA</span></div>
-                <div class="fact-row"><span class="fact-label">🎓 School</span><span>UC San Diego — B.S.
-                    Mathematics-Computer Science</span></div>
-                <div class="fact-row"><span class="fact-label">💼 Status</span><span>Open to internships &amp;
-                    opportunities</span></div>
-                <div class="fact-row"><span class="fact-label">📧 Email</span><span><a
-                      href="mailto:EmanuelSNader@gmail.com">EmanuelSNader@gmail.com</a></span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="win-statusbar">1 object selected</div>
     </div>
-
-    <!-- PROJECTS Window -->
-    <div class="xp-window hidden" id="win-projects" style="left:120px;top:60px;width:760px;height:580px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-projects')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-projects"></div>
-          <span class="win-title">My Projects</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-projects')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-projects')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-projects')" title="Close">&#10005;</button>
-        </div>
-      </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-      </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn">&#9664; Back</button>
-        <button class="toolbar-btn">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\My Projects" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">File and Folder Tasks</div>
-            <div class="sidebar-link">&#128193; Open project</div>
-            <div class="sidebar-link">&#128279; View on GitHub</div>
-            <div class="sidebar-link">&#128190; Share project</div>
-          </div>
-          <div class="sidebar-section">
-            <div class="sidebar-title">Details</div>
-            <p style="font-size:11px;color:#333;padding:4px 8px;">3 featured projects<br />All built with ❤️</p>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="projects-grid">
-
-            <div class="project-card">
-              <div class="project-icon-bar">
-                <div class="project-folder-icon project-folder-green"></div>
-                <div class="project-header-text">
-                  <div class="project-name">HealthBook 2.0</div>
-                  <div class="project-type">AI + Automation</div>
-                </div>
-              </div>
-              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-                <li>Reduced medical appointment booking time 90% via Browser Use SDK and OpenAI Realtime API Twilio
-                  calls.
-                </li>
-                <li>Eliminated repeated health history entry via pgvector semantic memory pipeline in Supabase.</li>
-              </ul>
-              <div class="project-tags">
-                <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">pgvector</span><span
-                  class="tag">Supabase</span>
-              </div>
-            </div>
-
-            <div class="project-card">
-              <div class="project-icon-bar">
-                <div class="project-folder-icon"></div>
-                <div class="project-header-text">
-                  <div class="project-name">LockedIn</div>
-                  <div class="project-type">IoT & Fullstack</div>
-                </div>
-              </div>
-              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-                <li>Reduced device event latency by 35%+ by architecting an IoT pipeline (ESP32 &rarr; REST &rarr;
-                  MongoDB).</li>
-                <li>Optimized database schemas cutting data retrieval latency by 40% across modular REST services.</li>
-              </ul>
-              <div class="project-tags">
-                <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span
-                  class="tag">MongoDB</span>
-              </div>
-            </div>
-
-            <div class="project-card">
-              <div class="project-icon-bar">
-                <div class="project-folder-icon project-folder-orange"></div>
-                <div class="project-header-text">
-                  <div class="project-name">Nutribase</div>
-                  <div class="project-type">IoT Tracking</div>
-                </div>
-              </div>
-              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-                <li>Engineered a MERN-stack Smart Fridge Tracker, reducing food waste tracking errors by 60%.</li>
-                <li>Programmed custom ESP32 firmware in C++ to stream high-frequency real-time weight payloads.</li>
-              </ul>
-              <div class="project-tags">
-                <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span
-                  class="tag">C++</span>
-              </div>
-            </div>
-
-            <div class="project-card">
-              <div class="project-icon-bar">
-                <div class="project-folder-icon project-folder-orange"></div>
-                <div class="project-header-text">
-                  <div class="project-name">ShortStack</div>
-                  <div class="project-type">Platform Architecture</div>
-                </div>
-              </div>
-              <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-                <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx replicas.
-                </li>
-                <li>Achieved 84% test coverage via GitHub Actions CI pipeline orchestrating 7 Docker containers.</li>
-              </ul>
-              <div class="project-tags">
-                <span class="tag">Flask</span><span class="tag">Redis</span><span class="tag">Docker</span><span
-                  class="tag">Prometheus</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div class="win-statusbar">3 objects</div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
-
-    <!-- EXPERIENCE Window -->
-    <div class="xp-window hidden" id="win-experience" style="left:160px;top:80px;width:680px;height:520px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-experience')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-experience"></div>
-          <span class="win-title">Experience — My Documents</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-experience')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-experience')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-experience')" title="Close">&#10005;</button>
-        </div>
-      </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-      </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn">&#9664; Back</button>
-        <button class="toolbar-btn">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\Experience" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">File and Folder Tasks</div>
-            <div class="sidebar-link">&#128196; View resume</div>
-            <div class="sidebar-link">&#128231; Contact me</div>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="experience-list">
-            <div class="exp-item">
-              <div class="exp-dot"></div>
-              <div class="exp-content">
-                <div class="exp-role">Software Engineering Extern (Technical Analyst)</div>
-                <div class="exp-company">HP Tech Ventures &bull; Remote</div>
-                <div class="exp-date">Feb 2026 – Apr 2026</div>
-                <p class="exp-desc">Cut due diligence cycle time by 40% building Python scrapers; performed architecture
-                  audits on 20+ startups to improve screening efficiency by 25%; built an LLM-powered NLP research tool
-                  halving technical risk analysis time.</p>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-dot"></div>
-              <div class="exp-content">
-                <div class="exp-role">Software Project Lead</div>
-                <div class="exp-company">Theta Tau - Professional Engineering Fraternity</div>
-                <div class="exp-date">May 2025 – Present</div>
-                <p class="exp-desc">Led Agile delivery of Garnett holding 99%+ uptime for 70+ members; reduced real-time
-                  notification latency by 30% via Firebase integrations; drove 100% on-time delivery mentoring 12
-                  engineers across 2 full-stack projects.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="win-statusbar">4 objects</div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn">&#9664; Back</button>
+      <button class="toolbar-btn">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\My Projects" readonly /></div>
     </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">File and Folder Tasks</div>
+          <div class="sidebar-link">&#128193; Open project</div>
+          <div class="sidebar-link">&#128279; View on GitHub</div>
+          <div class="sidebar-link">&#128190; Share project</div>
+        </div>
+        <div class="sidebar-section">
+          <div class="sidebar-title">Details</div>
+          <p style="font-size:11px;color:#333;padding:4px 8px;">3 featured projects<br />All built with ❤️</p>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="projects-grid">
 
-    <!-- SKILLS Window -->
-    <div class="xp-window hidden" id="win-skills" style="left:200px;top:100px;width:640px;height:480px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-skills')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-skills"></div>
-          <span class="win-title">Skills — Control Panel</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-skills')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-skills')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-skills')" title="Close">&#10005;</button>
-        </div>
-      </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-      </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn">&#9664; Back</button>
-        <button class="toolbar-btn">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\Skills" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">See Also</div>
-            <div class="sidebar-link">&#128193; Projects</div>
-            <div class="sidebar-link">&#128196; Resume</div>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="skills-content">
-            <div class="skills-category">
-              <div class="skills-cat-title">Languages</div>
-              <div class="skills-tags">
-                <span class="skill-tag">Python</span><span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">JavaScript</span><span class="skill-tag">Java</span>
-                <span class="skill-tag">C</span><span class="skill-tag">C++</span><span
-                  class="skill-tag">HTML/CSS</span>
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon project-folder-green"></div>
+              <div class="project-header-text">
+                <div class="project-name">HealthBook 2.0</div>
+                <div class="project-type">AI + Automation</div>
               </div>
             </div>
-            <div class="skills-category">
-              <div class="skills-cat-title">Frameworks & Libraries</div>
-              <div class="skills-tags">
-                <span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span
-                  class="skill-tag">Express.js</span>
-                <span class="skill-tag">FastAPI</span><span class="skill-tag">Selenium</span><span
-                  class="skill-tag">Google Gemini API</span>
-                <span class="skill-tag">OpenAI API</span>
-              </div>
-            </div>
-            <div class="skills-category">
-              <div class="skills-cat-title">Cloud & Databases</div>
-              <div class="skills-tags">
-                <span class="skill-tag">AWS</span><span class="skill-tag">MongoDB</span><span
-                  class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">Redis</span><span class="skill-tag">Firebase</span><span
-                  class="skill-tag">Supabase</span>
-                <span class="skill-tag">pgvector</span><span class="skill-tag">Vercel</span><span
-                  class="skill-tag">SQL</span>
-              </div>
-            </div>
-            <div class="skills-category">
-              <div class="skills-cat-title">DevOps & Tools</div>
-              <div class="skills-tags">
-                <span class="skill-tag">Docker</span><span class="skill-tag">GitHub Actions</span><span
-                  class="skill-tag">Prometheus</span>
-                <span class="skill-tag">Grafana</span><span class="skill-tag">Locust</span><span
-                  class="skill-tag">CI/CD</span>
-                <span class="skill-tag">Git/GitHub</span><span class="skill-tag">Agile/Scrum</span><span
-                  class="skill-tag">System Design</span>
-              </div>
+            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+              <li>Reduced medical appointment booking time 90% via Browser Use SDK and OpenAI Realtime API Twilio calls.
+              </li>
+              <li>Eliminated repeated health history entry via pgvector semantic memory pipeline in Supabase.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">pgvector</span><span
+                class="tag">Supabase</span>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="win-statusbar">28 skills listed</div>
-    </div>
 
-    <!-- CONTACT Window -->
-    <div class="xp-window hidden" id="win-contact" style="left:240px;top:120px;width:560px;height:420px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-contact')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-contact"></div>
-          <span class="win-title">Contact — Address Book</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-contact')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-contact')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-contact')" title="Close">&#10005;</button>
-        </div>
-      </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-      </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn">&#9664; Back</button>
-        <button class="toolbar-btn">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\Contact" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">File and Folder Tasks</div>
-            <div class="sidebar-link">&#128231; Send email</div>
-            <div class="sidebar-link">&#128279; Open LinkedIn</div>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="contact-content">
-            <div class="contact-item">
-              <div class="contact-icon">📧</div>
-              <div class="contact-detail">
-                <div class="contact-label">Email</div>
-                <a href="mailto:EmanuelSNader@gmail.com" class="contact-value">EmanuelSNader@gmail.com</a>
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon"></div>
+              <div class="project-header-text">
+                <div class="project-name">LockedIn</div>
+                <div class="project-type">IoT & Fullstack</div>
               </div>
             </div>
-            <div class="contact-item">
-              <div class="contact-icon">🔗</div>
-              <div class="contact-detail">
-                <div class="contact-label">LinkedIn</div>
-                <a href="https://linkedin.com/in/emanuelnader" class="contact-value"
-                  target="_blank">linkedin.com/in/emanuelnader</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">🐙</div>
-              <div class="contact-detail">
-                <div class="contact-label">GitHub</div>
-                <a href="https://github.com/EmanuelNader" class="contact-value"
-                  target="_blank">github.com/EmanuelNader</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">🏫</div>
-              <div class="contact-detail">
-                <div class="contact-label">University</div>
-                <span class="contact-value">UC San Diego — Software Engineering</span>
-              </div>
-            </div>
-            <div class="contact-message">
-              <p>I'm always open to <strong>internships</strong>, <strong>collaborations</strong>, and <strong>cool
-                  project ideas</strong>. Feel free to reach out!</p>
+            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+              <li>Reduced device event latency by 35%+ by architecting an IoT pipeline (ESP32 &rarr; REST &rarr;
+                MongoDB).</li>
+              <li>Optimized database schemas cutting data retrieval latency by 40% across modular REST services.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span
+                class="tag">MongoDB</span>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="win-statusbar">4 contact methods</div>
-    </div>
 
-    <!-- HOBBIES Window -->
-    <div class="xp-window hidden" id="win-hobbies" style="left:280px;top:140px;width:580px;height:460px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-hobbies')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-hobbies"></div>
-          <span class="win-title">Hobbies — My Pictures</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-hobbies')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-hobbies')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-hobbies')" title="Close">&#10005;</button>
-        </div>
-      </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-      </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn">&#9664; Back</button>
-        <button class="toolbar-btn">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\My Pictures\Hobbies" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">File and Folder Tasks</div>
-            <div class="sidebar-link">&#127968; See more</div>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="hobbies-grid">
-            <div class="hobby-card">
-              <div class="hobby-emoji">🏔️</div>
-              <div class="hobby-name">Hiking</div>
-              <div class="hobby-desc">Love exploring trails around San Diego and the surrounding mountains. Torrey Pines
-                is a frequent spot.</div>
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon project-folder-orange"></div>
+              <div class="project-header-text">
+                <div class="project-name">Nutribase</div>
+                <div class="project-type">IoT Tracking</div>
+              </div>
             </div>
-            <div class="hobby-card">
-              <div class="hobby-emoji">🎮</div>
-              <div class="hobby-name">Gaming</div>
-              <div class="hobby-desc">Big fan of strategy and indie games. Currently playing through a backlog of titles
-                from the 2000s.</div>
-            </div>
-            <div class="hobby-card">
-              <div class="hobby-emoji">📸</div>
-              <div class="hobby-name">Photography</div>
-              <div class="hobby-desc">Street and landscape photography. Shoot on a mirrorless camera and edit in
-                Lightroom.</div>
-            </div>
-            <div class="hobby-card">
-              <div class="hobby-emoji">📚</div>
-              <div class="hobby-name">Reading</div>
-              <div class="hobby-desc">Into tech books, sci-fi, and the occasional biography. Currently re-reading The
-                Pragmatic Programmer.</div>
-            </div>
-            <div class="hobby-card">
-              <div class="hobby-emoji">🎸</div>
-              <div class="hobby-name">Guitar</div>
-              <div class="hobby-desc">Self-taught acoustic guitarist. Mostly playing indie rock and fingerpicking
-                arrangements.</div>
-            </div>
-            <div class="hobby-card">
-              <div class="hobby-emoji">☕</div>
-              <div class="hobby-name">Coffee</div>
-              <div class="hobby-desc">Passionate about specialty coffee. Always searching for the best pour-over in San
-                Diego.</div>
+            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+              <li>Engineered a MERN-stack Smart Fridge Tracker, reducing food waste tracking errors by 60%.</li>
+              <li>Programmed custom ESP32 firmware in C++ to stream high-frequency real-time weight payloads.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span
+                class="tag">C++</span>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="win-statusbar">6 objects</div>
-    </div>
 
-    <!-- RESUME Window -->
-    <div class="xp-window hidden" id="win-resume" style="left:300px;top:60px;width:640px;height:520px;">
-      <div class="win-titlebar" onmousedown="startDrag(event,'win-resume')">
-        <div class="win-titlebar-left">
-          <div class="win-icon win-icon-resume"></div>
-          <span class="win-title">Resume.pdf — My Documents</span>
-        </div>
-        <div class="win-controls">
-          <button class="win-btn win-min" onclick="minimizeWindow('win-resume')" title="Minimize">&#8211;</button>
-          <button class="win-btn win-max" onclick="maximizeWindow('win-resume')" title="Maximize">&#9744;</button>
-          <button class="win-btn win-close" onclick="closeWindow('win-resume')" title="Close">&#10005;</button>
-        </div>
-      </div>
-      <div class="win-menubar">
-        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-      </div>
-      <div class="win-toolbar">
-        <button class="toolbar-btn">&#9664; Back</button>
-        <button class="toolbar-btn">Forward &#9654;</button>
-        <button class="toolbar-btn">&#8593; Up</button>
-        <div class="address-bar"><span class="address-label">Address</span><input type="text"
-            value="C:\Users\EmanuelNader\Resume.pdf" readonly /></div>
-      </div>
-      <div class="win-body">
-        <div class="win-sidebar">
-          <div class="sidebar-section">
-            <div class="sidebar-title">File Tasks</div>
-            <div class="sidebar-link">&#128229; Download PDF</div>
-            <div class="sidebar-link">&#128231; Email resume</div>
-            <div class="sidebar-link">&#128196; Print</div>
-          </div>
-        </div>
-        <div class="win-content">
-          <div class="resume-content">
-            <div class="resume-paper">
-              <div class="resume-header">
-                <h2>Emanuel Nader</h2>
-                <p style="font-size:12px; margin-top:5px;">818-624-7395 &bull; EmanuelSNader@gmail.com &bull;
-                  in/emanuelnader &bull; gh/EmanuelNader</p>
-                <p style="font-size:12px;">emanuelnader.tech</p>
-              </div>
-              <div class="resume-section">
-                <div class="resume-section-title">EDUCATION</div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header">
-                    <strong>University of California, San Diego</strong>
-                    <span>Expected June 2027</span>
-                  </div>
-                  <div>B.S. in Mathematics-Computer Science &bull; La Jolla, CA</div>
-                  <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Design & Analysis of
-                    Algorithms, Systems Programming, Software Tools, Discrete Math & Graph Theory</div>
-                </div>
-              </div>
-              <div class="resume-section">
-                <div class="resume-section-title">TECHNICAL SKILLS</div>
-                <div style="font-size:11px;line-height:1.8;">
-                  <strong>Languages:</strong> Python, TypeScript, JavaScript, Java, C, C++, HTML/CSS<br>
-                  <strong>Frameworks/Libraries:</strong> React, Node.js, Express.js, FastAPI, Selenium, Google Gemini
-                  API, OpenAI API<br>
-                  <strong>Cloud & Databases:</strong> AWS, MongoDB, PostgreSQL, Redis, Firebase, Supabase, pgvector,
-                  Vercel, SQL<br>
-                  <strong>DevOps & Tools:</strong> Docker, GitHub Actions, Prometheus, Grafana, Locust, CI/CD, REST
-                  APIs, System Design
-                </div>
-              </div>
-              <div class="resume-section">
-                <div class="resume-section-title">EXPERIENCE</div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header">
-                    <strong>HP Tech Ventures</strong>
-                    <span>Feb 2026 – Apr 2026</span>
-                  </div>
-                  <div style="font-size:11px;color:#555;">Software Engineering Extern (Technical Analyst) &bull; Remote
-                  </div>
-                  <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Cut due diligence cycle time by 40%, saving >15 hours/week, by building Python scrapers that
-                      aggregated >10,000 market records.</li>
-                    <li>Improved investment screening efficiency by 25% via architecture audits on 20+ startup stacks.
-                    </li>
-                    <li>Halved technical risk analysis time by building an LLM-powered research tool using NLP
-                      pipelines.</li>
-                  </ul>
-                </div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header">
-                    <strong>Theta Tau - Professional Engineering Fraternity</strong>
-                    <span>May 2025 – Present</span>
-                  </div>
-                  <div style="font-size:11px;color:#555;">Software Project Lead &bull; San Diego, CA</div>
-                  <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Led Agile delivery of Garnett, a production React/Node.js app for 70+ members maintaining 99%+
-                      uptime.</li>
-                    <li>Reduced real-time notification latency by 30% by architecting full-stack solutions with
-                      Firebase.</li>
-                    <li>Drove 100% on-time delivery across 2 full-stack projects by mentoring 12 engineers.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="resume-section">
-                <div class="resume-section-title">PROJECTS</div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header"><strong>HealthBook 2.0</strong> &bull; <em>Next.js, FastAPI, Browser
-                      Use SDK, OpenAI API</em></div>
-                  <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Reduced medical appointment booking time 90% via a Browser Use SDK agent and AI phone calls via
-                      Twilio.</li>
-                    <li>Eliminated repeated health history entry by engineering a pgvector semantic memory pipeline in
-                      Supabase.</li>
-                  </ul>
-                </div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header"><strong>LockedIn</strong> &bull; <em>React, Node.js, Express,
-                      MongoDB, ESP32</em></div>
-                  <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Reduced device event latency by 35% by architecting an IoT pipeline for real-time monitoring of
-                      50+ concurrent devices.</li>
-                  </ul>
-                </div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header"><strong>Nutribase</strong> &bull; <em>MongoDB, Express.js, React,
-                      C++</em></div>
-                  <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Reduced food waste tracking errors by 60% by engineering a Smart Fridge Tracker with role-based
-                      auth.</li>
-                  </ul>
-                </div>
-                <div class="resume-entry">
-                  <div class="resume-entry-header"><strong>ShortStack</strong> &bull; <em>Flask, PostgreSQL, Redis,
-                      Docker</em></div>
-                  <ul style="font-size:11px;margin:4px 0 0 16px;">
-                    <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx
-                      replicas.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="resume-download-btn">
-                <a href="#" class="btn-download">📄 Download Full Resume (PDF)</a>
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon project-folder-orange"></div>
+              <div class="project-header-text">
+                <div class="project-name">ShortStack</div>
+                <div class="project-type">Platform Architecture</div>
               </div>
             </div>
+            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
+              <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx replicas.
+              </li>
+              <li>Achieved 84% test coverage via GitHub Actions CI pipeline orchestrating 7 Docker containers.</li>
+            </ul>
+            <div class="project-tags">
+              <span class="tag">Flask</span><span class="tag">Redis</span><span class="tag">Docker</span><span
+                class="tag">Prometheus</span>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="win-statusbar">1 object — Resume.pdf (148 KB)</div>
-    </div>
 
-    <!-- Shutdown overlay (Authentic XP Mode) -->
-    <div class="shutdown-overlay hidden" id="shutdown-overlay">
-      <div class="shutdown-dialog-xp">
-        <div class="shutdown-header-xp">
-          <span>Turn off computer</span>
-          <img src="assets/icons/startup.png" style="height: 24px; max-width: 40px; object-fit: contain;" />
-        </div>
-        <div class="shutdown-body-xp">
-          <div class="shutdown-action" onclick="hideShutdown()">
-            <div class="shutdown-btn-icon standby">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <path fill="none" stroke="white" stroke-width="2" d="M12 2v6" />
-                <path fill="none" stroke="white" stroke-width="2" d="M16 4a10 10 0 1 1-8 0" />
-              </svg>
-            </div>
-            <span>Stand By</span>
-          </div>
-          <div class="shutdown-action" onclick="doRestart()">
-            <div class="shutdown-btn-icon turnoff">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <path fill="none" stroke="white" stroke-width="2" d="M12 2v10" />
-                <path fill="none" stroke="white" stroke-width="2" d="M16 6a8 8 0 1 1-8 0" />
-              </svg>
-            </div>
-            <span>Turn Off</span>
-          </div>
-          <div class="shutdown-action" onclick="doRestart()">
-            <div class="shutdown-btn-icon restart">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <path fill="none" stroke="white" stroke-width="2"
-                  d="M12 2v4l3 3-3 3V8a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6v4z" />
-              </svg>
-            </div>
-            <span>Restart</span>
-          </div>
-        </div>
-        <div class="shutdown-footer-xp">
-          <button class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
         </div>
       </div>
     </div>
+    <div class="win-statusbar">3 objects</div>
+  </div>
+
+  <!-- EXPERIENCE Window -->
+  <div class="xp-window hidden" id="win-experience" style="left:160px;top:80px;width:680px;height:520px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-experience')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-experience"></div>
+        <span class="win-title">Experience — My Documents</span>
+      </div>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-experience')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-experience')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-experience')" title="Close">&#10005;</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+    </div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn">&#9664; Back</button>
+      <button class="toolbar-btn">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\Experience" readonly /></div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">File and Folder Tasks</div>
+          <div class="sidebar-link">&#128196; View resume</div>
+          <div class="sidebar-link">&#128231; Contact me</div>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="experience-list">
+          <div class="exp-item">
+            <div class="exp-dot"></div>
+            <div class="exp-content">
+              <div class="exp-role">Software Engineering Extern (Technical Analyst)</div>
+              <div class="exp-company">HP Tech Ventures &bull; Remote</div>
+              <div class="exp-date">Feb 2026 – Apr 2026</div>
+              <p class="exp-desc">Cut due diligence cycle time by 40% building Python scrapers; performed architecture
+                audits on 20+ startups to improve screening efficiency by 25%; built an LLM-powered NLP research tool
+                halving technical risk analysis time.</p>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-dot"></div>
+            <div class="exp-content">
+              <div class="exp-role">Software Project Lead</div>
+              <div class="exp-company">Theta Tau - Professional Engineering Fraternity</div>
+              <div class="exp-date">May 2025 – Present</div>
+              <p class="exp-desc">Led Agile delivery of Garnett holding 99%+ uptime for 70+ members; reduced real-time
+                notification latency by 30% via Firebase integrations; drove 100% on-time delivery mentoring 12
+                engineers across 2 full-stack projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-statusbar">4 objects</div>
+  </div>
+
+  <!-- SKILLS Window -->
+  <div class="xp-window hidden" id="win-skills" style="left:200px;top:100px;width:640px;height:480px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-skills')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-skills"></div>
+        <span class="win-title">Skills — Control Panel</span>
+      </div>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-skills')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-skills')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-skills')" title="Close">&#10005;</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+    </div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn">&#9664; Back</button>
+      <button class="toolbar-btn">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\Skills" readonly /></div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">See Also</div>
+          <div class="sidebar-link">&#128193; Projects</div>
+          <div class="sidebar-link">&#128196; Resume</div>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="skills-content">
+          <div class="skills-category">
+            <div class="skills-cat-title">Languages</div>
+            <div class="skills-tags">
+              <span class="skill-tag">Python</span><span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">JavaScript</span><span class="skill-tag">Java</span>
+              <span class="skill-tag">C</span><span class="skill-tag">C++</span><span class="skill-tag">HTML/CSS</span>
+            </div>
+          </div>
+          <div class="skills-category">
+            <div class="skills-cat-title">Frameworks & Libraries</div>
+            <div class="skills-tags">
+              <span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span
+                class="skill-tag">Express.js</span>
+              <span class="skill-tag">FastAPI</span><span class="skill-tag">Selenium</span><span
+                class="skill-tag">Google Gemini API</span>
+              <span class="skill-tag">OpenAI API</span>
+            </div>
+          </div>
+          <div class="skills-category">
+            <div class="skills-cat-title">Cloud & Databases</div>
+            <div class="skills-tags">
+              <span class="skill-tag">AWS</span><span class="skill-tag">MongoDB</span><span
+                class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Redis</span><span class="skill-tag">Firebase</span><span
+                class="skill-tag">Supabase</span>
+              <span class="skill-tag">pgvector</span><span class="skill-tag">Vercel</span><span
+                class="skill-tag">SQL</span>
+            </div>
+          </div>
+          <div class="skills-category">
+            <div class="skills-cat-title">DevOps & Tools</div>
+            <div class="skills-tags">
+              <span class="skill-tag">Docker</span><span class="skill-tag">GitHub Actions</span><span
+                class="skill-tag">Prometheus</span>
+              <span class="skill-tag">Grafana</span><span class="skill-tag">Locust</span><span
+                class="skill-tag">CI/CD</span>
+              <span class="skill-tag">Git/GitHub</span><span class="skill-tag">Agile/Scrum</span><span
+                class="skill-tag">System Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-statusbar">28 skills listed</div>
+  </div>
+
+  <!-- CONTACT Window -->
+  <div class="xp-window hidden" id="win-contact" style="left:240px;top:120px;width:560px;height:420px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-contact')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-contact"></div>
+        <span class="win-title">Contact — Address Book</span>
+      </div>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-contact')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-contact')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-contact')" title="Close">&#10005;</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+    </div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn">&#9664; Back</button>
+      <button class="toolbar-btn">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\Contact" readonly /></div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">File and Folder Tasks</div>
+          <div class="sidebar-link">&#128231; Send email</div>
+          <div class="sidebar-link">&#128279; Open LinkedIn</div>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="contact-content">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-detail">
+              <div class="contact-label">Email</div>
+              <a href="mailto:EmanuelSNader@gmail.com" class="contact-value">EmanuelSNader@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🔗</div>
+            <div class="contact-detail">
+              <div class="contact-label">LinkedIn</div>
+              <a href="https://linkedin.com/in/emanuelnader" class="contact-value"
+                target="_blank">linkedin.com/in/emanuelnader</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🐙</div>
+            <div class="contact-detail">
+              <div class="contact-label">GitHub</div>
+              <a href="https://github.com/EmanuelNader" class="contact-value"
+                target="_blank">github.com/EmanuelNader</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🏫</div>
+            <div class="contact-detail">
+              <div class="contact-label">University</div>
+              <span class="contact-value">UC San Diego — Software Engineering</span>
+            </div>
+          </div>
+          <div class="contact-message">
+            <p>I'm always open to <strong>internships</strong>, <strong>collaborations</strong>, and <strong>cool
+                project ideas</strong>. Feel free to reach out!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-statusbar">4 contact methods</div>
+  </div>
+
+  <!-- HOBBIES Window -->
+  <div class="xp-window hidden" id="win-hobbies" style="left:280px;top:140px;width:580px;height:460px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-hobbies')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-hobbies"></div>
+        <span class="win-title">Hobbies — My Pictures</span>
+      </div>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-hobbies')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-hobbies')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-hobbies')" title="Close">&#10005;</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+    </div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn">&#9664; Back</button>
+      <button class="toolbar-btn">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\My Pictures\Hobbies" readonly /></div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">File and Folder Tasks</div>
+          <div class="sidebar-link">&#127968; See more</div>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="hobbies-grid">
+          <div class="hobby-card">
+            <div class="hobby-emoji">🏔️</div>
+            <div class="hobby-name">Hiking</div>
+            <div class="hobby-desc">Love exploring trails around San Diego and the surrounding mountains. Torrey Pines
+              is a frequent spot.</div>
+          </div>
+          <div class="hobby-card">
+            <div class="hobby-emoji">🎮</div>
+            <div class="hobby-name">Gaming</div>
+            <div class="hobby-desc">Big fan of strategy and indie games. Currently playing through a backlog of titles
+              from the 2000s.</div>
+          </div>
+          <div class="hobby-card">
+            <div class="hobby-emoji">📸</div>
+            <div class="hobby-name">Photography</div>
+            <div class="hobby-desc">Street and landscape photography. Shoot on a mirrorless camera and edit in
+              Lightroom.</div>
+          </div>
+          <div class="hobby-card">
+            <div class="hobby-emoji">📚</div>
+            <div class="hobby-name">Reading</div>
+            <div class="hobby-desc">Into tech books, sci-fi, and the occasional biography. Currently re-reading The
+              Pragmatic Programmer.</div>
+          </div>
+          <div class="hobby-card">
+            <div class="hobby-emoji">🎸</div>
+            <div class="hobby-name">Guitar</div>
+            <div class="hobby-desc">Self-taught acoustic guitarist. Mostly playing indie rock and fingerpicking
+              arrangements.</div>
+          </div>
+          <div class="hobby-card">
+            <div class="hobby-emoji">☕</div>
+            <div class="hobby-name">Coffee</div>
+            <div class="hobby-desc">Passionate about specialty coffee. Always searching for the best pour-over in San
+              Diego.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-statusbar">6 objects</div>
+  </div>
+
+  <!-- RESUME Window -->
+  <div class="xp-window hidden" id="win-resume" style="left:300px;top:60px;width:640px;height:520px;">
+    <div class="win-titlebar" onmousedown="startDrag(event,'win-resume')">
+      <div class="win-titlebar-left">
+        <div class="win-icon win-icon-resume"></div>
+        <span class="win-title">Resume.pdf — My Documents</span>
+      </div>
+      <div class="win-controls">
+        <button class="win-btn win-min" onclick="minimizeWindow('win-resume')" title="Minimize">&#8211;</button>
+        <button class="win-btn win-max" onclick="maximizeWindow('win-resume')" title="Maximize">&#9744;</button>
+        <button class="win-btn win-close" onclick="closeWindow('win-resume')" title="Close">&#10005;</button>
+      </div>
+    </div>
+    <div class="win-menubar">
+      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+    </div>
+    <div class="win-toolbar">
+      <button class="toolbar-btn">&#9664; Back</button>
+      <button class="toolbar-btn">Forward &#9654;</button>
+      <button class="toolbar-btn">&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          value="C:\Users\EmanuelNader\Resume.pdf" readonly /></div>
+    </div>
+    <div class="win-body">
+      <div class="win-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-title">File Tasks</div>
+          <div class="sidebar-link">&#128229; Download PDF</div>
+          <div class="sidebar-link">&#128231; Email resume</div>
+          <div class="sidebar-link">&#128196; Print</div>
+        </div>
+      </div>
+      <div class="win-content">
+        <div class="resume-content">
+          <div class="resume-paper">
+            <div class="resume-header">
+              <h2>Emanuel Nader</h2>
+              <p style="font-size:12px; margin-top:5px;">818-624-7395 &bull; EmanuelSNader@gmail.com &bull;
+                in/emanuelnader &bull; gh/EmanuelNader</p>
+              <p style="font-size:12px;">emanuelnader.tech</p>
+            </div>
+            <div class="resume-section">
+              <div class="resume-section-title">EDUCATION</div>
+              <div class="resume-entry">
+                <div class="resume-entry-header">
+                  <strong>University of California, San Diego</strong>
+                  <span>Expected June 2027</span>
+                </div>
+                <div>B.S. in Mathematics-Computer Science &bull; La Jolla, CA</div>
+                <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Design & Analysis of
+                  Algorithms, Systems Programming, Software Tools, Discrete Math & Graph Theory</div>
+              </div>
+            </div>
+            <div class="resume-section">
+              <div class="resume-section-title">TECHNICAL SKILLS</div>
+              <div style="font-size:11px;line-height:1.8;">
+                <strong>Languages:</strong> Python, TypeScript, JavaScript, Java, C, C++, HTML/CSS<br>
+                <strong>Frameworks/Libraries:</strong> React, Node.js, Express.js, FastAPI, Selenium, Google Gemini
+                API, OpenAI API<br>
+                <strong>Cloud & Databases:</strong> AWS, MongoDB, PostgreSQL, Redis, Firebase, Supabase, pgvector,
+                Vercel, SQL<br>
+                <strong>DevOps & Tools:</strong> Docker, GitHub Actions, Prometheus, Grafana, Locust, CI/CD, REST
+                APIs, System Design
+              </div>
+            </div>
+            <div class="resume-section">
+              <div class="resume-section-title">EXPERIENCE</div>
+              <div class="resume-entry">
+                <div class="resume-entry-header">
+                  <strong>HP Tech Ventures</strong>
+                  <span>Feb 2026 – Apr 2026</span>
+                </div>
+                <div style="font-size:11px;color:#555;">Software Engineering Extern (Technical Analyst) &bull; Remote
+                </div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Cut due diligence cycle time by 40%, saving >15 hours/week, by building Python scrapers that
+                    aggregated >10,000 market records.</li>
+                  <li>Improved investment screening efficiency by 25% via architecture audits on 20+ startup stacks.
+                  </li>
+                  <li>Halved technical risk analysis time by building an LLM-powered research tool using NLP
+                    pipelines.</li>
+                </ul>
+              </div>
+              <div class="resume-entry">
+                <div class="resume-entry-header">
+                  <strong>Theta Tau - Professional Engineering Fraternity</strong>
+                  <span>May 2025 – Present</span>
+                </div>
+                <div style="font-size:11px;color:#555;">Software Project Lead &bull; San Diego, CA</div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Led Agile delivery of Garnett, a production React/Node.js app for 70+ members maintaining 99%+
+                    uptime.</li>
+                  <li>Reduced real-time notification latency by 30% by architecting full-stack solutions with
+                    Firebase.</li>
+                  <li>Drove 100% on-time delivery across 2 full-stack projects by mentoring 12 engineers.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="resume-section">
+              <div class="resume-section-title">PROJECTS</div>
+              <div class="resume-entry">
+                <div class="resume-entry-header"><strong>HealthBook 2.0</strong> &bull; <em>Next.js, FastAPI, Browser
+                    Use SDK, OpenAI API</em></div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Reduced medical appointment booking time 90% via a Browser Use SDK agent and AI phone calls via
+                    Twilio.</li>
+                  <li>Eliminated repeated health history entry by engineering a pgvector semantic memory pipeline in
+                    Supabase.</li>
+                </ul>
+              </div>
+              <div class="resume-entry">
+                <div class="resume-entry-header"><strong>LockedIn</strong> &bull; <em>React, Node.js, Express,
+                    MongoDB, ESP32</em></div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Reduced device event latency by 35% by architecting an IoT pipeline for real-time monitoring of
+                    50+ concurrent devices.</li>
+                </ul>
+              </div>
+              <div class="resume-entry">
+                <div class="resume-entry-header"><strong>Nutribase</strong> &bull; <em>MongoDB, Express.js, React,
+                    C++</em></div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Reduced food waste tracking errors by 60% by engineering a Smart Fridge Tracker with role-based
+                    auth.</li>
+                </ul>
+              </div>
+              <div class="resume-entry">
+                <div class="resume-entry-header"><strong>ShortStack</strong> &bull; <em>Flask, PostgreSQL, Redis,
+                    Docker</em></div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx
+                    replicas.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="resume-download-btn">
+              <a href="#" class="btn-download">📄 Download Full Resume (PDF)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="win-statusbar">1 object — Resume.pdf (148 KB)</div>
+  </div>
+
+  <!-- Shutdown overlay (Authentic XP Mode) -->
+  <div class="shutdown-overlay hidden" id="shutdown-overlay">
+    <div class="shutdown-dialog-xp">
+      <div class="shutdown-header-xp">
+        <span>Turn off computer</span>
+        <img src="assets/icons/startup.png" style="height: 24px; max-width: 40px; object-fit: contain;" />
+      </div>
+      <div class="shutdown-body-xp">
+        <div class="shutdown-action" onclick="hideShutdown()">
+          <div class="shutdown-btn-icon standby">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" stroke="white" stroke-width="2" d="M12 2v6" />
+              <path fill="none" stroke="white" stroke-width="2" d="M16 4a10 10 0 1 1-8 0" />
+            </svg>
+          </div>
+          <span>Stand By</span>
+        </div>
+        <div class="shutdown-action" onclick="doRestart()">
+          <div class="shutdown-btn-icon turnoff">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" stroke="white" stroke-width="2" d="M12 2v10" />
+              <path fill="none" stroke="white" stroke-width="2" d="M16 6a8 8 0 1 1-8 0" />
+            </svg>
+          </div>
+          <span>Turn Off</span>
+        </div>
+        <div class="shutdown-action" onclick="doRestart()">
+          <div class="shutdown-btn-icon restart">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path fill="none" stroke="white" stroke-width="2"
+                d="M12 2v4l3 3-3 3V8a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6v4z" />
+            </svg>
+          </div>
+          <span>Restart</span>
+        </div>
+      </div>
+      <div class="shutdown-footer-xp">
+        <button class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   </div><!-- end #desktop -->
 
