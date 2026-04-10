@@ -282,7 +282,7 @@ function createTaskbarButton(winId, type) {
   const btn = document.createElement('div');
   btn.id = `tb-btn-${winId}`;
   btn.className = 'taskbar-win-btn active';
-  btn.innerHTML = `<div class="tb-icon sm-icon-${type}"></div><span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${titleMap[type]}</span>`;
+  btn.innerHTML = `<div class="tb-icon icon-${type}"></div><span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${titleMap[type]}</span>`;
   
   btn.addEventListener('click', () => {
     const win = document.getElementById(winId);
