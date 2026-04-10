@@ -178,8 +178,8 @@ function maximizeWindow(winId) {
     // Maximize
     win.style.left = '0px';
     win.style.top = '0px';
-    win.style.width = '100vw';
-    win.style.height = 'calc(100vh - 30px)'; // Account for taskbar
+    win.style.width = '100%';
+    win.style.height = 'calc(100% - 45px)'; // Account for taskbar
     win.dataset.maximized = 'true';
   }
   bringToFront(winId);
