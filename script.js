@@ -110,14 +110,19 @@ function hideShutdown() {
   document.getElementById('shutdown-overlay').classList.add('hidden');
 }
 
+function doStandBy() {
+  hideShutdown();
+  document.body.innerHTML = '<div style="background:black;width:100vw;height:100vh;"></div>';
+}
+
+function doTurnOff() {
+  hideShutdown();
+  document.body.innerHTML = '<div style="background:black;width:100vw;height:100vh;"></div>';
+}
+
 function doRestart() {
-  const action = document.querySelector('.shutdown-select').value;
-  if(action === 'Shut down' || action === 'Stand by') {
-    // Blank screen simulate
-    document.body.innerHTML = '<div style="background:black; width:100vw; height:100vh;"></div>';
-  } else {
-    window.location.reload();
-  }
+  hideShutdown();
+  window.location.reload();
 }
 
 // ==========================================================================
