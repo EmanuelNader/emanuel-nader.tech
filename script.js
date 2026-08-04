@@ -30,6 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.xp-window').forEach(win => {
     win.addEventListener('mousedown', () => bringToFront(win.id));
   });
+
+  const userCard = document.getElementById('user-card');
+  if (userCard) {
+    userCard.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        doLogin();
+      }
+    });
+  }
 });
 
 // ==========================================================================
