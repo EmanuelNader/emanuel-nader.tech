@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const coarse = window.matchMedia('(pointer: coarse)').matches;
+  document.querySelectorAll('.desktop-icon[data-window]').forEach(icon => {
+    if (!coarse) return;
+    icon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWindow(icon.dataset.window);
+    });
+  });
+
   // Deselect icons when clicking empty desktop
   document.getElementById('desktop').addEventListener('click', () => {
     icons.forEach(i => i.classList.remove('selected'));
@@ -138,6 +147,25 @@ function doRestart() {
 // ==========================================================================
 // WINDOW MANAGEMENT
 // ==========================================================================
+function clampWindowToDesktop(win) {
+  const desk = document.getElementById('desktop');
+  if (!desk || !win) return;
+  const deskRect = desk.getBoundingClientRect();
+  const maxW = Math.max(280, deskRect.width - 8);
+  const maxH = Math.max(200, deskRect.height - 8);
+  const style = win.style;
+  const w = Math.min(parseFloat(style.width) || win.offsetWidth, maxW);
+  const h = Math.min(parseFloat(style.height) || win.offsetHeight, maxH);
+  style.width = w + 'px';
+  style.height = h + 'px';
+  let left = parseFloat(style.left) || 0;
+  let top = parseFloat(style.top) || 0;
+  left = Math.min(Math.max(0, left), Math.max(0, deskRect.width - w));
+  top = Math.min(Math.max(0, top), Math.max(0, deskRect.height - h));
+  style.left = left + 'px';
+  style.top = top + 'px';
+}
+
 function openWindow(id) {
   const winId = `win-${id}`;
   const win = document.getElementById(winId);
@@ -152,6 +180,7 @@ function openWindow(id) {
     createTaskbarButton(winId, id);
   }
   
+  clampWindowToDesktop(win);
   bringToFront(winId);
 }
 
