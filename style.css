@@ -1376,25 +1376,308 @@ p {
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
+/* ==========================================================================
+   MOBILE / NARROW VIEWPORTS
+   ========================================================================== */
 @media (max-width: 640px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    zoom: 1;
+    font-size: 13px;
+  }
+
+  /* —— Login: stacked welcome card —— */
+  .login-left-pane,
+  .login-divider {
+    display: none;
+  }
+
+  .login-body {
+    justify-content: center;
+    align-items: center;
+    padding: 28px 20px 16px;
+  }
+
+  .login-right-pane {
+    width: 100%;
+    max-width: 360px;
+    align-items: center;
+  }
+
+  .xp-logo-block {
+    margin: 0 0 18px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .xp-logo-block img {
+    max-height: 110px !important;
+    width: auto;
+  }
+
+  .login-instruction {
+    margin: 0 0 22px;
+    font-size: 0; /* hide desktop copy */
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .login-instruction::after {
+    content: "To begin, tap your user name";
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .user-list {
+    max-width: 100%;
+  }
+
+  .user-card {
+    max-width: 100%;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: linear-gradient(to right, #3A6EA5 0%, rgba(64, 120, 224, 0.65) 70%, rgba(64, 120, 224, 0.25) 100%);
+  }
+
+  .user-avatar-xp {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .user-name-xp {
+    font-size: 20px;
+  }
+
+  .user-sub-xp {
+    font-size: 13px;
+  }
+
+  .login-footer {
+    height: auto;
+    min-height: 56px;
+    padding: 12px 18px;
+  }
+
+  .login-footer-right {
+    display: none;
+  }
+
+  .footer-turnoff {
+    font-size: 18px;
+  }
+
+  .power-btn-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+
+  /* —— Desktop: touch icon grid —— */
+  .desktop {
+    bottom: 52px;
+  }
+
   .desktop-icons {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    gap: 8px;
-    padding: 8px;
-    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 6px;
+    padding: 16px 10px 20px;
+    height: auto;
+    max-height: 100%;
     overflow-y: auto;
+    align-content: start;
   }
 
   .desktop-icon {
-    position: static;
-    width: 72px;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto;
+    min-height: 92px;
+    padding: 10px 4px;
+    border-radius: 6px;
   }
 
+  .desktop-icon:active {
+    background: rgba(11, 97, 255, 0.25);
+  }
+
+  .icon-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon-label {
+    font-size: 12px;
+    margin-top: 6px;
+    max-width: 96%;
+    line-height: 1.2;
+  }
+
+  .taskbar {
+    height: 52px;
+  }
+
+  .start-img-btn {
+    height: 52px !important;
+    width: 104px !important;
+  }
+
+  .taskbar-win-btn {
+    height: 40px;
+    font-size: 12px;
+    max-width: 120px;
+    padding: 0 8px;
+  }
+
+  .systray-clock {
+    font-size: 12px;
+  }
+
+  /* —— Start menu: full-width sheet —— */
+  .start-menu {
+    width: 100vw;
+    max-width: 100%;
+    bottom: 52px;
+    max-height: calc(100vh - 52px);
+  }
+
+  .sm-body {
+    flex-direction: column;
+    height: auto;
+    max-height: min(58vh, 420px);
+    overflow-y: auto;
+  }
+
+  .sm-left,
+  .sm-right {
+    width: 100%;
+    flex: none;
+  }
+
+  .sm-item,
+  .sm-right-item {
+    min-height: 42px;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .sm-footer {
+    height: 56px;
+    gap: 20px;
+  }
+
+  .sm-footer-btn {
+    font-size: 14px;
+  }
+
+  /* —— Windows: full-bleed inside desktop (desktop already clears taskbar) —— */
   .xp-window {
-    max-width: calc(100vw / 1.2 - 8px);
-    max-height: calc(100vh / 1.2 - 50px);
+    border-radius: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-shadow: none;
+  }
+
+  .xp-window .win-titlebar {
+    border-radius: 0;
+    height: 36px;
+  }
+
+  .win-title {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100vw - 110px);
+  }
+
+  .win-btn {
+    width: 28px;
+    height: 26px;
+    font-size: 14px;
+  }
+
+  .win-menubar {
+    display: none;
+  }
+
+  .win-toolbar {
+    flex-wrap: wrap;
+    gap: 4px;
+    height: auto;
+    min-height: 36px;
+    padding: 4px 6px;
+  }
+
+  .toolbar-btn {
+    display: none;
+  }
+
+  .address-bar {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .win-sidebar {
+    display: none;
+  }
+
+  .win-content {
+    padding: 12px;
+  }
+
+  .about-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .about-avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .about-intro h1 {
+    font-size: 22px;
+  }
+
+  .about-subtitle {
+    font-size: 13px;
+  }
+
+  .projects-grid,
+  .hobbies-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .contact-item,
+  .exp-item,
+  .hobby-card,
+  .project-card {
+    font-size: 13px;
+  }
+
+  .shutdown-overlay {
+    padding: 12px;
+  }
+
+  .shutdown-dialog-xp {
+    width: calc(100vw - 24px);
+    max-width: 340px;
+  }
+
+  .shutdown-body-xp {
+    gap: 18px;
+    padding: 20px 12px;
   }
 }

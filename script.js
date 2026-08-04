@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const coarse = window.matchMedia('(pointer: coarse)').matches;
+  // Single-tap open on phones / narrow viewports (dblclick stays for desktop mouse)
   document.querySelectorAll('.desktop-icon[data-window]').forEach(icon => {
-    if (!coarse) return;
     icon.addEventListener('click', (e) => {
+      if (!isTouchFriendlyViewport()) return;
       e.stopPropagation();
       openWindow(icon.dataset.window);
     });
@@ -147,7 +147,12 @@ function doRestart() {
 // ==========================================================================
 // WINDOW MANAGEMENT
 // ==========================================================================
+function isTouchFriendlyViewport() {
+  return window.matchMedia('(max-width: 640px), (pointer: coarse)').matches;
+}
+
 function clampWindowToDesktop(win) {
+  if (isTouchFriendlyViewport()) return; // CSS full-bleeds windows on narrow screens
   const desk = document.getElementById('desktop');
   if (!desk || !win) return;
   const deskRect = desk.getBoundingClientRect();
@@ -179,9 +184,15 @@ function openWindow(id) {
     win.classList.remove('hidden');
     createTaskbarButton(winId, id);
   }
-  
-  clampWindowToDesktop(win);
+
+  if (isTouchFriendlyViewport()) {
+    win.dataset.maximized = 'true';
+  } else {
+    clampWindowToDesktop(win);
+  }
+
   bringToFront(winId);
+  hideStartMenu();
 }
 
 function closeWindow(winId) {
