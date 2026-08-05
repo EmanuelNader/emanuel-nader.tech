@@ -19,6 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Single-tap open on phones / narrow viewports (dblclick stays for desktop mouse)
+  document.querySelectorAll('.desktop-icon[data-window]').forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      if (!isTouchFriendlyViewport()) return;
+      e.stopPropagation();
+      openWindow(icon.dataset.window);
+    });
+  });
+
   // Deselect icons when clicking empty desktop
   document.getElementById('desktop').addEventListener('click', () => {
     icons.forEach(i => i.classList.remove('selected'));
@@ -30,6 +39,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.xp-window').forEach(win => {
     win.addEventListener('mousedown', () => bringToFront(win.id));
   });
+
+  const userCard = document.getElementById('user-card');
+  if (userCard) {
+    userCard.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        doLogin();
+      }
+    });
+  }
+
+  const runInput = document.getElementById('run-input');
+  if (runInput) {
+    runInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeRun();
+      } else if (e.key === 'Escape') {
+        hideRunDialog();
+      }
+    });
+  }
 });
 
 // ==========================================================================
@@ -96,6 +127,67 @@ function startMenuOpen(winId) {
   hideStartMenu();
 }
 
+function showRunDialog() {
+  hideStartMenu();
+  const overlay = document.getElementById('run-overlay');
+  const input = document.getElementById('run-input');
+  overlay.classList.remove('hidden');
+  if (input) {
+    input.value = '';
+    setTimeout(() => input.focus(), 0);
+  }
+}
+
+function hideRunDialog() {
+  document.getElementById('run-overlay').classList.add('hidden');
+}
+
+function executeRun() {
+  const raw = (document.getElementById('run-input')?.value || '').trim().toLowerCase();
+  const aliases = {
+    about: 'about',
+    'about me': 'about',
+    'my computer': 'about',
+    projects: 'projects',
+    'my projects': 'projects',
+    search: 'projects',
+    experience: 'experience',
+    skills: 'skills',
+    'control panel': 'skills',
+    contact: 'contact',
+    hobbies: 'hobbies',
+    'my pictures': 'hobbies',
+    resume: 'resume',
+    'my documents': 'resume',
+    github: null,
+    linkedin: null
+  };
+
+  hideRunDialog();
+
+  if (raw.includes('github')) {
+    openExternal('https://github.com/EmanuelNader');
+    return;
+  }
+  if (raw.includes('linkedin')) {
+    openExternal('https://linkedin.com/in/emanuelnader');
+    return;
+  }
+
+  const winId = aliases[raw];
+  if (winId) {
+    openWindow(winId);
+    return;
+  }
+
+  // Partial match fallback
+  const keys = Object.keys(aliases);
+  const hit = keys.find(k => k.includes(raw) || raw.includes(k));
+  if (hit && aliases[hit]) {
+    openWindow(aliases[hit]);
+  }
+}
+
 function doLogoff() {
   // reload to return to login screen
   window.location.reload();
@@ -104,25 +196,56 @@ function doLogoff() {
 function doShutdown() {
   hideStartMenu();
   document.getElementById('shutdown-overlay').classList.remove('hidden');
+  document.body.classList.add('shutdown-active');
 }
 
 function hideShutdown() {
   document.getElementById('shutdown-overlay').classList.add('hidden');
+  document.body.classList.remove('shutdown-active');
+}
+
+function doStandBy() {
+  hideShutdown();
+  document.body.innerHTML = '<div style="background:black;width:100vw;height:100vh;"></div>';
+}
+
+function doTurnOff() {
+  hideShutdown();
+  document.body.innerHTML = '<div style="background:black;width:100vw;height:100vh;"></div>';
 }
 
 function doRestart() {
-  const action = document.querySelector('.shutdown-select').value;
-  if(action === 'Shut down' || action === 'Stand by') {
-    // Blank screen simulate
-    document.body.innerHTML = '<div style="background:black; width:100vw; height:100vh;"></div>';
-  } else {
-    window.location.reload();
-  }
+  hideShutdown();
+  window.location.reload();
 }
 
 // ==========================================================================
 // WINDOW MANAGEMENT
 // ==========================================================================
+function isTouchFriendlyViewport() {
+  return window.matchMedia('(max-width: 640px), (pointer: coarse)').matches;
+}
+
+function clampWindowToDesktop(win) {
+  if (isTouchFriendlyViewport()) return; // CSS full-bleeds windows on narrow screens
+  const desk = document.getElementById('desktop');
+  if (!desk || !win) return;
+  const deskRect = desk.getBoundingClientRect();
+  const maxW = Math.max(280, deskRect.width - 8);
+  const maxH = Math.max(200, deskRect.height - 8);
+  const style = win.style;
+  const w = Math.min(parseFloat(style.width) || win.offsetWidth, maxW);
+  const h = Math.min(parseFloat(style.height) || win.offsetHeight, maxH);
+  style.width = w + 'px';
+  style.height = h + 'px';
+  let left = parseFloat(style.left) || 0;
+  let top = parseFloat(style.top) || 0;
+  left = Math.min(Math.max(0, left), Math.max(0, deskRect.width - w));
+  top = Math.min(Math.max(0, top), Math.max(0, deskRect.height - h));
+  style.left = left + 'px';
+  style.top = top + 'px';
+}
+
 function openWindow(id) {
   const winId = `win-${id}`;
   const win = document.getElementById(winId);
@@ -136,8 +259,15 @@ function openWindow(id) {
     win.classList.remove('hidden');
     createTaskbarButton(winId, id);
   }
-  
+
+  if (isTouchFriendlyViewport()) {
+    win.dataset.maximized = 'true';
+  } else {
+    clampWindowToDesktop(win);
+  }
+
   bringToFront(winId);
+  hideStartMenu();
 }
 
 function closeWindow(winId) {

@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Emanuel Nader — Software Engineer</title>
+  <title>Emanuel Nader</title>
   <meta name="description"
     content="Emanuel Nader's personal portfolio — Software Engineering student at UCSD. Built with nostalgic Windows XP aesthetic." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/icons/computer.png" type="image/png" />
 </head>
 
 <body>
@@ -53,13 +54,10 @@
 
     <!-- Footer -->
     <div class="login-footer">
-      <div class="login-footer-left">
-        <div class="power-btn-icon" title="Turn off computer">
-          <img src="assets/icons/shut_down.png" alt="Turn off computer"
-            style="width: 100%; height: 100%; object-fit: contain;" />
-        </div>
+      <button type="button" class="login-footer-left" onclick="doShutdown()" aria-label="Turn off computer">
+        <img class="power-btn-icon" src="assets/icons/shut_down.png?v=7" alt="" width="32" height="32" aria-hidden="true">
         <span class="footer-turnoff">Turn off computer</span>
-      </div>
+      </button>
       <div class="login-footer-right">
         After you log on, you can add or change accounts.<br />
         Just go to Control Panel and click User Accounts.
@@ -184,15 +182,15 @@
       </div>
       <!-- Right column: light blue -->
       <div class="sm-right">
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
+        <div class="sm-right-item" onclick="startMenuOpen('about')"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
+        <div class="sm-right-item" onclick="startMenuOpen('resume')"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
+        <div class="sm-right-item" onclick="startMenuOpen('hobbies')"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
+        <div class="sm-right-item" onclick="startMenuOpen('skills')"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
 
         <div class="sm-right-sep"></div>
 
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
+        <div class="sm-right-item" onclick="startMenuOpen('projects')"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
+        <div class="sm-right-item" onclick="showRunDialog()"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
       </div>
     </div>
     <div class="sm-footer">
@@ -239,15 +237,15 @@
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">File and Folder Tasks</div>
-          <div class="sidebar-link">&#128462; Make a new folder</div>
-          <div class="sidebar-link">&#128190; Publish this folder</div>
-          <div class="sidebar-link">&#128231; Share this folder</div>
+          <div class="sidebar-link">Make a new folder</div>
+          <div class="sidebar-link">Publish this folder</div>
+          <div class="sidebar-link">Share this folder</div>
         </div>
         <div class="sidebar-section">
           <div class="sidebar-title">Other Places</div>
-          <div class="sidebar-link">&#128193; My Documents</div>
-          <div class="sidebar-link">&#128450; My Computer</div>
-          <div class="sidebar-link">&#127760; Network</div>
+          <div class="sidebar-link">My Documents</div>
+          <div class="sidebar-link">My Computer</div>
+          <div class="sidebar-link">Network</div>
         </div>
       </div>
       <div class="win-content">
@@ -260,17 +258,16 @@
             </div>
           </div>
           <div class="about-body">
-            <p>Hey! I'm Emanuel — a student at <strong>UC San Diego</strong>, passionate about building products that
-              people actually love to use.</p>
-            <p>I focus on full-stack development, modern system design, AI pipelines, and cloud tooling. When I'm not
-              coding, I'm exploring side projects and learning new tech stacks.</p>
+            <p>Hey! I'm Emanuel — a Math-CS student at <strong>UC San Diego</strong> and currently a Technical Program
+              Manager Intern on Chassis Controls at <strong>Tesla</strong>.</p>
+            <p>I build full-stack systems, internal tools, and AI-powered workflows — from fleet-planning consoles to
+              agentic booking pipelines. Always open to cool project ideas and collaborations.</p>
             <div class="about-facts">
-              <div class="fact-row"><span class="fact-label">📍 Location</span><span>San Diego, CA</span></div>
-              <div class="fact-row"><span class="fact-label">🎓 School</span><span>UC San Diego — B.S.
-                  Mathematics-Computer Science</span></div>
-              <div class="fact-row"><span class="fact-label">💼 Status</span><span>Open to internships &amp;
-                  opportunities</span></div>
-              <div class="fact-row"><span class="fact-label">📧 Email</span><span><a
+              <div class="fact-row"><span class="fact-label">Location</span><span>San Diego / Palo Alto, CA</span></div>
+              <div class="fact-row"><span class="fact-label">School</span><span>UC San Diego — B.S.
+                  Mathematics-Computer Science (Expected June 2028)</span></div>
+              <div class="fact-row"><span class="fact-label">Status</span><span>TPM Intern @ Tesla — Chassis Controls</span></div>
+              <div class="fact-row"><span class="fact-label">Email</span><span><a
                     href="mailto:EmanuelSNader@gmail.com">EmanuelSNader@gmail.com</a></span></div>
             </div>
           </div>
@@ -313,11 +310,53 @@
         </div>
         <div class="sidebar-section">
           <div class="sidebar-title">Details</div>
-          <p style="font-size:11px;color:#333;padding:4px 8px;">6 featured projects<br />All built with ❤️</p>
+          <p style="font-size:11px;color:#333;padding:4px 8px;">8 featured projects<br />Resume + side projects</p>
         </div>
       </div>
       <div class="win-content">
         <div class="projects-grid">
+
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon project-folder-blue"></div>
+              <div class="project-header-text">
+                <div class="project-name">ShortStack</div>
+                <div class="project-type">Platform Architecture &bull; April 2026</div>
+              </div>
+            </div>
+            <p class="project-desc">A production-style URL shortener with Redis caching, load-balanced Nginx, Dockerized services, and a full CI pipeline with Prometheus/Grafana monitoring.</p>
+            <div class="project-tags">
+              <span class="tag">Flask</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Nginx</span><span class="tag">Docker</span><span class="tag">Prometheus</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon project-folder-green"></div>
+              <div class="project-header-text">
+                <div class="project-name">HealthBook</div>
+                <div class="project-type">AI + Automation &bull; March 2026</div>
+              </div>
+            </div>
+            <p class="project-desc">An AI agent that books medical appointments for you — browsing sites like Zocdoc and placing real phone calls via OpenAI Realtime API, with semantic memory so you don’t re-enter health history every time.</p>
+            <div class="project-tags">
+              <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">Browser Use SDK</span><span class="tag">OpenAI</span><span class="tag">pgvector</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon-bar">
+              <div class="project-folder-icon project-folder-orange"></div>
+              <div class="project-header-text">
+                <div class="project-name">Nutribase</div>
+                <div class="project-type">IoT Tracking &bull; May 2025</div>
+              </div>
+            </div>
+            <p class="project-desc">A smart-fridge tracker that watches what’s in your fridge. ESP32 weight sensors stream live data into a MERN app with role-based auth and waste/analytics dashboards.</p>
+            <div class="project-tags">
+              <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">C++</span>
+            </div>
+          </div>
 
           <div class="project-card">
             <div class="project-icon-bar">
@@ -327,10 +366,7 @@
                 <div class="project-type">Fullstack Application</div>
               </div>
             </div>
-            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-              <li>Grew platform to 100+ unique sessions by shipping gamified reward loops, progress dashboards, and Auth0/JWT authentication achieving &lt;1s login latency end-to-end.</li>
-              <li>Cut average study session setup time by 50% by integrating the Google Gemini API to deliver personalized LLM-generated study prompts via Node.js endpoints (&lt;1.5s response time).</li>
-            </ul>
+            <p class="project-desc">A gamified study platform with progress dashboards, Auth0 login, and Gemini-powered personalized study prompts so sessions are quicker to start and more fun to finish.</p>
             <div class="project-tags">
               <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Google Gemini API</span><span class="tag">Auth0</span><span class="tag">MongoDB</span>
             </div>
@@ -344,10 +380,7 @@
                 <div class="project-type">Automation Engine</div>
               </div>
             </div>
-            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-              <li>Achieved >95% reservation success rate on high-demand UCSD library rooms by engineering a Python/Selenium automation engine that fully eliminates a 5-step manual booking workflow.</li>
-              <li>Reduced room acquisition time by >90% (from ~10 min to &lt;2 sec) by simulating WebDriver interactions with precise timing to capture slots within seconds of availability release.</li>
-            </ul>
+            <p class="project-desc">A Selenium bot that grabs hard-to-get UCSD library rooms the moment they open — no more clicking through a five-step booking flow by hand.</p>
             <div class="project-tags">
               <span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">WebDriver</span><span class="tag">REST APIs</span>
             </div>
@@ -357,18 +390,13 @@
             <div class="project-icon-bar">
               <div class="project-folder-icon project-folder-green"></div>
               <div class="project-header-text">
-                <div class="project-name">Healthbook</div>
-                <div class="project-type">AI + Automation</div>
+                <div class="project-name">LockedIn</div>
+                <div class="project-type">IoT &amp; Fullstack</div>
               </div>
             </div>
-            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-              <li>Reduced medical appointment booking time 90% via Browser Use SDK and OpenAI Realtime API Twilio calls.
-              </li>
-              <li>Eliminated repeated health history entry via pgvector semantic memory pipeline in Supabase.</li>
-            </ul>
+            <p class="project-desc">An IoT + web stack that connects ESP32 devices to a React/Node backend for real-time monitoring and automated workflow triggers.</p>
             <div class="project-tags">
-              <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">pgvector</span><span
-                class="tag">Supabase</span>
+              <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span>
             </div>
           </div>
 
@@ -376,62 +404,34 @@
             <div class="project-icon-bar">
               <div class="project-folder-icon"></div>
               <div class="project-header-text">
-                <div class="project-name">LockedIn</div>
-                <div class="project-type">IoT & Fullstack</div>
+                <div class="project-name">discord-internship-job-board-bot</div>
+                <div class="project-type">Discord Bot &bull; Scraping + Alerts</div>
               </div>
             </div>
-            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-              <li>Reduced device event latency by 35%+ by architecting an IoT pipeline (ESP32 &rarr; REST &rarr;
-                MongoDB).</li>
-              <li>Optimized database schemas cutting data retrieval latency by 40% across modular REST services.</li>
-            </ul>
+            <p class="project-desc">A Discord bot that scrapes internship, co-op, and fellowship postings, dedupes them, and drops each new listing into the right role-family channel with optional title ping roles.</p>
             <div class="project-tags">
-              <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span
-                class="tag">MongoDB</span>
+              <span class="tag">Discord.js</span><span class="tag">Node.js</span><span class="tag">Web Scraping</span><span class="tag">Automation</span>
             </div>
           </div>
 
           <div class="project-card">
             <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-orange"></div>
+              <div class="project-folder-icon project-folder-blue"></div>
               <div class="project-header-text">
-                <div class="project-name">Nutribase</div>
-                <div class="project-type">IoT Tracking</div>
+                <div class="project-name">ShotClock</div>
+                <div class="project-type">Mobile App &bull; In Progress</div>
               </div>
             </div>
-            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-              <li>Engineered a MERN-stack Smart Fridge Tracker, reducing food waste tracking errors by 60%.</li>
-              <li>Programmed custom ESP32 firmware in C++ to stream high-frequency real-time weight payloads.</li>
-            </ul>
+            <p class="project-desc">A social memory-keeping app for nights out with friends — capture moments, people, and stories from a night in one place. iOS-first MVP on Expo, React Native, and Supabase.</p>
             <div class="project-tags">
-              <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span
-                class="tag">C++</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-orange"></div>
-              <div class="project-header-text">
-                <div class="project-name">ShortStack</div>
-                <div class="project-type">Platform Architecture</div>
-              </div>
-            </div>
-            <ul style="font-size:12px; margin-top:5px; padding-left:15px; color:#333;">
-              <li>Reduced redirect latency by 93% by integrating Redis caching across 3 load-balanced Nginx replicas.
-              </li>
-              <li>Achieved 84% test coverage via GitHub Actions CI pipeline orchestrating 7 Docker containers.</li>
-            </ul>
-            <div class="project-tags">
-              <span class="tag">Flask</span><span class="tag">Redis</span><span class="tag">Docker</span><span
-                class="tag">Prometheus</span>
+              <span class="tag">Expo</span><span class="tag">React Native</span><span class="tag">Supabase</span><span class="tag">iOS</span>
             </div>
           </div>
 
         </div>
       </div>
     </div>
-    <div class="win-statusbar">6 objects</div>
+    <div class="win-statusbar">8 objects</div>
   </div>
 
   <!-- EXPERIENCE Window -->
@@ -470,27 +470,34 @@
           <div class="exp-item">
             <div class="exp-dot"></div>
             <div class="exp-content">
+              <div class="exp-role">Technical Program Manager Intern — Chassis Controls</div>
+              <div class="exp-company">Tesla &bull; Palo Alto, CA</div>
+              <div class="exp-date">Jun 2026 – Present</div>
+              <p class="exp-desc">Rebuilt an internal fleet-planning console in React/Vite/Tailwind on Flask/SQLite for 7 Vehicle Software teams (75% less manual cross-checking); designed a weighted release-scoring algorithm ranking 350+ vehicles; reconciled 3 systems into 4-stage source-of-truth tables.</p>
+            </div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-dot"></div>
+            <div class="exp-content">
               <div class="exp-role">Software Engineering Extern (Technical Analyst)</div>
               <div class="exp-company">HP Tech Ventures &bull; Remote</div>
               <div class="exp-date">Feb 2026 – Apr 2026</div>
-              <p class="exp-desc">Cut due diligence cycle time by 40% building Python scrapers; performed architecture audits on 20+ startups to evaluate scalability and robustness; built an LLM-powered research tool using NLP pipelines to auto-generate competitive landscape briefs.</p>
+              <p class="exp-desc">Cut due diligence cycle time by 40% (15+ hrs/week) with Python scrapers over 10,000+ market records; audited 20+ startup stacks for scalability; built an LLM research tool that halved competitive-brief write time.</p>
             </div>
           </div>
           <div class="exp-item">
             <div class="exp-dot"></div>
             <div class="exp-content">
               <div class="exp-role">Software Project Lead</div>
-              <div class="exp-company">Theta Tau - Professional Engineering Fraternity</div>
+              <div class="exp-company">Theta Tau — Professional Engineering Fraternity &bull; San Diego, CA</div>
               <div class="exp-date">May 2025 – Present</div>
-              <p class="exp-desc">Led Agile delivery of Garnett holding 99%+ uptime for 70+ members; reduced real-time
-                notification latency by 30% via Firebase integrations; drove 100% on-time delivery mentoring 12
-                engineers across 2 full-stack projects.</p>
+              <p class="exp-desc">Led Agile delivery of Garnett (React/Node) for 70+ members at 99%+ uptime and 500+ monthly transactions; cut notification latency 30% with Firebase; mentored 12 engineers across Nutribase and LockedIn.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="win-statusbar">4 objects</div>
+    <div class="win-statusbar">3 objects</div>
   </div>
 
   <!-- SKILLS Window -->
@@ -520,8 +527,8 @@
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">See Also</div>
-          <div class="sidebar-link">&#128193; Projects</div>
-          <div class="sidebar-link">&#128196; Resume</div>
+          <div class="sidebar-link" onclick="openWindow('projects')">Projects</div>
+          <div class="sidebar-link" onclick="openWindow('resume')">Resume</div>
         </div>
       </div>
       <div class="win-content">
@@ -531,45 +538,55 @@
             <div class="skills-tags">
               <span class="skill-tag">Python</span><span class="skill-tag">TypeScript</span>
               <span class="skill-tag">JavaScript</span><span class="skill-tag">Java</span>
-              <span class="skill-tag">C</span><span class="skill-tag">C++</span><span class="skill-tag">HTML/CSS</span>
+              <span class="skill-tag">C</span><span class="skill-tag">C++</span>
+              <span class="skill-tag">SQL</span><span class="skill-tag">HTML/CSS</span>
             </div>
           </div>
           <div class="skills-category">
             <div class="skills-cat-title">Frameworks & Libraries</div>
             <div class="skills-tags">
-              <span class="skill-tag">React</span><span class="skill-tag">Node.js</span><span
-                class="skill-tag">Express.js</span>
-              <span class="skill-tag">FastAPI</span><span class="skill-tag">Selenium</span><span
-                class="skill-tag">Google Gemini API</span>
+              <span class="skill-tag">React</span><span class="skill-tag">React Native</span>
+              <span class="skill-tag">Expo</span><span class="skill-tag">Vite</span>
+              <span class="skill-tag">Tailwind</span><span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express.js</span><span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Flask</span><span class="skill-tag">FastAPI</span>
+              <span class="skill-tag">Discord.js</span><span class="skill-tag">Selenium</span>
               <span class="skill-tag">OpenAI API</span>
             </div>
           </div>
           <div class="skills-category">
             <div class="skills-cat-title">Cloud & Databases</div>
             <div class="skills-tags">
-              <span class="skill-tag">AWS</span><span class="skill-tag">MongoDB</span><span
-                class="skill-tag">PostgreSQL</span>
-              <span class="skill-tag">Redis</span><span class="skill-tag">Firebase</span><span
-                class="skill-tag">Supabase</span>
-              <span class="skill-tag">pgvector</span><span class="skill-tag">Vercel</span><span
-                class="skill-tag">SQL</span>
+              <span class="skill-tag">AWS</span><span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">MongoDB</span><span class="skill-tag">SQLite</span>
+              <span class="skill-tag">Redis</span><span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Supabase</span><span class="skill-tag">pgvector</span>
+              <span class="skill-tag">Vercel</span>
             </div>
           </div>
           <div class="skills-category">
             <div class="skills-cat-title">DevOps & Tools</div>
             <div class="skills-tags">
-              <span class="skill-tag">Docker</span><span class="skill-tag">GitHub Actions</span><span
-                class="skill-tag">Prometheus</span>
-              <span class="skill-tag">Grafana</span><span class="skill-tag">Locust</span><span
-                class="skill-tag">CI/CD</span>
-              <span class="skill-tag">Git/GitHub</span><span class="skill-tag">Agile/Scrum</span><span
-                class="skill-tag">System Design</span>
+              <span class="skill-tag">Docker</span><span class="skill-tag">Docker Compose</span>
+              <span class="skill-tag">Nginx</span><span class="skill-tag">GitHub Actions</span>
+              <span class="skill-tag">Prometheus</span><span class="skill-tag">Grafana</span>
+              <span class="skill-tag">Locust</span><span class="skill-tag">CI/CD</span>
+              <span class="skill-tag">Git</span><span class="skill-tag">Linux</span>
+            </div>
+          </div>
+          <div class="skills-category">
+            <div class="skills-cat-title">Concepts</div>
+            <div class="skills-tags">
+              <span class="skill-tag">REST APIs</span><span class="skill-tag">Microservices</span>
+              <span class="skill-tag">Unit/Integration Testing</span><span class="skill-tag">pytest</span>
+              <span class="skill-tag">System Design</span><span class="skill-tag">Agile/Scrum</span>
+              <span class="skill-tag">Web Scraping</span><span class="skill-tag">IoT</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="win-statusbar">28 skills listed</div>
+    <div class="win-statusbar">48 skills listed</div>
   </div>
 
   <!-- CONTACT Window -->
@@ -599,21 +616,19 @@
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">File and Folder Tasks</div>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=EmanuelSNader@gmail.com" target="_blank" class="sidebar-link">&#128231; Send email</a>
-          <a href="https://linkedin.com/in/emanuelnader" target="_blank" class="sidebar-link">&#128279; Open LinkedIn</a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=EmanuelSNader@gmail.com" target="_blank" class="sidebar-link">Send email</a>
+          <a href="https://linkedin.com/in/emanuelnader" target="_blank" class="sidebar-link">Open LinkedIn</a>
         </div>
       </div>
       <div class="win-content">
         <div class="contact-content">
           <div class="contact-item">
-            <div class="contact-icon">📧</div>
             <div class="contact-detail">
               <div class="contact-label">Email</div>
               <a href="mailto:EmanuelSNader@gmail.com" class="contact-value">EmanuelSNader@gmail.com</a>
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">🔗</div>
             <div class="contact-detail">
               <div class="contact-label">LinkedIn</div>
               <a href="https://linkedin.com/in/emanuelnader" class="contact-value"
@@ -621,7 +636,6 @@
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">🐙</div>
             <div class="contact-detail">
               <div class="contact-label">GitHub</div>
               <a href="https://github.com/EmanuelNader" class="contact-value"
@@ -629,10 +643,9 @@
             </div>
           </div>
           <div class="contact-item">
-            <div class="contact-icon">🏫</div>
             <div class="contact-detail">
               <div class="contact-label">University</div>
-              <span class="contact-value">UC San Diego — Software Engineering</span>
+              <span class="contact-value">UC San Diego — B.S. Mathematics-Computer Science</span>
             </div>
           </div>
           <div class="contact-message">
@@ -672,38 +685,32 @@
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">File and Folder Tasks</div>
-          <div class="sidebar-link">&#127968; See more</div>
+          <div class="sidebar-link">See more</div>
         </div>
       </div>
       <div class="win-content">
         <div class="hobbies-grid">
           <div class="hobby-card">
-            <div class="hobby-emoji">🏍️</div>
             <div class="hobby-name">Motorcycle</div>
             <div class="hobby-desc">I ride a 2006 Ninja Kawazaki ZX6r</div>
           </div>
           <div class="hobby-card">
-            <div class="hobby-emoji">🏋️‍♂️</div>
             <div class="hobby-name">Bodybuilding</div>
             <div class="hobby-desc">Lost over 100 lbs and lift 5-6 times a week</div>
           </div>
           <div class="hobby-card">
-            <div class="hobby-emoji">🍳</div>
             <div class="hobby-name">Cooking</div>
             <div class="hobby-desc">Enjoy cooking and preparing meals</div>
           </div>
           <div class="hobby-card">
-            <div class="hobby-emoji">🏚️</div>
             <div class="hobby-name">Exploration</div>
             <div class="hobby-desc">Love exploring random haunted buildings in the woods, and hiking for sunsets</div>
           </div>
           <div class="hobby-card">
-            <div class="hobby-emoji">📺</div>
             <div class="hobby-name">Watching Anime / Reading manga</div>
             <div class="hobby-desc">Love One Piece, Tokyo Ghoul</div>
           </div>
           <div class="hobby-card">
-            <div class="hobby-emoji">🎮</div>
             <div class="hobby-name">Gaming</div>
             <div class="hobby-desc">Play solo video games such as Persona, Minecraft, Terraria</div>
           </div>
@@ -760,25 +767,39 @@
               <div class="resume-entry">
                 <div class="resume-entry-header">
                   <strong>University of California, San Diego</strong>
-                  <span>Expected June 2027</span>
+                  <span>Expected June 2028</span>
                 </div>
                 <div>B.S. in Mathematics-Computer Science &bull; La Jolla, CA</div>
-                <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Design & Analysis of
-                  Algorithms, Systems Programming, Software Tools, Discrete Math & Graph Theory</div>
+                <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Design and Analysis of
+                  Algorithms, Systems Programming, Object-Oriented Design</div>
               </div>
             </div>
             <div class="resume-section">
               <div class="resume-section-title">TECHNICAL SKILLS</div>
               <div style="font-size:11px;line-height:1.4;">
-                <strong>Languages:</strong> Python, TypeScript, JavaScript, Java, C, C++, HTML/CSS<br>
-                <strong>Frameworks/Libraries:</strong> React, Node.js, Express.js, FastAPI, Selenium, Google Gemini API, OpenAI API<br>
-                <strong>Cloud & Databases:</strong> AWS, MongoDB, PostgreSQL, Redis, Firebase, Supabase, pgvector, Vercel, SQL<br>
-                <strong>DevOps:</strong> Docker, Docker Compose, Nginx, GitHub Actions, Prometheus, Grafana, Locust, CI/CD<br>
-                <strong>Tools & Architecture:</strong> Git, GitHub, REST APIs, Auth0, Agile/Scrum, System Design
+                <strong>Languages:</strong> Python, TypeScript, JavaScript, Java, C, C++, SQL, HTML/CSS<br>
+                <strong>Frameworks/Libraries:</strong> React, Vite, Tailwind, Node.js, Express.js, Next.js, Flask, FastAPI, OpenAI API<br>
+                <strong>Cloud and Databases:</strong> AWS, PostgreSQL, MongoDB, SQLite, Redis, Firebase, Supabase, pgvector, Vercel<br>
+                <strong>DevOps and Tools:</strong> Docker, Docker Compose, Nginx, GitHub Actions, Prometheus, Grafana, Locust, CI/CD, Git, Linux<br>
+                <strong>Concepts:</strong> REST APIs, Microservices, Unit/Integration Testing, pytest, System Design, Agile/Scrum
               </div>
             </div>
             <div class="resume-section">
               <div class="resume-section-title">EXPERIENCE</div>
+              <div class="resume-entry">
+                <div class="resume-entry-header">
+                  <strong>Tesla</strong>
+                  <span>Jun 2026 – Present</span>
+                </div>
+                <div style="font-size:11px;color:#555;">Technical Program Manager Intern — Chassis Controls &bull; Palo Alto, CA</div>
+                <ul style="font-size:11px;margin:4px 0 0 16px;">
+                  <li>Rebuilt and shipped internal fleet-planning console in React/Vite/Tailwind on a Flask REST API and SQLite, consolidating 4 planner workflows into one interface and cutting manual cross-checking by 75% for 7 Vehicle Software teams.</li>
+                  <li>Engineered a vehicle adapter layer normalizing sparse relational rows and nested JSON configuration into a single 12+ attribute UI model, eliminating per-view parsing logic across 4 console views.</li>
+                  <li>Designed a weighted release-scoring algorithm ranking 350+ vehicles 0 to 100 on 5 metrics with scarcity-protection caps, turning quarterly decommission review into a ranked list guiding 25–45 releases per quarter.</li>
+                  <li>Implemented config-driven eligibility validation on hardware-pedigree and firmware-branch predicates, flagging a significant share of the campaign population as unsupported.</li>
+                  <li>Reconciled 3 internal systems into 4-stage source-of-truth tables tracking approval, parts, technician, and completion.</li>
+                </ul>
+              </div>
               <div class="resume-entry">
                 <div class="resume-entry-header">
                   <strong>HP Tech Ventures</strong>
@@ -786,9 +807,9 @@
                 </div>
                 <div style="font-size:11px;color:#555;">Software Engineering Extern (Technical Analyst) &bull; Remote</div>
                 <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Cut due diligence cycle time by 40%, saving &gt;15 hours/week, by building Python scrapers that aggregated and cleaned &gt;10,000 market records into structured investment reports.</li>
+                  <li>Cut due diligence cycle time by 40%, saving 15+ hours/week, by building Python scrapers that aggregated and cleaned 10,000+ market records into structured investment reports.</li>
                   <li>Improved investment screening efficiency by 25% by performing technical architectural audits on 20+ startup stacks to evaluate system scalability, high availability, and code robustness.</li>
-                  <li>Halved technical risk analysis time (4 hrs to &lt;2 hrs/report) by building an LLM-powered research tool using NLP pipelines to auto-generate structured competitive landscape briefs.</li>
+                  <li>Halved technical risk analysis time (4 hrs to under 2 hrs/report) by building an LLM-powered research tool using NLP pipelines to auto-generate structured competitive landscape briefs.</li>
                 </ul>
               </div>
               <div class="resume-entry">
@@ -798,8 +819,8 @@
                 </div>
                 <div style="font-size:11px;color:#555;">Software Project Lead &bull; San Diego, CA</div>
                 <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Led Agile delivery of Garnett, a production React/Node.js app for 70+ members, maintaining 99%+ uptime and supporting &gt;500 monthly transactions across dues, events, and merit tracking.</li>
-                  <li>Reduced real-time notification latency by 30% (&lt;200ms) for merit tracking by architecting full-stack solutions integrated with Firebase and optimizing event-driven data sync.</li>
+                  <li>Led Agile delivery of Garnett, a production React/Node.js app for 70+ members, maintaining 99%+ uptime and supporting 500+ monthly transactions across dues, events, and merit tracking.</li>
+                  <li>Reduced real-time notification latency by 30% (sub-200ms) for merit tracking by architecting full-stack solutions integrated with Firebase and optimizing event-driven data sync.</li>
                   <li>Drove 100% on-time delivery across 2 full-stack projects (Nutribase, LockedIn) by mentoring 12 engineers through structured code reviews, sprint planning, and technical design sessions.</li>
                 </ul>
               </div>
@@ -807,31 +828,24 @@
             <div class="resume-section">
               <div class="resume-section-title">PROJECTS</div>
               <div class="resume-entry">
-                <div class="resume-entry-header"><strong>Healthbook</strong> &bull; <em>Next.js, FastAPI, Browser Use SDK, OpenAI Realtime API</em></div>
+                <div class="resume-entry-header"><strong>ShortStack</strong> &bull; <em>Flask, PostgreSQL, Redis, Nginx, Docker, Prometheus, GitHub Actions</em> &bull; April 2026</div>
                 <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Reduced medical appointment booking time 90% (30 min &rarr; &lt;3 min) by orchestrating a Browser Use SDK agent to automate Zocdoc navigation and trigger real AI phone calls to doctor offices via OpenAI Realtime API and Twilio.</li>
-                  <li>Eliminated 100% of repeated health history entry across sessions by engineering a pgvector semantic memory pipeline in Supabase, retrieving the top 3 relevant memory chunks via cosine similarity and injecting them into each agent task prompt.</li>
+                  <li>Reduced redirect latency by 93% (30ms → &lt;2ms on cache hits) by integrating Redis caching across 3 load-balanced Nginx replicas, validated under 500 concurrent users via Locust load testing.</li>
+                  <li>Achieved 84% test coverage across 25 automated tests by building a full CI pipeline with GitHub Actions and orchestrating 7 Docker containers with health checks, auto-restart policies, and Prometheus/Grafana monitoring.</li>
                 </ul>
               </div>
               <div class="resume-entry">
-                <div class="resume-entry-header"><strong>LockedIn</strong> &bull; <em>React, Node.js, Express, MongoDB, ESP32</em></div>
+                <div class="resume-entry-header"><strong>HealthBook</strong> &bull; <em>Next.js, FastAPI, Browser Use SDK, OpenAI Realtime API</em> &bull; March 2026</div>
                 <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Reduced device event latency by 35%+ by architecting an IoT pipeline (ESP32 &rarr; REST &rarr; MongoDB) enabling real-time monitoring and automated workflow triggers for 50+ concurrent devices.</li>
-                  <li>Optimized database schemas and query execution to cut data retrieval latency by 40% (500ms to &lt;300ms) across modular REST API backend services.</li>
+                  <li>Reduced medical appointment booking time 90% (30 min to under 3 min) by orchestrating a Browser Use SDK agent to automate Zocdoc navigation and trigger real AI phone calls to doctor offices via OpenAI Realtime API and Twilio.</li>
+                  <li>Eliminated repeated health history entry across sessions by engineering a pgvector semantic memory pipeline in Supabase, retrieving the top 3 relevant memory chunks via cosine similarity and injecting them into each agent task prompt.</li>
                 </ul>
               </div>
               <div class="resume-entry">
-                <div class="resume-entry-header"><strong>Nutribase</strong> &bull; <em>MongoDB, Express.js, React, Node.js, C++</em></div>
+                <div class="resume-entry-header"><strong>Nutribase</strong> &bull; <em>MongoDB, Express.js, React, Node.js, C++</em> &bull; May 2025</div>
                 <ul style="font-size:11px;margin:4px 0 0 16px;">
                   <li>Reduced food waste tracking errors and unauthorized access by 60% by engineering a MERN-stack Smart Fridge Tracker with secure, role-based authentication and user analytics dashboards.</li>
-                  <li>Programmed custom ESP32 firmware in C++ to stream real-time weight data (&gt;10 payloads/second) to a scalable Node.js backend via low-latency MQTT/HTTP pipelines.</li>
-                </ul>
-              </div>
-              <div class="resume-entry">
-                <div class="resume-entry-header"><strong>ShortStack</strong> &bull; <em>Flask, PostgreSQL, Redis, Nginx, Docker, Prometheus, GitHub Actions</em></div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Reduced redirect latency by 93% (30ms &rarr; &lt;2ms on cache hits) by integrating Redis caching across 3 load-balanced Nginx replicas, validated under 500 concurrent users via Locust load testing.</li>
-                  <li>Achieved 84% test coverage across 25 automated tests by building a full CI pipeline with GitHub Actions and orchestrating 7 Docker containers with health checks, auto-restart policies, and Prometheus/Grafana monitoring.</li>
+                  <li>Programmed custom ESP32 firmware in C++ to stream real-time weight data (10+ payloads/second) to a scalable Node.js backend via low-latency MQTT/HTTP pipelines.</li>
                 </ul>
               </div>
             </div>
@@ -845,49 +859,57 @@
     <div class="win-statusbar">1 object — Resume.pdf (148 KB)</div>
   </div>
 
-  <!-- Shutdown overlay (Authentic XP Mode) -->
+  </div><!-- end #desktop -->
+
+  <!-- Shutdown overlay (Authentic XP Mode) — outside #desktop so grayscale doesn't wash it out -->
   <div class="shutdown-overlay hidden" id="shutdown-overlay">
-    <div class="shutdown-dialog-xp">
+    <div class="shutdown-dialog-xp" role="dialog" aria-label="Turn off computer">
       <div class="shutdown-header-xp">
-        <span>Turn off computer</span>
-        <img src="assets/icons/startup.png" style="height: 24px; max-width: 40px; object-fit: contain;" />
+        <span class="shutdown-title-xp">Turn off computer</span>
+        <img class="shutdown-xp-flag" src="assets/icons/windows_flag.png?v=4" alt="" width="58" height="44" aria-hidden="true">
       </div>
       <div class="shutdown-body-xp">
-        <div class="shutdown-action" onclick="hideShutdown()">
-          <div class="shutdown-btn-icon standby">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path fill="none" stroke="white" stroke-width="2" d="M12 2v6" />
-              <path fill="none" stroke="white" stroke-width="2" d="M16 4a10 10 0 1 1-8 0" />
-            </svg>
-          </div>
-          <span>Stand By</span>
-        </div>
-        <div class="shutdown-action" onclick="doRestart()">
-          <div class="shutdown-btn-icon turnoff">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path fill="none" stroke="white" stroke-width="2" d="M12 2v10" />
-              <path fill="none" stroke="white" stroke-width="2" d="M16 6a8 8 0 1 1-8 0" />
-            </svg>
-          </div>
-          <span>Turn Off</span>
-        </div>
-        <div class="shutdown-action" onclick="doRestart()">
-          <div class="shutdown-btn-icon restart">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path fill="none" stroke="white" stroke-width="2"
-                d="M12 2v4l3 3-3 3V8a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6v4z" />
-            </svg>
-          </div>
-          <span>Restart</span>
-        </div>
+        <button type="button" class="shutdown-action" onclick="doStandBy()">
+          <img class="shutdown-btn-icon" src="assets/icons/stand_by.png?v=7" alt="" width="40" height="40" aria-hidden="true">
+          <span class="shutdown-btn-label">Stand By</span>
+        </button>
+        <button type="button" class="shutdown-action" onclick="doTurnOff()">
+          <img class="shutdown-btn-icon" src="assets/icons/shut_down.png?v=7" alt="" width="40" height="40" aria-hidden="true">
+          <span class="shutdown-btn-label">Turn Off</span>
+        </button>
+        <button type="button" class="shutdown-action" onclick="doRestart()">
+          <img class="shutdown-btn-icon" src="assets/icons/restart.png?v=7" alt="" width="40" height="40" aria-hidden="true">
+          <span class="shutdown-btn-label">Restart</span>
+        </button>
       </div>
       <div class="shutdown-footer-xp">
-        <button class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
+        <button type="button" class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
       </div>
     </div>
   </div>
 
-  </div><!-- end #desktop -->
+  <!-- Run dialog -->
+  <div class="run-overlay hidden" id="run-overlay">
+    <div class="run-dialog" role="dialog" aria-label="Run">
+      <div class="run-titlebar">
+        <span>Run</span>
+        <button class="run-close" onclick="hideRunDialog()" title="Close">&#10005;</button>
+      </div>
+      <div class="run-body">
+        <img class="run-icon" src="assets/icons/computer.png" alt="" />
+        <p>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</p>
+        <label class="run-open-row">
+          <span>Open:</span>
+          <input id="run-input" type="text" autocomplete="off" spellcheck="false"
+            placeholder="about, projects, resume..." />
+        </label>
+        <div class="run-actions">
+          <button type="button" onclick="executeRun()">OK</button>
+          <button type="button" onclick="hideRunDialog()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

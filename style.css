@@ -205,6 +205,12 @@ a:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
 }
 
 .login-footer-left * {
@@ -212,24 +218,29 @@ a:hover {
 }
 
 .power-btn-icon {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 15px;
-  transition: filter 0.2s;
+  width: 32px;
+  height: 32px;
+  display: block;
+  margin-right: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
+  transition: filter 0.15s;
 }
 
 .login-footer-left:hover .power-btn-icon {
-  filter: brightness(1.15);
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35)) brightness(1.12);
+}
+
+.login-footer-left:hover .footer-turnoff {
+  text-decoration: underline;
 }
 
 .footer-turnoff {
   color: white;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.55);
 }
 
 .login-footer-right {
@@ -1029,9 +1040,10 @@ p {
 }
 
 .project-desc {
-  font-size: 11px;
-  margin-bottom: 10px;
-  color: #555;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 8px 0 12px;
+  color: #333;
 }
 
 .project-tags {
@@ -1138,14 +1150,9 @@ p {
   display: flex;
   align-items: flex-start;
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 10px 12px;
   background: #f9f9f9;
   border: 1px solid #e0e0e0;
-}
-
-.contact-icon {
-  font-size: 24px;
-  margin-right: 15px;
 }
 
 .contact-label {
@@ -1177,20 +1184,15 @@ p {
 .hobby-card {
   background: white;
   border: 1px solid #ddd;
-  padding: 15px;
-  text-align: center;
+  padding: 16px 14px;
+  text-align: left;
   border-radius: 4px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.hobby-emoji {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
 .hobby-name {
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-size: 13px;
 }
 
@@ -1272,49 +1274,78 @@ p {
 }
 
 /* ==========================================================================
-   SHUTDOWN DIALOG
+   SHUTDOWN DIALOG (classic XP)
    ========================================================================== */
 .shutdown-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  inset: 0;
   z-index: 100000;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
+  overflow: visible;
+}
+
+/* Classic XP: desktop/login go grayscale behind shutdown dialog */
+body.shutdown-active #desktop,
+body.shutdown-active #login-screen {
+  filter: grayscale(1);
 }
 
 .shutdown-dialog-xp {
-  width: 550px;
-  background: transparent;
+  width: 420px;
+  border: 1px solid #000;
+  background: #003399;
   display: flex;
   flex-direction: column;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+  overflow: visible;
 }
 
 .shutdown-header-xp {
   background: #003399;
-  color: white;
-  font-family: Tahoma, sans-serif;
-  font-size: 26px;
-  font-style: italic;
+  color: #fff;
+  font-family: Tahoma, 'Segoe UI', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  gap: 20px;
+  padding: 16px 36px 14px 18px;
+  min-height: 64px;
+  overflow: visible;
+}
+
+.shutdown-title-xp {
+  font-size: 22px;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+  flex: 1;
+  min-width: 0;
+}
+
+.shutdown-xp-flag {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 44px;
+  object-fit: contain;
+  object-position: left center;
+  image-rendering: auto;
+  /* keep clear of header edges; drop-shadow without clipping */
+  margin: 0 2px 0 0;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
 }
 
 .shutdown-body-xp {
-  background: linear-gradient(to right, #5A7FDE 0%, #A3BAED 50%, #5A7FDE 100%);
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  /* Official XP: light sky blue top → deeper blue bottom */
+  background: linear-gradient(to bottom, #d0e0f8 0%, #a8c4ef 42%, #6f97d8 100%);
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 45px;
-  padding: 40px 0;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 40px 32px 34px;
+  min-height: 160px;
 }
 
 .shutdown-action {
@@ -1322,56 +1353,504 @@ p {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  width: 72px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: #fff; /* override UA button text color */
 }
 
-.shutdown-action span {
-  color: white;
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 13px;
-  margin-top: 8px;
-}
-
+/* Official XP: colored icons sit directly on the blue gradient (no gray plate) */
 .shutdown-btn-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
-  border: 2px solid white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.5);
-  transition: all 0.2s;
+  width: 42px;
+  height: 42px;
+  display: block;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
+  transition: filter 0.12s, transform 0.12s;
 }
 
-.shutdown-btn-icon:hover {
-  filter: brightness(1.2);
+.shutdown-btn-label {
+  color: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 12px;
+  margin-top: 10px;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.55),
+    1px 1px 1px rgba(0, 0, 0, 0.65);
+  white-space: nowrap;
 }
 
-.shutdown-btn-icon.standby {
-  background: #EBBF30;
+.shutdown-action:hover .shutdown-btn-icon,
+.shutdown-action:focus-visible .shutdown-btn-icon {
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.45)) brightness(1.1);
+  transform: translateY(-1px);
 }
 
-.shutdown-btn-icon.turnoff {
-  background: #D5433C;
+.shutdown-action:focus-visible {
+  outline: none;
 }
 
-.shutdown-btn-icon.restart {
-  background: #4AA43B;
+.shutdown-action:active .shutdown-btn-icon {
+  transform: translateY(1px);
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.2)) brightness(0.95);
 }
 
 .shutdown-footer-xp {
   background: #003399;
   display: flex;
   justify-content: flex-end;
-  padding: 12px 15px;
+  align-items: center;
+  padding: 16px 18px 18px;
 }
 
 .shutdown-cancel-btn {
-  background: #EBEBEB;
-  border: 1px solid #CCC;
-  border-radius: 2px;
-  padding: 4px 20px;
+  background: linear-gradient(to bottom, #fff 0%, #f0f0f0 48%, #e3e3e3 100%);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  padding: 0 14px;
+  min-width: 75px;
+  height: 23px;
   cursor: pointer;
   font-family: Tahoma, Arial, sans-serif;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  color: #000;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 1px 0 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.shutdown-cancel-btn:hover {
+  background: linear-gradient(to bottom, #fff 0%, #e8f3fc 40%, #c5e0f5 100%);
+}
+
+.shutdown-cancel-btn:active {
+  background: #d6e5f5;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   RUN DIALOG
+   ========================================================================== */
+.run-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.run-dialog {
+  width: 360px;
+  background: #ece9d8;
+  border: 1px solid #0055ea;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.45);
+  font-family: Tahoma, 'Trebuchet MS', sans-serif;
+}
+
+.run-titlebar {
+  height: 28px;
+  background: linear-gradient(to right, #0a246a 0%, #a6caf0 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px 0 8px;
+  border-radius: 5px 5px 0 0;
+}
+
+.run-close {
+  width: 21px;
+  height: 21px;
+  background: #c75050;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.run-body {
+  padding: 14px 14px 12px;
+  position: relative;
+}
+
+.run-icon {
+  width: 32px;
+  height: 32px;
+  float: left;
+  margin: 0 10px 8px 0;
+}
+
+.run-body p {
+  font-size: 11px;
+  color: #000;
+  margin: 0 0 14px;
+  line-height: 1.35;
+}
+
+.run-open-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  clear: both;
+  font-size: 11px;
+  margin-bottom: 14px;
+}
+
+.run-open-row span {
+  flex-shrink: 0;
+}
+
+.run-open-row input {
+  flex: 1;
+  border: 1px solid #7f9db9;
+  padding: 3px 5px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  outline: none;
+}
+
+.run-open-row input:focus {
+  border-color: #0058ee;
+}
+
+.run-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.run-actions button {
+  min-width: 75px;
+  padding: 3px 12px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  background: linear-gradient(to bottom, #fff 0%, #ece9d8 100%);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.run-actions button:hover {
+  background: linear-gradient(to bottom, #fff 0%, #e5f1fc 40%, #c5e0f5 100%);
+}
+
+/* ==========================================================================
+   MOBILE / NARROW VIEWPORTS
+   ========================================================================== */
+@media (max-width: 640px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    zoom: 1;
+    font-size: 13px;
+  }
+
+  /* —— Login: stacked welcome card —— */
+  .login-left-pane,
+  .login-divider {
+    display: none;
+  }
+
+  .login-body {
+    justify-content: center;
+    align-items: center;
+    padding: 28px 20px 16px;
+  }
+
+  .login-right-pane {
+    width: 100%;
+    max-width: 360px;
+    align-items: center;
+  }
+
+  .xp-logo-block {
+    margin: 0 0 18px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .xp-logo-block img {
+    max-height: 110px !important;
+    width: auto;
+  }
+
+  .login-instruction {
+    margin: 0 0 22px;
+    font-size: 0; /* hide desktop copy */
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  .login-instruction::after {
+    content: "To begin, tap your user name";
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .user-list {
+    max-width: 100%;
+  }
+
+  .user-card {
+    max-width: 100%;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: linear-gradient(to right, #3A6EA5 0%, rgba(64, 120, 224, 0.65) 70%, rgba(64, 120, 224, 0.25) 100%);
+  }
+
+  .user-avatar-xp {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .user-name-xp {
+    font-size: 20px;
+  }
+
+  .user-sub-xp {
+    font-size: 13px;
+  }
+
+  .login-footer {
+    height: auto;
+    min-height: 56px;
+    padding: 12px 18px;
+  }
+
+  .login-footer-right {
+    display: none;
+  }
+
+  .footer-turnoff {
+    font-size: 16px;
+  }
+
+  .power-btn-icon {
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+  }
+
+  /* —— Desktop: touch icon grid —— */
+  .desktop {
+    bottom: 52px;
+  }
+
+  .desktop-icons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 6px;
+    padding: 16px 10px 20px;
+    height: auto;
+    max-height: 100%;
+    overflow-y: auto;
+    align-content: start;
+  }
+
+  .desktop-icon {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto;
+    min-height: 92px;
+    padding: 10px 4px;
+    border-radius: 6px;
+  }
+
+  .desktop-icon:active {
+    background: rgba(11, 97, 255, 0.25);
+  }
+
+  .icon-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon-label {
+    font-size: 12px;
+    margin-top: 6px;
+    max-width: 96%;
+    line-height: 1.2;
+  }
+
+  .taskbar {
+    height: 52px;
+  }
+
+  .start-img-btn {
+    height: 52px !important;
+    width: 104px !important;
+  }
+
+  .taskbar-win-btn {
+    height: 40px;
+    font-size: 12px;
+    max-width: 120px;
+    padding: 0 8px;
+  }
+
+  .systray-clock {
+    font-size: 12px;
+  }
+
+  /* —— Start menu: full-width sheet —— */
+  .start-menu {
+    width: 100vw;
+    max-width: 100%;
+    bottom: 52px;
+    max-height: calc(100vh - 52px);
+  }
+
+  .sm-body {
+    flex-direction: column;
+    height: auto;
+    max-height: min(58vh, 420px);
+    overflow-y: auto;
+  }
+
+  .sm-left,
+  .sm-right {
+    width: 100%;
+    flex: none;
+  }
+
+  .sm-item,
+  .sm-right-item {
+    min-height: 42px;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .sm-footer {
+    height: 56px;
+    gap: 20px;
+  }
+
+  .sm-footer-btn {
+    font-size: 14px;
+  }
+
+  /* —— Windows: full-bleed inside desktop (desktop already clears taskbar) —— */
+  .xp-window {
+    border-radius: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-shadow: none;
+  }
+
+  .xp-window .win-titlebar {
+    border-radius: 0;
+    height: 36px;
+  }
+
+  .win-title {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100vw - 110px);
+  }
+
+  .win-btn {
+    width: 28px;
+    height: 26px;
+    font-size: 14px;
+  }
+
+  .win-menubar {
+    display: none;
+  }
+
+  .win-toolbar {
+    flex-wrap: wrap;
+    gap: 4px;
+    height: auto;
+    min-height: 36px;
+    padding: 4px 6px;
+  }
+
+  .toolbar-btn {
+    display: none;
+  }
+
+  .address-bar {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .win-sidebar {
+    display: none;
+  }
+
+  .win-content {
+    padding: 12px;
+  }
+
+  .about-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .about-avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .about-intro h1 {
+    font-size: 22px;
+  }
+
+  .about-subtitle {
+    font-size: 13px;
+  }
+
+  .projects-grid,
+  .hobbies-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .contact-item,
+  .exp-item,
+  .hobby-card,
+  .project-card {
+    font-size: 13px;
+  }
+
+  .shutdown-overlay {
+    padding: 12px;
+  }
+
+  .shutdown-dialog-xp {
+    width: min(380px, calc(100vw - 24px));
+  }
+
+  .shutdown-body-xp {
+    gap: 24px;
+    padding: 28px 16px 24px;
+  }
+
+  .run-dialog {
+    width: min(360px, calc(100vw - 24px));
+  }
 }
