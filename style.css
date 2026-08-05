@@ -205,12 +205,18 @@ a:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
   background: transparent;
+  background-color: transparent;
   border: 0;
+  border-radius: 0;
   padding: 0;
   margin: 0;
   font: inherit;
   color: inherit;
+  box-shadow: none;
+  outline: none;
 }
 
 .login-footer-left * {
@@ -1338,8 +1344,8 @@ body.shutdown-active #login-screen {
 }
 
 .shutdown-body-xp {
-  /* Official XP: light sky blue top → deeper blue bottom */
-  background: linear-gradient(to bottom, #d0e0f8 0%, #a8c4ef 42%, #6f97d8 100%);
+  /* Classic XP msgina blue — deep enough that white labels stay readable */
+  background: linear-gradient(to bottom, #7ba2e7 0%, #4a7ac9 45%, #2f5cb5 100%);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -1357,7 +1363,12 @@ body.shutdown-active #login-screen {
   padding: 0;
   margin: 0;
   border: 0;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
   background: transparent;
+  background-color: transparent;
+  box-shadow: none;
   font: inherit;
   color: #fff; /* override UA button text color */
 }
@@ -1377,10 +1388,12 @@ body.shutdown-active #login-screen {
   color: #fff;
   font-family: Tahoma, Arial, sans-serif;
   font-size: 12px;
+  font-weight: bold;
   margin-top: 10px;
   text-shadow:
-    0 0 2px rgba(0, 0, 0, 0.55),
-    1px 1px 1px rgba(0, 0, 0, 0.65);
+    0 0 3px rgba(0, 0, 0, 0.85),
+    1px 1px 0 rgba(0, 0, 0, 0.9),
+    -1px 0 0 rgba(0, 0, 0, 0.35);
   white-space: nowrap;
 }
 
