@@ -196,10 +196,12 @@ function doLogoff() {
 function doShutdown() {
   hideStartMenu();
   document.getElementById('shutdown-overlay').classList.remove('hidden');
+  document.body.classList.add('shutdown-active');
 }
 
 function hideShutdown() {
   document.getElementById('shutdown-overlay').classList.add('hidden');
+  document.body.classList.remove('shutdown-active');
 }
 
 function doStandBy() {

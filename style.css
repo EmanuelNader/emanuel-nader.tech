@@ -205,6 +205,12 @@ a:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
 }
 
 .login-footer-left * {
@@ -212,24 +218,29 @@ a:hover {
 }
 
 .power-btn-icon {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 15px;
-  transition: filter 0.2s;
+  width: 32px;
+  height: 32px;
+  display: block;
+  margin-right: 12px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
+  transition: filter 0.15s;
 }
 
 .login-footer-left:hover .power-btn-icon {
-  filter: brightness(1.15);
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35)) brightness(1.12);
+}
+
+.login-footer-left:hover .footer-turnoff {
+  text-decoration: underline;
 }
 
 .footer-turnoff {
   color: white;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.55);
 }
 
 .login-footer-right {
@@ -1267,51 +1278,74 @@ p {
    ========================================================================== */
 .shutdown-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparent;
+  inset: 0;
   z-index: 100000;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
+  overflow: visible;
+}
+
+/* Classic XP: desktop/login go grayscale behind shutdown dialog */
+body.shutdown-active #desktop,
+body.shutdown-active #login-screen {
+  filter: grayscale(1);
 }
 
 .shutdown-dialog-xp {
-  width: 314px;
-  background: transparent;
+  width: 420px;
+  border: 1px solid #000;
+  background: #003399;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.45);
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+  overflow: visible;
 }
 
 .shutdown-header-xp {
   background: #003399;
   color: #fff;
-  font-family: Tahoma, 'Trebuchet MS', sans-serif;
-  font-size: 18px;
-  font-style: italic;
-  font-weight: bold;
+  font-family: Tahoma, 'Segoe UI', sans-serif;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 10px 8px 12px;
-  min-height: 36px;
+  gap: 20px;
+  padding: 16px 36px 14px 18px;
+  min-height: 64px;
+  overflow: visible;
+}
+
+.shutdown-title-xp {
+  font-size: 22px;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.35);
+  flex: 1;
+  min-width: 0;
 }
 
 .shutdown-xp-flag {
-  flex-shrink: 0;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+  flex: 0 0 auto;
+  width: 58px;
+  height: 44px;
+  object-fit: contain;
+  object-position: left center;
+  image-rendering: auto;
+  /* keep clear of header edges; drop-shadow without clipping */
+  margin: 0 2px 0 0;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
 }
 
 .shutdown-body-xp {
-  background: linear-gradient(to bottom, #a8c6f0 0%, #7ea4e0 45%, #5f8fd4 100%);
+  /* Official XP: light sky blue top → deeper blue bottom */
+  background: linear-gradient(to bottom, #d0e0f8 0%, #a8c4ef 42%, #6f97d8 100%);
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 28px;
-  padding: 28px 18px 22px;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 40px 32px 34px;
+  min-height: 160px;
 }
 
 .shutdown-action {
@@ -1319,78 +1353,84 @@ p {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 64px;
+  width: 72px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: #fff; /* override UA button text color */
 }
 
-.shutdown-action span {
+/* Official XP: colored icons sit directly on the blue gradient (no gray plate) */
+.shutdown-btn-icon {
+  width: 42px;
+  height: 42px;
+  display: block;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.35));
+  transition: filter 0.12s, transform 0.12s;
+}
+
+.shutdown-btn-label {
   color: #fff;
   font-family: Tahoma, Arial, sans-serif;
-  font-size: 11px;
-  margin-top: 7px;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  margin-top: 10px;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.55),
+    1px 1px 1px rgba(0, 0, 0, 0.65);
+  white-space: nowrap;
 }
 
-.shutdown-btn-icon {
-  width: 33px;
-  height: 33px;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.25),
-    1px 1px 2px rgba(0, 0, 0, 0.45);
-  transition: filter 0.15s;
+.shutdown-action:hover .shutdown-btn-icon,
+.shutdown-action:focus-visible .shutdown-btn-icon {
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.45)) brightness(1.1);
+  transform: translateY(-1px);
 }
 
-.shutdown-btn-icon:hover {
-  filter: brightness(1.12);
+.shutdown-action:focus-visible {
+  outline: none;
 }
 
-.shutdown-btn-icon:active {
-  filter: brightness(0.95);
-}
-
-.shutdown-btn-icon.standby {
-  background: linear-gradient(to bottom, #f6d56a 0%, #e8b020 55%, #d49a12 100%);
-}
-
-.shutdown-btn-icon.turnoff {
-  background: linear-gradient(to bottom, #ef6a5c 0%, #d33b32 55%, #b92c24 100%);
-}
-
-.shutdown-btn-icon.restart {
-  background: linear-gradient(to bottom, #78c45a 0%, #4caa35 55%, #3a9228 100%);
+.shutdown-action:active .shutdown-btn-icon {
+  transform: translateY(1px);
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0.2)) brightness(0.95);
 }
 
 .shutdown-footer-xp {
   background: #003399;
   display: flex;
   justify-content: flex-end;
-  padding: 10px 12px;
+  align-items: center;
+  padding: 16px 18px 18px;
 }
 
 .shutdown-cancel-btn {
-  background: linear-gradient(to bottom, #fff 0%, #ece9d8 100%);
+  background: linear-gradient(to bottom, #fff 0%, #f0f0f0 48%, #e3e3e3 100%);
   border: 1px solid #003c74;
   border-radius: 3px;
-  padding: 3px 18px;
+  padding: 0 14px;
   min-width: 75px;
+  height: 23px;
   cursor: pointer;
   font-family: Tahoma, Arial, sans-serif;
   font-size: 11px;
   color: #000;
-  box-shadow: inset 0 1px 0 #fff;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 1px 0 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .shutdown-cancel-btn:hover {
-  background: linear-gradient(to bottom, #fff 0%, #e5f1fc 40%, #c5e0f5 100%);
+  background: linear-gradient(to bottom, #fff 0%, #e8f3fc 40%, #c5e0f5 100%);
 }
 
 .shutdown-cancel-btn:active {
-  background: #dce8f5;
+  background: #d6e5f5;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* ==========================================================================
@@ -1596,12 +1636,12 @@ p {
   }
 
   .footer-turnoff {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .power-btn-icon {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     margin-right: 10px;
   }
 
@@ -1802,12 +1842,12 @@ p {
   }
 
   .shutdown-dialog-xp {
-    width: min(314px, calc(100vw - 24px));
+    width: min(380px, calc(100vw - 24px));
   }
 
   .shutdown-body-xp {
-    gap: 20px;
-    padding: 22px 12px 18px;
+    gap: 24px;
+    padding: 28px 16px 24px;
   }
 
   .run-dialog {

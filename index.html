@@ -54,13 +54,10 @@
 
     <!-- Footer -->
     <div class="login-footer">
-      <div class="login-footer-left">
-        <div class="power-btn-icon" title="Turn off computer">
-          <img src="assets/icons/shut_down.png" alt="Turn off computer"
-            style="width: 100%; height: 100%; object-fit: contain;" />
-        </div>
+      <button type="button" class="login-footer-left" onclick="doShutdown()" aria-label="Turn off computer">
+        <img class="power-btn-icon" src="assets/icons/shut_down.png?v=7" alt="" width="32" height="32" aria-hidden="true">
         <span class="footer-turnoff">Turn off computer</span>
-      </div>
+      </button>
       <div class="login-footer-right">
         After you log on, you can add or change accounts.<br />
         Just go to Control Panel and click User Accounts.
@@ -862,49 +859,31 @@
     <div class="win-statusbar">1 object — Resume.pdf (148 KB)</div>
   </div>
 
-  <!-- Shutdown overlay (Authentic XP Mode) -->
+  </div><!-- end #desktop -->
+
+  <!-- Shutdown overlay (Authentic XP Mode) — outside #desktop so grayscale doesn't wash it out -->
   <div class="shutdown-overlay hidden" id="shutdown-overlay">
-    <div class="shutdown-dialog-xp">
+    <div class="shutdown-dialog-xp" role="dialog" aria-label="Turn off computer">
       <div class="shutdown-header-xp">
-        <span>Turn off computer</span>
-        <svg class="shutdown-xp-flag" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
-          <path fill="#F25022" d="M2 2h13v13H2z"/>
-          <path fill="#7FBA00" d="M17 2h13v13H17z"/>
-          <path fill="#00A4EF" d="M2 17h13v13H2z"/>
-          <path fill="#FFB900" d="M17 17h13v13H17z"/>
-        </svg>
+        <span class="shutdown-title-xp">Turn off computer</span>
+        <img class="shutdown-xp-flag" src="assets/icons/windows_flag.png?v=4" alt="" width="58" height="44" aria-hidden="true">
       </div>
       <div class="shutdown-body-xp">
-        <div class="shutdown-action" onclick="doStandBy()">
-          <div class="shutdown-btn-icon standby">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3v7" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M7.2 6.2a7.5 7.5 0 1 0 9.6 0" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span>Stand By</span>
-        </div>
-        <div class="shutdown-action" onclick="doTurnOff()">
-          <div class="shutdown-btn-icon turnoff">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3v9" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M7.05 6.5a7.5 7.5 0 1 0 9.9 0" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span>Turn Off</span>
-        </div>
-        <div class="shutdown-action" onclick="doRestart()">
-          <div class="shutdown-btn-icon restart">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M20 12a8 8 0 1 1-2.3-5.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-              <path d="M20 4v5h-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <span>Restart</span>
-        </div>
+        <button type="button" class="shutdown-action" onclick="doStandBy()">
+          <img class="shutdown-btn-icon" src="assets/icons/stand_by.png?v=7" alt="" width="40" height="40" aria-hidden="true">
+          <span class="shutdown-btn-label">Stand By</span>
+        </button>
+        <button type="button" class="shutdown-action" onclick="doTurnOff()">
+          <img class="shutdown-btn-icon" src="assets/icons/shut_down.png?v=7" alt="" width="40" height="40" aria-hidden="true">
+          <span class="shutdown-btn-label">Turn Off</span>
+        </button>
+        <button type="button" class="shutdown-action" onclick="doRestart()">
+          <img class="shutdown-btn-icon" src="assets/icons/restart.png?v=7" alt="" width="40" height="40" aria-hidden="true">
+          <span class="shutdown-btn-label">Restart</span>
+        </button>
       </div>
       <div class="shutdown-footer-xp">
-        <button class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
+        <button type="button" class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
       </div>
     </div>
   </div>
@@ -931,8 +910,6 @@
       </div>
     </div>
   </div>
-
-  </div><!-- end #desktop -->
 
   <script src="script.js"></script>
 </body>
