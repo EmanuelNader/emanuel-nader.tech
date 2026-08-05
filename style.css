@@ -1029,9 +1029,10 @@ p {
 }
 
 .project-desc {
-  font-size: 11px;
-  margin-bottom: 10px;
-  color: #555;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 8px 0 12px;
+  color: #333;
 }
 
 .project-tags {
