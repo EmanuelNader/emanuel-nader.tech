@@ -49,6 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  const runInput = document.getElementById('run-input');
+  if (runInput) {
+    runInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeRun();
+      } else if (e.key === 'Escape') {
+        hideRunDialog();
+      }
+    });
+  }
 });
 
 // ==========================================================================
@@ -113,6 +125,67 @@ function hideStartMenu() {
 function startMenuOpen(winId) {
   openWindow(winId);
   hideStartMenu();
+}
+
+function showRunDialog() {
+  hideStartMenu();
+  const overlay = document.getElementById('run-overlay');
+  const input = document.getElementById('run-input');
+  overlay.classList.remove('hidden');
+  if (input) {
+    input.value = '';
+    setTimeout(() => input.focus(), 0);
+  }
+}
+
+function hideRunDialog() {
+  document.getElementById('run-overlay').classList.add('hidden');
+}
+
+function executeRun() {
+  const raw = (document.getElementById('run-input')?.value || '').trim().toLowerCase();
+  const aliases = {
+    about: 'about',
+    'about me': 'about',
+    'my computer': 'about',
+    projects: 'projects',
+    'my projects': 'projects',
+    search: 'projects',
+    experience: 'experience',
+    skills: 'skills',
+    'control panel': 'skills',
+    contact: 'contact',
+    hobbies: 'hobbies',
+    'my pictures': 'hobbies',
+    resume: 'resume',
+    'my documents': 'resume',
+    github: null,
+    linkedin: null
+  };
+
+  hideRunDialog();
+
+  if (raw.includes('github')) {
+    openExternal('https://github.com/EmanuelNader');
+    return;
+  }
+  if (raw.includes('linkedin')) {
+    openExternal('https://linkedin.com/in/emanuelnader');
+    return;
+  }
+
+  const winId = aliases[raw];
+  if (winId) {
+    openWindow(winId);
+    return;
+  }
+
+  // Partial match fallback
+  const keys = Object.keys(aliases);
+  const hit = keys.find(k => k.includes(raw) || raw.includes(k));
+  if (hit && aliases[hit]) {
+    openWindow(aliases[hit]);
+  }
 }
 
 function doLogoff() {

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Emanuel Nader — Software Engineer</title>
+  <title>Emanuel Nader</title>
   <meta name="description"
     content="Emanuel Nader's personal portfolio — Software Engineering student at UCSD. Built with nostalgic Windows XP aesthetic." />
   <link rel="stylesheet" href="style.css" />
@@ -185,15 +185,15 @@
       </div>
       <!-- Right column: light blue -->
       <div class="sm-right">
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
+        <div class="sm-right-item" onclick="startMenuOpen('about')"><img class="sm-right-icon" src="assets/icons/computer.png" />My Computer</div>
+        <div class="sm-right-item" onclick="startMenuOpen('resume')"><img class="sm-right-icon" src="assets/icons/folder.png" />My Documents</div>
+        <div class="sm-right-item" onclick="startMenuOpen('hobbies')"><img class="sm-right-icon" src="assets/icons/folder.png" />My Pictures</div>
+        <div class="sm-right-item" onclick="startMenuOpen('skills')"><img class="sm-right-icon" src="assets/icons/settings.png" />Control Panel</div>
 
         <div class="sm-right-sep"></div>
 
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
-        <div class="sm-right-item"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
+        <div class="sm-right-item" onclick="startMenuOpen('projects')"><img class="sm-right-icon" src="assets/icons/folder.png" />Search</div>
+        <div class="sm-right-item" onclick="showRunDialog()"><img class="sm-right-icon" src="assets/icons/computer.png" />Run...</div>
       </div>
     </div>
     <div class="sm-footer">
@@ -530,8 +530,8 @@
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">See Also</div>
-          <div class="sidebar-link">&#128193; Projects</div>
-          <div class="sidebar-link">&#128196; Resume</div>
+          <div class="sidebar-link" onclick="openWindow('projects')">Projects</div>
+          <div class="sidebar-link" onclick="openWindow('resume')">Resume</div>
         </div>
       </div>
       <div class="win-content">
@@ -548,10 +548,13 @@
           <div class="skills-category">
             <div class="skills-cat-title">Frameworks & Libraries</div>
             <div class="skills-tags">
-              <span class="skill-tag">React</span><span class="skill-tag">Vite</span><span class="skill-tag">Tailwind</span>
-              <span class="skill-tag">Node.js</span><span class="skill-tag">Express.js</span>
-              <span class="skill-tag">Next.js</span><span class="skill-tag">Flask</span>
-              <span class="skill-tag">FastAPI</span><span class="skill-tag">OpenAI API</span>
+              <span class="skill-tag">React</span><span class="skill-tag">React Native</span>
+              <span class="skill-tag">Expo</span><span class="skill-tag">Vite</span>
+              <span class="skill-tag">Tailwind</span><span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express.js</span><span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Flask</span><span class="skill-tag">FastAPI</span>
+              <span class="skill-tag">Discord.js</span><span class="skill-tag">Selenium</span>
+              <span class="skill-tag">OpenAI API</span>
             </div>
           </div>
           <div class="skills-category">
@@ -580,12 +583,13 @@
               <span class="skill-tag">REST APIs</span><span class="skill-tag">Microservices</span>
               <span class="skill-tag">Unit/Integration Testing</span><span class="skill-tag">pytest</span>
               <span class="skill-tag">System Design</span><span class="skill-tag">Agile/Scrum</span>
+              <span class="skill-tag">Web Scraping</span><span class="skill-tag">IoT</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="win-statusbar">42 skills listed</div>
+    <div class="win-statusbar">48 skills listed</div>
   </div>
 
   <!-- CONTACT Window -->
@@ -863,32 +867,37 @@
     <div class="shutdown-dialog-xp">
       <div class="shutdown-header-xp">
         <span>Turn off computer</span>
-        <img src="assets/icons/startup.png" style="height: 24px; max-width: 40px; object-fit: contain;" />
+        <svg class="shutdown-xp-flag" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+          <path fill="#F25022" d="M2 2h13v13H2z"/>
+          <path fill="#7FBA00" d="M17 2h13v13H17z"/>
+          <path fill="#00A4EF" d="M2 17h13v13H2z"/>
+          <path fill="#FFB900" d="M17 17h13v13H17z"/>
+        </svg>
       </div>
       <div class="shutdown-body-xp">
         <div class="shutdown-action" onclick="doStandBy()">
           <div class="shutdown-btn-icon standby">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path fill="none" stroke="white" stroke-width="2" d="M12 2v6" />
-              <path fill="none" stroke="white" stroke-width="2" d="M16 4a10 10 0 1 1-8 0" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v7" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M7.2 6.2a7.5 7.5 0 1 0 9.6 0" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
             </svg>
           </div>
           <span>Stand By</span>
         </div>
         <div class="shutdown-action" onclick="doTurnOff()">
           <div class="shutdown-btn-icon turnoff">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path fill="none" stroke="white" stroke-width="2" d="M12 2v10" />
-              <path fill="none" stroke="white" stroke-width="2" d="M16 6a8 8 0 1 1-8 0" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v9" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M7.05 6.5a7.5 7.5 0 1 0 9.9 0" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
             </svg>
           </div>
           <span>Turn Off</span>
         </div>
         <div class="shutdown-action" onclick="doRestart()">
           <div class="shutdown-btn-icon restart">
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path fill="none" stroke="white" stroke-width="2"
-                d="M12 2v4l3 3-3 3V8a8 8 0 1 0 8 8h-2a6 6 0 1 1-6-6v4z" />
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M20 12a8 8 0 1 1-2.3-5.6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M20 4v5h-5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <span>Restart</span>
@@ -896,6 +905,29 @@
       </div>
       <div class="shutdown-footer-xp">
         <button class="shutdown-cancel-btn" onclick="hideShutdown()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Run dialog -->
+  <div class="run-overlay hidden" id="run-overlay">
+    <div class="run-dialog" role="dialog" aria-label="Run">
+      <div class="run-titlebar">
+        <span>Run</span>
+        <button class="run-close" onclick="hideRunDialog()" title="Close">&#10005;</button>
+      </div>
+      <div class="run-body">
+        <img class="run-icon" src="assets/icons/computer.png" alt="" />
+        <p>Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</p>
+        <label class="run-open-row">
+          <span>Open:</span>
+          <input id="run-input" type="text" autocomplete="off" spellcheck="false"
+            placeholder="about, projects, resume..." />
+        </label>
+        <div class="run-actions">
+          <button type="button" onclick="executeRun()">OK</button>
+          <button type="button" onclick="hideRunDialog()">Cancel</button>
+        </div>
       </div>
     </div>
   </div>

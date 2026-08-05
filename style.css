@@ -1263,7 +1263,7 @@ p {
 }
 
 /* ==========================================================================
-   SHUTDOWN DIALOG
+   SHUTDOWN DIALOG (classic XP)
    ========================================================================== */
 .shutdown-overlay {
   position: fixed;
@@ -1271,7 +1271,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: transparent;
   z-index: 100000;
   display: flex;
   justify-content: center;
@@ -1279,33 +1279,39 @@ p {
 }
 
 .shutdown-dialog-xp {
-  width: 550px;
+  width: 314px;
   background: transparent;
   display: flex;
   flex-direction: column;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 .shutdown-header-xp {
   background: #003399;
-  color: white;
-  font-family: Tahoma, sans-serif;
-  font-size: 26px;
+  color: #fff;
+  font-family: Tahoma, 'Trebuchet MS', sans-serif;
+  font-size: 18px;
   font-style: italic;
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
+  padding: 8px 10px 8px 12px;
+  min-height: 36px;
+}
+
+.shutdown-xp-flag {
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
 }
 
 .shutdown-body-xp {
-  background: linear-gradient(to right, #5A7FDE 0%, #A3BAED 50%, #5A7FDE 100%);
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  background: linear-gradient(to bottom, #a8c6f0 0%, #7ea4e0 45%, #5f8fd4 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 45px;
-  padding: 40px 0;
+  gap: 28px;
+  padding: 28px 18px 22px;
 }
 
 .shutdown-action {
@@ -1313,58 +1319,191 @@ p {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  width: 64px;
 }
 
 .shutdown-action span {
-  color: white;
+  color: #fff;
   font-family: Tahoma, Arial, sans-serif;
-  font-size: 13px;
-  margin-top: 8px;
+  font-size: 11px;
+  margin-top: 7px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .shutdown-btn-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 4px;
-  border: 2px solid white;
+  width: 33px;
+  height: 33px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.5);
-  transition: all 0.2s;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+    1px 1px 2px rgba(0, 0, 0, 0.45);
+  transition: filter 0.15s;
 }
 
 .shutdown-btn-icon:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.12);
+}
+
+.shutdown-btn-icon:active {
+  filter: brightness(0.95);
 }
 
 .shutdown-btn-icon.standby {
-  background: #EBBF30;
+  background: linear-gradient(to bottom, #f6d56a 0%, #e8b020 55%, #d49a12 100%);
 }
 
 .shutdown-btn-icon.turnoff {
-  background: #D5433C;
+  background: linear-gradient(to bottom, #ef6a5c 0%, #d33b32 55%, #b92c24 100%);
 }
 
 .shutdown-btn-icon.restart {
-  background: #4AA43B;
+  background: linear-gradient(to bottom, #78c45a 0%, #4caa35 55%, #3a9228 100%);
 }
 
 .shutdown-footer-xp {
   background: #003399;
   display: flex;
   justify-content: flex-end;
-  padding: 12px 15px;
+  padding: 10px 12px;
 }
 
 .shutdown-cancel-btn {
-  background: #EBEBEB;
-  border: 1px solid #CCC;
-  border-radius: 2px;
-  padding: 4px 20px;
+  background: linear-gradient(to bottom, #fff 0%, #ece9d8 100%);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  padding: 3px 18px;
+  min-width: 75px;
   cursor: pointer;
   font-family: Tahoma, Arial, sans-serif;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 11px;
+  color: #000;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.shutdown-cancel-btn:hover {
+  background: linear-gradient(to bottom, #fff 0%, #e5f1fc 40%, #c5e0f5 100%);
+}
+
+.shutdown-cancel-btn:active {
+  background: #dce8f5;
+}
+
+/* ==========================================================================
+   RUN DIALOG
+   ========================================================================== */
+.run-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.run-dialog {
+  width: 360px;
+  background: #ece9d8;
+  border: 1px solid #0055ea;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.45);
+  font-family: Tahoma, 'Trebuchet MS', sans-serif;
+}
+
+.run-titlebar {
+  height: 28px;
+  background: linear-gradient(to right, #0a246a 0%, #a6caf0 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px 0 8px;
+  border-radius: 5px 5px 0 0;
+}
+
+.run-close {
+  width: 21px;
+  height: 21px;
+  background: #c75050;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.run-body {
+  padding: 14px 14px 12px;
+  position: relative;
+}
+
+.run-icon {
+  width: 32px;
+  height: 32px;
+  float: left;
+  margin: 0 10px 8px 0;
+}
+
+.run-body p {
+  font-size: 11px;
+  color: #000;
+  margin: 0 0 14px;
+  line-height: 1.35;
+}
+
+.run-open-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  clear: both;
+  font-size: 11px;
+  margin-bottom: 14px;
+}
+
+.run-open-row span {
+  flex-shrink: 0;
+}
+
+.run-open-row input {
+  flex: 1;
+  border: 1px solid #7f9db9;
+  padding: 3px 5px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  outline: none;
+}
+
+.run-open-row input:focus {
+  border-color: #0058ee;
+}
+
+.run-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.run-actions button {
+  min-width: 75px;
+  padding: 3px 12px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  background: linear-gradient(to bottom, #fff 0%, #ece9d8 100%);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.run-actions button:hover {
+  background: linear-gradient(to bottom, #fff 0%, #e5f1fc 40%, #c5e0f5 100%);
 }
 
 /* ==========================================================================
@@ -1663,12 +1802,15 @@ p {
   }
 
   .shutdown-dialog-xp {
-    width: calc(100vw - 24px);
-    max-width: 340px;
+    width: min(314px, calc(100vw - 24px));
   }
 
   .shutdown-body-xp {
-    gap: 18px;
-    padding: 20px 12px;
+    gap: 20px;
+    padding: 22px 12px 18px;
+  }
+
+  .run-dialog {
+    width: min(360px, calc(100vw - 24px));
   }
 }
