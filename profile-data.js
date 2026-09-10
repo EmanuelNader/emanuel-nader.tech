@@ -5,8 +5,8 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function createPortfolioProfile() {
   const PROFILE = {
     name: 'Emanuel Nader',
-    headline: 'Software engineer building reliable systems, developer tools, and high-impact products.',
-    biography: "I'm a Mathematics-Computer Science student at UC San Diego and a Technical Program Manager Intern on Tesla's Chassis Controls team. I build dependable systems that turn complex engineering work into clear, usable products.",
+    headline: 'Math-CS at UC San Diego. TPM intern on Tesla Chassis Controls.',
+    biography: "I'm studying Mathematics-Computer Science at UC San Diego and interning as a Technical Program Manager on Tesla's Chassis Controls team.\n\nI like the problems under the dashboard: ranking which vehicles to release, keeping tracker IDs stable on driving logs, shipping software a team will actually open on Monday.",
     school: 'UC San Diego — B.S. Mathematics-Computer Science (Expected June 2028)',
     status: 'Technical Program Manager Intern — Chassis Controls at Tesla',
     location: 'San Diego / Palo Alto, CA',
@@ -17,12 +17,6 @@
     websiteLabel: 'emanuelnader.dev',
     availability: 'Open to software engineering opportunities and collaborations.'
   };
-
-  const PROOF_POINTS = [
-    { value: '75%', label: 'less manual cross-checking', detail: 'for 7 Vehicle Software teams' },
-    { value: '53%', label: 'fewer tracking identity switches', detail: 'from 890 to 415 across 10 driving scenes' },
-    { value: '93%', label: 'lower redirect latency', detail: 'from 30 ms to under 2 ms on cache hits' }
-  ];
 
   const EXPERIENCE = [
     {
@@ -126,11 +120,10 @@
     ['name', 'headline', 'biography', 'school', 'status', 'location', 'email', 'linkedinUrl', 'githubUrl', 'websiteUrl'].forEach((key) => {
       if (!PROFILE[key]) errors.push(`PROFILE.${key} is required`);
     });
-    if (PROOF_POINTS.length !== 3) errors.push('PROOF_POINTS must contain exactly 3 records');
     if (EXPERIENCE.length !== 3 || EXPERIENCE.reduce((sum, item) => sum + item.bullets.length, 0) !== 8) errors.push('EXPERIENCE must contain 3 positions and 8 bullets');
     if (HOBBIES.length !== 6 || HOBBIES.some((item) => !item.image?.src || !item.image?.alt || !item.image?.kind || !item.photos?.length)) errors.push('HOBBIES must contain 6 image records with photos');
     return errors;
   }
 
-  return { PROFILE, PROOF_POINTS, EXPERIENCE, HOBBIES, RESUME_ASSETS, validateProfileData };
+  return { PROFILE, EXPERIENCE, HOBBIES, RESUME_ASSETS, validateProfileData };
 });

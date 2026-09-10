@@ -4,8 +4,6 @@ const assert = require('node:assert/strict');
 const {
   PROJECTS,
   validateProjects,
-  getFeaturedProjects,
-  getMoreProjects,
   parseProjectRoute,
   projectRouteFor,
   canonicalProjectRoute,
@@ -32,8 +30,7 @@ test('project validation reports missing required content and malformed evidence
     stack: [],
     repositoryUrl: 'not-a-url',
     demoUrl: null,
-    screenshots: [{ src: '', alt: '', caption: '' }],
-    featuredRank: null
+    screenshots: [{ src: '', alt: '', caption: '' }]
   }]);
 
   assert.ok(errors.includes('broken-project: name is required'));
@@ -43,14 +40,10 @@ test('project validation reports missing required content and malformed evidence
   assert.ok(errors.includes('broken-project: screenshot 1 requires src, alt, and caption'));
 });
 
-test('featured projects are ordered by rank and the remaining projects preserve recency order', () => {
+test('project records keep a stable explorer order', () => {
   assert.deepEqual(
-    getFeaturedProjects(PROJECTS).map(project => project.id),
-    ['trackbench', 'shortstack', 'healthbook']
-  );
-  assert.deepEqual(
-    getMoreProjects(PROJECTS).map(project => project.id),
-    ['nutribase', 'quizki', 'autobook', 'lockedin', 'internship-job-board', 'shotclock']
+    PROJECTS.map(project => project.id),
+    ['trackbench', 'shortstack', 'healthbook', 'nutribase', 'quizki', 'autobook', 'lockedin', 'internship-job-board', 'shotclock']
   );
 });
 

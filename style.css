@@ -11,7 +11,7 @@
 
 
 :root {
-  --xp-taskbar-height: 34px;
+  --xp-taskbar-height: 40px;
   --xp-start-width: 54px;
   --xp-start-height: 29px;
   --xp-desktop-inset: var(--xp-taskbar-height);
@@ -465,7 +465,7 @@ a:hover {
 }
 
 /* ==========================================================================
-   TASKBAR (34PX LUNA)
+   TASKBAR (40PX LUNA)
    ========================================================================== */
 .taskbar {
   position: fixed;
@@ -531,7 +531,7 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 2px;
   color: white;
-  height: 24px;
+  height: 28px;
   min-width: 180px;
   max-width: 250px;
   margin: 0 2px;
@@ -1226,20 +1226,7 @@ summary:focus-visible,
   margin: 0 auto;
 }
 
-.project-section + .project-section {
-  margin-top: 14px;
-}
-
-.project-section h2 {
-  margin: 0 0 8px;
-  padding: 0 0 7px;
-  border-bottom-color: #d8dff0;
-  color: #0645b5;
-  font-size: 16px;
-}
-
-.project-featured-list,
-.project-more-list {
+.project-list {
   overflow: hidden;
   border: 1px solid #d4d4d4;
   border-radius: 2px;
@@ -1248,6 +1235,7 @@ summary:focus-visible,
 
 .project-entry {
   width: 100%;
+  min-height: 76px;
   border: 0;
   border-bottom: 1px solid #dedede;
   background: #fff;
@@ -1275,25 +1263,10 @@ summary:focus-visible,
   box-shadow: inset 0 0 0 2px #2a72e5;
 }
 
-.project-entry-featured {
-  min-height: 92px;
-}
-
-.project-entry-compact {
-  min-height: 54px;
-  grid-template-columns: 32px minmax(0, 1fr) auto;
-  padding-block: 4px;
-}
-
 .project-entry-icon {
   width: 52px;
   height: 52px;
   object-fit: contain;
-}
-
-.project-entry-compact .project-entry-icon {
-  width: 28px;
-  height: 28px;
 }
 
 .project-entry-copy {
@@ -1316,21 +1289,6 @@ summary:focus-visible,
 .project-entry-meta {
   color: #6a6a6a;
   font-size: 12px;
-}
-
-.project-entry-compact .project-entry-name {
-  font-size: 14px;
-}
-
-.project-entry-compact .project-entry-summary {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 12px;
-}
-
-.project-entry-compact .project-entry-meta {
-  display: none;
 }
 
 .project-entry-open {
@@ -1490,17 +1448,18 @@ summary:focus-visible,
 
 .project-thumbnails {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-top: 8px;
 }
 
 .project-thumbnail {
-  width: 112px;
-  height: 68px;
+  width: 128px;
+  height: 76px;
   padding: 2px;
   border: 1px solid #9aabc0;
   border-radius: 3px;
-  background: #fff;
+  background: #111;
 }
 
 .project-thumbnail.selected,
@@ -1543,27 +1502,16 @@ summary:focus-visible,
 }
 
 .engineering-details {
-  padding: 14px 6px;
-  font-size: 13px;
-}
-
-.engineering-details summary {
-  width: fit-content;
-  color: #0758d6;
-  font-weight: bold;
-  cursor: pointer;
+  grid-column: 1 / -1;
 }
 
 .engineering-details ul {
   max-width: 760px;
-  margin: 14px 0 10px;
-  padding-left: 20px;
-  line-height: 1.55;
 }
 
 .engineering-stack {
-  margin: 0;
-  font-size: 12px;
+  margin: 10px 0 0;
+  font-size: 13px;
 }
 
 /* Experience List */
@@ -2385,32 +2333,23 @@ body.shutdown-active #login-screen {
     padding: 10px;
   }
 
-  .project-section h2 {
-    font-size: 15px;
-  }
-
-  .project-entry,
-  .project-entry-featured,
-  .project-entry-compact {
+  .project-entry {
     min-height: 82px;
     grid-template-columns: 44px minmax(0, 1fr);
     gap: 10px;
     padding: 10px;
   }
 
-  .project-entry-icon,
-  .project-entry-compact .project-entry-icon {
+  .project-entry-icon {
     width: 42px;
     height: 42px;
   }
 
-  .project-entry-name,
-  .project-entry-compact .project-entry-name {
+  .project-entry-name {
     font-size: 16px;
   }
 
-  .project-entry-summary,
-  .project-entry-compact .project-entry-summary {
+  .project-entry-summary {
     display: -webkit-box;
     overflow: hidden;
     white-space: normal;
@@ -2444,12 +2383,6 @@ body.shutdown-active #login-screen {
 
   .project-action {
     min-height: 44px;
-  }
-
-  .engineering-details summary {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
   }
 
   .project-outcome {
@@ -2538,16 +2471,11 @@ body.shutdown-active #login-screen {
 }
 .about-intro h1 { margin: 0 0 3px; font-size: 22px; }
 .about-subtitle { max-width: 650px; margin: 0; color: #555; font-size: 13px; line-height: 1.35; }
-.about-biography { margin: 0 0 10px; line-height: 1.45; }
+.about-biography { max-width: 42em; margin: 0 0 10px; line-height: 1.5; }
+.about-biography + .about-biography { margin-top: 2px; }
 .xp-group { min-width: 0; margin: 10px 0; padding: 12px 10px 10px; border: 1px solid #aca899; }
 .xp-group legend { padding: 0 5px; color: #003399; font-weight: 700; }
-.accomplishment-list { display: grid; gap: 0; }
-.accomplishment-row { min-height: 34px; display: grid; grid-template-columns: 58px minmax(0,1fr); align-items: center; border-bottom: 1px solid #ddd; }
-.accomplishment-row:last-child { border-bottom: 0; }
-.accomplishment-row strong { color: #003399; font-size: 16px; }
-.accomplishment-row span { display: flex; flex-wrap: wrap; gap: 3px 8px; }
-.accomplishment-row small { color: #666; }
-.welcome-actions { margin: 10px 0; }
+.welcome-actions { margin: 14px 0 10px; }
 .about-details dl { display: grid; gap: 5px; }
 .about-details dl > div { display: grid; grid-template-columns: 82px minmax(0,1fr); }
 .about-details dt { color: #555; font-weight: 700; }
@@ -2634,7 +2562,6 @@ body.shutdown-active #login-screen {
   .experience-heading { display: block; }
   .experience-when { display: flex; gap: 8px; margin-top: 3px; text-align: left; }
   .experience-tile ul { font-size: 12px; }
-  .accomplishment-row { grid-template-columns: 52px minmax(0,1fr); }
   .about-details dl > div { grid-template-columns: 70px minmax(0,1fr); }
   .contact-property { grid-template-columns: 70px minmax(0,1fr); }
   #win-resume .win-toolbar { display: grid; grid-template-columns: auto auto; }

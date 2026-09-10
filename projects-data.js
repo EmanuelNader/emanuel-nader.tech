@@ -13,32 +13,47 @@
       name: 'trackbench',
       category: 'Computer Vision + Systems',
       completed: 'August 2026',
-      summary: 'A deterministic multi-object tracking and evaluation pipeline for measuring, diagnosing, and preventing identity-switch regressions.',
+      summary: 'A multi-object tracker that diagnoses identity-switch failures on driving data.',
       role: 'Software Engineer',
-      outcomeHeadline: '53% fewer identity switches — 890 to 415',
-      whatIBuilt: 'I built a C++17 Constant-Velocity EKF tracker with Hungarian/greedy association, a Python ingest pipeline, Postgres failure triage, a React bird’s-eye interface, and regression-blocking CI.',
+      outcomeHeadline: '53% fewer identity switches — MOTA −1.351 to +0.666',
+      whatIBuilt: 'I built a C++17 Constant-Velocity EKF pipeline with Hungarian and greedy association solvers on nuScenes driving data, then scored MOTA, mined ID-switch failures, and gated regressions in CI.',
       impact: [
-        'Cut identity switches by 53% (890 to 415) and lifted MOTA from −1.351 to +0.666',
-        'Made association 29× faster at p99 (0.531ms to 0.018ms)',
+        'Cut identity switches 53% (890 → 415) and improved MOTA from −1.351 to +0.666',
+        'Accelerated association 29× at p99 (0.531ms → 0.018ms) with greedy matching',
         'Validated across a 24-cell ablation grid of 3,840 benchmark runs with CI gating'
       ],
       engineeringDetails: [
-        'Tuned Mahalanobis gating, a soft lateral-velocity cost, and track-birth thresholds against measured tracking results.',
-        'Normalized public detections into ego-frame JSONL and clustered identity-switch failures in PostgreSQL.',
-        'Added GoogleTest and golden-output checks in CI to block tracking regressions.'
+        'Ran a classical tracker on public nuScenes detections, then scored MOTA/AMOTA and clustered identity-switch failures in PostgreSQL.',
+        'Exposed failures in a React bird’s-eye triage UI so a swapped ID is a one-click inspect instead of a frame-by-frame hunt.',
+        'Blocked regressions with GoogleTest, golden-output checks, and CI gates after the 24-cell ablation sweep.'
       ],
       stack: ['C++17', 'Python', 'PostgreSQL', 'React', 'Docker', 'nuScenes'],
       repositoryUrl: 'https://github.com/EmanuelNader/trackbench',
       demoUrl: null,
-      screenshots: [],
-      featuredRank: 1
+      screenshots: [
+        {
+          src: 'assets/projects/trackbench/triage-bev.jpg',
+          alt: "trackbench bird's-eye triage UI with blue ground-truth boxes and orange tracker IDs, a selected identity switch highlighted",
+          caption: "Bird's-eye triage UI — blue = ground truth, orange = tracker IDs. Selected failure explains was track 3 → now track 2."
+        },
+        {
+          src: 'assets/projects/trackbench/pareto-amota-latency.png',
+          alt: 'Scatter plot of AMOTA versus p99 per-frame latency across a 24-cell trackbench ablation grid',
+          caption: 'AMOTA-vs-latency Pareto chart — each dot is one config from the 24-cell ablation grid. Hover for details in the triage UI.'
+        },
+        {
+          src: 'assets/projects/trackbench/architecture.jpg',
+          alt: 'trackbench architecture flowchart from ingest and C++ tracker through eval, Postgres, the triage UI, and CI',
+          caption: 'Architecture — ingest and the C++ tracker feed eval, failure mining, Postgres, the BEV triage UI, and CI.'
+        }
+      ]
     },
     {
       id: 'shortstack',
       name: 'ShortStack',
       category: 'Platform Architecture',
       completed: 'April 2026',
-      summary: 'A production-style URL shortener with Redis caching, load-balanced Nginx, Dockerized services, and full observability.',
+      summary: 'A production-style URL shortener with caching, load balancing, and monitoring.',
       role: 'Full Stack Engineer',
       outcomeHeadline: '93% faster redirects — 30ms to under 2ms',
       whatIBuilt: 'I built a production-style URL shortener with Redis caching, Nginx load balancing, container orchestration, automated tests, and monitoring from request to deployment.',
@@ -53,17 +68,22 @@
         'Added GitHub Actions CI plus Prometheus and Grafana monitoring.'
       ],
       stack: ['Flask', 'PostgreSQL', 'Redis', 'Nginx', 'Docker', 'Prometheus'],
-      repositoryUrl: null,
+      repositoryUrl: 'https://github.com/marcusmdza/WeMadeIt_PE_Project',
       demoUrl: null,
-      screenshots: [],
-      featuredRank: 2
+      screenshots: [
+        {
+          src: 'assets/projects/shortstack/architecture.png',
+          alt: 'ShortStack Docker Compose architecture with a client hitting Nginx on port 5000, three Flask apps, PostgreSQL, Redis, Prometheus, and Grafana',
+          caption: 'Architecture — Nginx load-balances three Flask apps, with Postgres, Redis, Prometheus, and Grafana in Docker Compose.'
+        }
+      ]
     },
     {
       id: 'healthbook',
       name: 'HealthBook',
       category: 'AI + Automation',
       completed: 'March 2026',
-      summary: 'An AI agent that finds and books medical appointments, places calls, and remembers relevant health history between sessions.',
+      summary: 'An AI agent that finds doctors, books appointments, and places the phone calls.',
       role: 'Full Stack Engineer',
       outcomeHeadline: '90% faster appointment booking — 30 minutes to under 3',
       whatIBuilt: 'I connected a browser automation agent, an AI calling workflow, and semantic memory so patients could move from search to appointment without repeatedly entering the same context.',
@@ -80,15 +100,40 @@
       stack: ['Next.js', 'FastAPI', 'Browser Use SDK', 'OpenAI', 'Supabase', 'pgvector'],
       repositoryUrl: 'https://github.com/EmanuelNader/healthbook',
       demoUrl: null,
-      screenshots: [],
-      featuredRank: 3
+      screenshots: [
+        {
+          src: 'assets/projects/healthbook/login.jpg',
+          alt: 'HealthBook login screen with phone number and password fields',
+          caption: 'Login — phone number and password to get back into HealthBook.'
+        },
+        {
+          src: 'assets/projects/healthbook/dashboard.jpg',
+          alt: 'HealthBook dashboard search for a doctor type or symptoms with insurance profile on the side',
+          caption: 'Dashboard — search by doctor type or symptoms, with insurance and location already on file.'
+        },
+        {
+          src: 'assets/projects/healthbook/searching.jpg',
+          alt: 'HealthBook searching for a back-pain doctor while the agent logs Zocdoc browser steps',
+          caption: 'Finding a doctor — the agent searches Zocdoc for in-network back-pain appointments.'
+        },
+        {
+          src: 'assets/projects/healthbook/results.jpg',
+          alt: 'HealthBook results list with Hannah Hartin as the best match and live agent activity',
+          caption: 'Results — ranked in-network providers with next available slots and agent activity.'
+        },
+        {
+          src: 'assets/projects/healthbook/booked.jpg',
+          alt: 'HealthBook confirmation that an appointment with Hannah Hartin is booked',
+          caption: 'Appointment booked — confirmation with time, location, and in-network coverage.'
+        }
+      ]
     },
     {
       id: 'nutribase',
       name: 'Nutribase',
       category: 'IoT Tracking',
       completed: 'May 2025',
-      summary: 'A smart-fridge tracker that streams live ESP32 weight data into a MERN application with role-based access and analytics.',
+      summary: 'A smart-fridge scale that streams live inventory into a web dashboard.',
       role: 'Software Project Lead',
       outcomeHeadline: '60% fewer tracking errors and unauthorized-access events',
       whatIBuilt: 'I led delivery of the web application and connected custom ESP32 firmware to a Node.js backend for live inventory, access control, and waste analytics.',
@@ -105,15 +150,30 @@
       stack: ['MongoDB', 'Express.js', 'React', 'Node.js', 'C++'],
       repositoryUrl: 'https://github.com/EmanuelNader/Nutribase',
       demoUrl: null,
-      screenshots: [],
-      featuredRank: null
+      screenshots: [
+        {
+          src: 'assets/projects/nutribase/enclosure-cad.png',
+          alt: 'CAD drawing of the Nutribase load-cell enclosure with overall dimensions of 5 by 3 by 4 inches',
+          caption: 'Enclosure CAD — housing for the scale tray and load-cell mount.'
+        },
+        {
+          src: 'assets/projects/nutribase/lid-cad.jpg',
+          alt: 'CAD drawing of the Nutribase enclosure lid with interlocking notches and dimensions',
+          caption: 'Lid CAD — interlocking cover plate for the tracker enclosure.'
+        },
+        {
+          src: 'assets/projects/nutribase/wiring-diagram.png',
+          alt: 'Wiring diagram of an HX711 load-cell amplifier, ESP32, and LCD display',
+          caption: 'Wiring — ESP32, HX711 load-cell amp, and LCD for live weight readout.'
+        }
+      ]
     },
     {
       id: 'quizki',
       name: 'Quizki',
       category: 'Fullstack Application',
       completed: '2025',
-      summary: 'A gamified study platform with progress dashboards, secure login, and personalized AI study prompts.',
+      summary: 'A gamified flashcard app with Smiski gacha and an AI study tutor.',
       role: 'Software Engineer',
       outcomeHeadline: 'Personalized study sessions with progress built in',
       whatIBuilt: 'I built a study workflow that combines progress dashboards, Auth0 authentication, and Gemini-generated prompts to make sessions quicker to start and easier to continue.',
@@ -130,15 +190,40 @@
       stack: ['React', 'Node.js', 'Google Gemini API', 'Auth0', 'MongoDB'],
       repositoryUrl: null,
       demoUrl: null,
-      screenshots: [],
-      featuredRank: null
+      screenshots: [
+        {
+          src: 'assets/projects/quizki/home.jpg',
+          alt: 'Quizki home with a Smiski collection row and Spanish and Chinese flashcard decks',
+          caption: 'Home — Smiski collection and flashcard decks in one place.'
+        },
+        {
+          src: 'assets/projects/quizki/edit-flashcards.jpg',
+          alt: 'Quizki Edit Flashcards screen for creating or choosing groups like Spanish, Chinese, History, and Math',
+          caption: 'Edit flashcards — create a group or open an existing deck.'
+        },
+        {
+          src: 'assets/projects/quizki/gacha.jpg',
+          alt: 'Quizki Gacha screen with a Spin button and 1510 points',
+          caption: 'Gacha — spend study points to spin for Smiski figures.'
+        },
+        {
+          src: 'assets/projects/quizki/collection.jpg',
+          alt: 'Quizki Smiski collection grid with unlocked and locked figures across series',
+          caption: 'Collection — unlocked Smiski figures grouped by series.'
+        },
+        {
+          src: 'assets/projects/quizki/professor-smiski.jpg',
+          alt: 'Professor Smiski chat answering what is 2 plus 2',
+          caption: 'Professor Smiski — Gemini study chat with a character tutor.'
+        }
+      ]
     },
     {
       id: 'autobook',
       name: 'AutoBook',
       category: 'Automation Engine',
       completed: '2025',
-      summary: 'A browser automation tool that books high-demand UCSD library rooms as soon as reservations open.',
+      summary: 'A browser bot that books UCSD library rooms as soon as they open.',
       role: 'Software Engineer',
       outcomeHeadline: 'Automated a repetitive five-step reservation flow',
       whatIBuilt: 'I automated the UCSD room-booking flow with Python, Selenium, and WebDriver so reservations could be attempted as soon as availability opened.',
@@ -155,15 +240,14 @@
       stack: ['Python', 'Selenium', 'WebDriver', 'REST APIs'],
       repositoryUrl: null,
       demoUrl: null,
-      screenshots: [],
-      featuredRank: null
+      screenshots: []
     },
     {
       id: 'lockedin',
       name: 'LockedIn',
       category: 'IoT + Fullstack',
       completed: '2025',
-      summary: 'An IoT and web platform for real-time device monitoring and automated workflow triggers.',
+      summary: 'An IoT platform that connects physical devices to real-time web workflows.',
       role: 'Software Project Lead',
       outcomeHeadline: 'Connected physical devices to real-time web workflows',
       whatIBuilt: 'I led a full-stack implementation that connected ESP32 devices to a React and Node.js application for monitoring and automated responses.',
@@ -180,15 +264,14 @@
       stack: ['React', 'Node.js', 'Express', 'MongoDB', 'ESP32'],
       repositoryUrl: null,
       demoUrl: null,
-      screenshots: [],
-      featuredRank: null
+      screenshots: []
     },
     {
       id: 'internship-job-board',
       name: 'Internship Job Board Bot',
       category: 'Scraping + Alerts',
       completed: '2025',
-      summary: 'A Discord bot that collects early-career opportunities, removes duplicates, and routes new listings to relevant channels.',
+      summary: 'A Discord bot that scrapes internships and routes them to the right channels.',
       role: 'Software Engineer',
       outcomeHeadline: 'Turned scattered postings into organized Discord alerts',
       whatIBuilt: 'I built a Discord automation pipeline that scrapes internship, co-op, and fellowship postings, deduplicates them, and publishes each listing to the appropriate role-family channel.',
@@ -203,17 +286,16 @@
         'Mapped job titles to role-family channels and opt-in ping roles.'
       ],
       stack: ['Discord.js', 'Node.js', 'Web Scraping', 'Automation'],
-      repositoryUrl: null,
+      repositoryUrl: 'https://github.com/EmanuelNader/discord-internship-job-board-bot',
       demoUrl: null,
-      screenshots: [],
-      featuredRank: null
+      screenshots: []
     },
     {
       id: 'shotclock',
       name: 'ShotClock',
       category: 'Mobile App · In Progress',
       completed: 'In progress',
-      summary: 'An iOS-first social memory app for collecting moments, people, and stories from a night out in one place.',
+      summary: 'An iOS app for collecting moments, people, and stories from a night out.',
       role: 'Mobile Engineer',
       outcomeHeadline: 'An iOS-first home for shared memories from a night out',
       whatIBuilt: 'I am building the MVP in Expo and React Native with Supabase as the backend for shared moments, people, and stories.',
@@ -230,8 +312,13 @@
       stack: ['Expo', 'React Native', 'Supabase', 'iOS'],
       repositoryUrl: null,
       demoUrl: null,
-      screenshots: [],
-      featuredRank: null
+      screenshots: [
+        {
+          src: 'assets/projects/shotclock/app-icon.png',
+          alt: 'ShotClock app icon on a purple gradient with the tagline remember every night out',
+          caption: 'ShotClock — remember every night out.'
+        }
+      ]
     }
   ];
 
@@ -255,7 +342,6 @@
   function validateProjects(projects) {
     const errors = [];
     const ids = new Set();
-    const ranks = new Set();
 
     projects.forEach((project, index) => {
       const label = project.id || `project-${index + 1}`;
@@ -294,28 +380,9 @@
           }
         });
       }
-
-      if (project.featuredRank !== null) {
-        if (!Number.isInteger(project.featuredRank) || project.featuredRank < 1 || project.featuredRank > 3) {
-          errors.push(`${label}: featuredRank must be 1, 2, 3, or null`);
-        } else if (ranks.has(project.featuredRank)) {
-          errors.push(`${label}: featuredRank must be unique`);
-        }
-        ranks.add(project.featuredRank);
-      }
     });
 
     return errors;
-  }
-
-  function getFeaturedProjects(projects) {
-    return projects
-      .filter(project => project.featuredRank !== null)
-      .sort((a, b) => a.featuredRank - b.featuredRank);
-  }
-
-  function getMoreProjects(projects) {
-    return projects.filter(project => project.featuredRank === null);
   }
 
   function getProjectById(id, projects) {
@@ -386,8 +453,6 @@
   return {
     PROJECTS,
     validateProjects,
-    getFeaturedProjects,
-    getMoreProjects,
     getProjectById,
     parseProjectRoute,
     projectRouteFor,

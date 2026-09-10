@@ -8,7 +8,7 @@ Personal portfolio for **Emanuel Nader** — Software Engineering student at UC 
 
 - XP-style login screen, Bliss desktop, Start menu, and taskbar
 - Recruiter-first Welcome window with direct Projects, Résumé, and Contact actions
-- Explorer project browser with featured work, single-click previews, and in-window case studies
+- Explorer project browser with single-click previews, in-window case studies, screenshots, and links
 - Shareable project hashes, keyboard navigation, mobile one-tap opening, and browser history support
 - Explorer windows for Experience, Skills, Hobbies, Contact, and Résumé
 - Classic “Turn off computer” shutdown dialog (Stand By / Turn Off / Restart)

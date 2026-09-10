@@ -8,29 +8,32 @@ const {
   renderProjectSidebarMarkup
 } = require('../projects-ui.js');
 
-test('project list renders semantic featured and archive buttons', () => {
+test('project list renders one folder list without featured and more headings', () => {
   const markup = renderProjectListMarkup(PROJECTS, 'trackbench');
 
-  assert.match(markup, /<h2[^>]*>Featured Projects<\/h2>/);
-  assert.match(markup, /<h2[^>]*>More Projects<\/h2>/);
+  assert.doesNotMatch(markup, /Featured Projects/);
+  assert.doesNotMatch(markup, /More Projects/);
   assert.match(markup, /<button[^>]+data-project-id="trackbench"[^>]+aria-pressed="true"/);
   assert.match(markup, /<button[^>]+data-project-id="shotclock"[^>]+aria-pressed="false"/);
+  assert.match(markup, /project-entry-summary">A multi-object tracker that diagnoses identity-switch failures on driving data\./);
+  assert.doesNotMatch(markup, /project-entry-summary">53% fewer identity switches/);
   assert.equal((markup.match(/<button class="project-entry/g) || []).length, 9);
 });
 
 test('project detail omits unavailable evidence and shows a concise three-item impact summary', () => {
-  const shortStack = PROJECTS.find(project => project.id === 'shortstack');
-  const markup = renderProjectDetailMarkup(shortStack);
+  const autoBook = PROJECTS.find(project => project.id === 'autobook');
+  const markup = renderProjectDetailMarkup(autoBook);
 
   assert.doesNotMatch(markup, /View GitHub/);
   assert.doesNotMatch(markup, /Live demo/);
   assert.doesNotMatch(markup, /project-gallery/);
   assert.equal((markup.match(/class="project-impact-item"/g) || []).length, 3);
-  assert.match(markup, /<details class="engineering-details">/);
+  assert.doesNotMatch(markup, /<details/);
+  assert.match(markup, /<section class="engineering-details"/);
   assert.match(markup, /Engineering details/);
 });
 
-test('project detail renders verified links and limits a screenshot gallery to one hero plus two thumbnails', () => {
+test('project detail renders verified links and shows every screenshot in the thumbnail strip', () => {
   const project = {
     ...PROJECTS[0],
     repositoryUrl: 'https://github.com/example/shortstack',
@@ -48,8 +51,9 @@ test('project detail renders verified links and limits a screenshot gallery to o
   assert.match(markup, /href="https:\/\/github\.com\/example\/shortstack"/);
   assert.match(markup, /href="https:\/\/example\.com\/shortstack"/);
   assert.match(markup, /class="project-hero-image"[^>]+src="one\.png"[^>]+alt="Dashboard overview"/);
-  assert.equal((markup.match(/<button class="project-thumbnail"/g) || []).length, 2);
-  assert.doesNotMatch(markup, /four\.png/);
+  assert.match(markup, /data-screenshot-src="one\.png"/);
+  assert.equal((markup.match(/<button class="project-thumbnail/g) || []).length, 4);
+  assert.match(markup, /four\.png/);
 });
 
 test('project sidebar switches from selection details to project tasks without fake actions', () => {
@@ -59,8 +63,9 @@ test('project sidebar switches from selection details to project tasks without f
 
   assert.match(listMarkup, /Project Details/);
   assert.match(listMarkup, /93% faster redirects/);
-  assert.doesNotMatch(listMarkup, /View GitHub/);
+  assert.match(listMarkup, /View GitHub/);
   assert.match(detailMarkup, /Back to My Projects/);
   assert.match(detailMarkup, /Full Stack Engineer/);
+  assert.match(detailMarkup, /View GitHub/);
   assert.doesNotMatch(detailMarkup, /Open live demo/);
 });

@@ -16,12 +16,12 @@
       .replace(/'/g, '&#039;');
   }
 
-  function projectEntryMarkup(project, selectedId, featured) {
+  function projectEntryMarkup(project, selectedId) {
     const selected = project.id === selectedId;
-    const stack = project.stack.slice(0, featured ? 5 : 3).map(escapeHtml).join(' • ');
+    const stack = project.stack.slice(0, 5).map(escapeHtml).join(' • ');
 
     return `
-      <button class="project-entry${featured ? ' project-entry-featured' : ' project-entry-compact'}${selected ? ' selected' : ''}"
+      <button class="project-entry${selected ? ' selected' : ''}"
         type="button"
         data-project-id="${escapeHtml(project.id)}"
         aria-pressed="${selected}"
@@ -29,7 +29,7 @@
         <img class="project-entry-icon" src="assets/icons/folder.png" alt="" aria-hidden="true" />
         <span class="project-entry-copy">
           <strong class="project-entry-name">${escapeHtml(project.name)}</strong>
-          <span class="project-entry-summary">${escapeHtml(featured ? project.outcomeHeadline : project.summary)}</span>
+          <span class="project-entry-summary">${escapeHtml(project.summary)}</span>
           <span class="project-entry-meta">${escapeHtml(stack)}</span>
         </span>
         <span class="project-entry-open" aria-hidden="true">Open</span>
@@ -37,25 +37,11 @@
   }
 
   function renderProjectListMarkup(projects, selectedId) {
-    const featured = projects
-      .filter(project => project.featuredRank !== null)
-      .sort((a, b) => a.featuredRank - b.featuredRank);
-    const more = projects.filter(project => project.featuredRank === null);
-
     return `
       <div class="projects-explorer-list" aria-label="Project folders">
-        <section class="project-section" aria-labelledby="featured-projects-heading">
-          <h2 id="featured-projects-heading">Featured Projects</h2>
-          <div class="project-featured-list">
-            ${featured.map(project => projectEntryMarkup(project, selectedId, true)).join('')}
-          </div>
-        </section>
-        <section class="project-section project-section-more" aria-labelledby="more-projects-heading">
-          <h2 id="more-projects-heading">More Projects</h2>
-          <div class="project-more-list">
-            ${more.map(project => projectEntryMarkup(project, selectedId, false)).join('')}
-          </div>
-        </section>
+        <div class="project-list">
+          ${projects.map(project => projectEntryMarkup(project, selectedId)).join('')}
+        </div>
       </div>`;
   }
 
@@ -73,18 +59,18 @@
   }
 
   function projectGalleryMarkup(project) {
-    const screenshots = project.screenshots.slice(0, 3);
+    const screenshots = project.screenshots.slice(0, 8);
     if (!screenshots.length) return '';
 
     const hero = screenshots[0];
-    const thumbnails = screenshots.slice(1);
-    const thumbnailMarkup = thumbnails.length
+    const thumbnailMarkup = screenshots.length > 1
       ? `<div class="project-thumbnails" aria-label="Project screenshots">
-          ${thumbnails.map((screenshot, index) => `
-            <button class="project-thumbnail" type="button"
+          ${screenshots.map((screenshot, index) => `
+            <button class="project-thumbnail${index === 0 ? ' selected' : ''}" type="button"
               data-screenshot-src="${escapeHtml(screenshot.src)}"
               data-screenshot-alt="${escapeHtml(screenshot.alt)}"
               data-screenshot-caption="${escapeHtml(screenshot.caption)}"
+              aria-pressed="${index === 0}"
               aria-label="Show ${escapeHtml(screenshot.caption)}">
               <img src="${escapeHtml(screenshot.src)}" alt="" aria-hidden="true" />
             </button>`).join('')}
@@ -125,12 +111,12 @@
               ${project.impact.map(item => `<li class="project-impact-item">${escapeHtml(item)}</li>`).join('')}
             </ul>
           </section>
+          <section class="engineering-details" aria-labelledby="engineering-details-heading">
+            <h2 id="engineering-details-heading">Engineering details</h2>
+            <ul>${project.engineeringDetails.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
+            <p class="engineering-stack"><strong>Stack:</strong> ${project.stack.map(escapeHtml).join(' • ')}</p>
+          </section>
         </div>
-        <details class="engineering-details">
-          <summary>Engineering details</summary>
-          <ul>${project.engineeringDetails.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
-          <p class="engineering-stack"><strong>Stack:</strong> ${project.stack.map(escapeHtml).join(' • ')}</p>
-        </details>
       </article>`;
   }
 

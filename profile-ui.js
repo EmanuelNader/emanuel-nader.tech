@@ -7,18 +7,20 @@
 
   function renderAbout() {
     if (!data) return;
-    const { PROFILE, PROOF_POINTS } = data;
+    const { PROFILE } = data;
     const target = document.getElementById('about-content');
     if (!target) return;
+    const biography = String(PROFILE.biography || '')
+      .split(/\n\n+/)
+      .filter(Boolean)
+      .map((paragraph) => `<p class="about-biography">${escapeHtml(paragraph)}</p>`)
+      .join('');
     target.innerHTML = `
       <div class="about-header">
         <img class="about-avatar" src="assets/icons/face.jpg" alt="Portrait of Emanuel Nader">
         <div class="about-intro"><h1>${escapeHtml(PROFILE.name)}</h1><p class="about-subtitle">${escapeHtml(PROFILE.headline)}</p></div>
       </div>
-      <p class="about-biography">${escapeHtml(PROFILE.biography)}</p>
-      <fieldset class="xp-group"><legend>Selected accomplishments</legend>
-        <div class="accomplishment-list">${PROOF_POINTS.map((point) => `<div class="accomplishment-row"><strong>${escapeHtml(point.value)}</strong><span>${escapeHtml(point.label)}<small>${escapeHtml(point.detail)}</small></span></div>`).join('')}</div>
-      </fieldset>
+      ${biography}
       <div class="welcome-actions" aria-label="Portfolio shortcuts">
         <button type="button" class="welcome-primary" onclick="dismissWelcomeAndOpen('projects')">Explore Projects</button>
         <button type="button" onclick="dismissWelcomeAndOpen('resume')">View Résumé</button>

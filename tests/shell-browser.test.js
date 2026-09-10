@@ -46,10 +46,44 @@ test('desktop taskbar is slightly taller while the Start asset stays native-size
       };
     });
 
-    assert.equal(geometry.taskbarHeight, 34);
+    assert.equal(geometry.taskbarHeight, 40);
     assert.equal(geometry.desktopBottom, geometry.taskbarTop);
     assert.equal(geometry.startWidth, 54);
     assert.equal(geometry.startHeight, 29);
+  } finally {
+    await browser.close();
+  }
+});
+
+test('opening About after a maximized Resume does not shrink Resume to 100px', async () => {
+  const browser = await chromium.launch({ channel: 'chrome', headless: true });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1024 } });
+  try {
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => {
+      localStorage.setItem('emanuel-portfolio.welcome-seen.v1', '1');
+      window.doLogin();
+    });
+    await page.locator('#win-about:not(.hidden)').waitFor();
+
+    const sizes = await page.evaluate(() => {
+      window.openWindow('resume');
+      window.openWindow('about');
+      window.openWindow('resume');
+      const resume = document.getElementById('win-resume').getBoundingClientRect();
+      const desktop = document.getElementById('desktop').getBoundingClientRect();
+      return {
+        resumeWidth: resume.width,
+        resumeHeight: resume.height,
+        desktopWidth: desktop.width,
+        desktopHeight: desktop.height,
+        maximized: document.getElementById('win-resume').dataset.maximized,
+      };
+    });
+
+    assert.equal(sizes.maximized, 'true');
+    assert.ok(sizes.resumeWidth >= sizes.desktopWidth - 4, `resume width ${sizes.resumeWidth} vs desktop ${sizes.desktopWidth}`);
+    assert.ok(sizes.resumeHeight >= sizes.desktopHeight - 4, `resume height ${sizes.resumeHeight} vs desktop ${sizes.desktopHeight}`);
   } finally {
     await browser.close();
   }

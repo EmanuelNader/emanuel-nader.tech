@@ -9,7 +9,7 @@ const projectUi = window.PortfolioProjectsUi;
 const profileApi = window.PortfolioProfile;
 const profileUi = window.PortfolioProfileUi;
 let projectNavigator = projectApi ? projectApi.createProjectNavigator(projectApi.PROJECTS) : null;
-let selectedProjectId = projectApi ? projectApi.getFeaturedProjects(projectApi.PROJECTS)[0]?.id || null : null;
+let selectedProjectId = projectApi ? projectApi.PROJECTS[0]?.id || null : null;
 let activeProjectId = null;
 let selectedHobbyId = profileApi?.HOBBIES[0]?.id || null;
 let activeHobbyId = null;
@@ -613,7 +613,9 @@ function selectProjectScreenshot(thumbnail) {
   hero.alt = thumbnail.dataset.screenshotAlt;
   if (caption) caption.textContent = thumbnail.dataset.screenshotCaption;
   document.querySelectorAll('#projects-content .project-thumbnail').forEach(button => {
-    button.classList.toggle('selected', button === thumbnail);
+    const selected = button === thumbnail;
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
   });
 }
 
@@ -629,8 +631,47 @@ function isTouchFriendlyViewport() {
   return window.matchMedia('(max-width: 640px), (pointer: coarse)').matches;
 }
 
+function isMaximized(win) {
+  return win?.dataset.maximized === 'true';
+}
+
+function parseStyleSize(value, fallback) {
+  const parsed = parseFloat(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) return fallback;
+  if (String(value).trim().endsWith('%')) return fallback;
+  return parsed;
+}
+
+function saveRestoreRect(win) {
+  if (!win || parseStyleSize(win.dataset.origWidth, 0) >= 280) return;
+  const computed = window.getComputedStyle(win);
+  const width = parseStyleSize(win.style.width, win.offsetWidth || parseStyleSize(computed.width, 760));
+  const height = parseStyleSize(win.style.height, win.offsetHeight || parseStyleSize(computed.height, 520));
+  win.dataset.origLeft = win.style.left || computed.left || '100px';
+  win.dataset.origTop = win.style.top || computed.top || '40px';
+  win.dataset.origWidth = `${Math.max(280, width)}px`;
+  win.dataset.origHeight = `${Math.max(200, height)}px`;
+}
+
+function applyMaximizedLayout(win) {
+  win.style.left = '0px';
+  win.style.top = '0px';
+  win.style.width = '100%';
+  win.style.height = '100%';
+  win.dataset.maximized = 'true';
+}
+
+function restoreWindow(win) {
+  win.style.left = win.dataset.origLeft || '100px';
+  win.style.top = win.dataset.origTop || '100px';
+  win.style.width = win.dataset.origWidth || '600px';
+  win.style.height = win.dataset.origHeight || '400px';
+  win.dataset.maximized = 'false';
+  clampWindowToDesktop(win);
+}
+
 function clampWindowToDesktop(win) {
-  if (isTouchFriendlyViewport()) return; // CSS full-bleeds windows on narrow screens
+  if (isTouchFriendlyViewport() || isMaximized(win)) return;
   const desk = document.getElementById('desktop');
   if (!desk || !win) return;
   const deskRect = desk.getBoundingClientRect();
@@ -640,8 +681,8 @@ function clampWindowToDesktop(win) {
   const maxW = Math.max(280, desktopWidth - 8);
   const maxH = Math.max(200, desktopHeight - 8);
   const style = win.style;
-  const w = Math.min(parseFloat(style.width) || win.offsetWidth, maxW);
-  const h = Math.min(parseFloat(style.height) || win.offsetHeight, maxH);
+  const w = Math.min(Math.max(280, parseStyleSize(style.width, win.offsetWidth)), maxW);
+  const h = Math.min(Math.max(200, parseStyleSize(style.height, win.offsetHeight)), maxH);
   style.width = w + 'px';
   style.height = h + 'px';
   let left = parseFloat(style.left) || 0;
@@ -667,10 +708,13 @@ function openWindow(id) {
   }
 
   if (isTouchFriendlyViewport()) {
-    win.dataset.maximized = 'true';
-  } else if (win.dataset.openMode === 'maximized' && win.dataset.maximized !== 'true') {
-    maximizeWindow(winId);
-  } else {
+    applyMaximizedLayout(win);
+  } else if (win.dataset.openMode === 'maximized') {
+    if (!isMaximized(win)) {
+      saveRestoreRect(win);
+      applyMaximizedLayout(win);
+    }
+  } else if (!isMaximized(win)) {
     clampWindowToDesktop(win);
   }
 
@@ -708,28 +752,13 @@ function minimizeWindow(winId) {
 
 function maximizeWindow(winId) {
   const win = document.getElementById(winId);
-  
-  // Toggle maximize state
-  if (win.dataset.maximized === 'true') {
-    // Restore
-    win.style.left = win.dataset.origLeft || '100px';
-    win.style.top = win.dataset.origTop || '100px';
-    win.style.width = win.dataset.origWidth || '600px';
-    win.style.height = win.dataset.origHeight || '400px';
-    win.dataset.maximized = 'false';
+  if (!win) return;
+
+  if (isMaximized(win)) {
+    restoreWindow(win);
   } else {
-    // Save original state
-    win.dataset.origLeft = win.style.left || window.getComputedStyle(win).left;
-    win.dataset.origTop = win.style.top || window.getComputedStyle(win).top;
-    win.dataset.origWidth = win.style.width || window.getComputedStyle(win).width;
-    win.dataset.origHeight = win.style.height || window.getComputedStyle(win).height;
-    
-    // Maximize
-    win.style.left = '0px';
-    win.style.top = '0px';
-    win.style.width = '100%';
-    win.style.height = '100%'; // #desktop already excludes the taskbar
-    win.dataset.maximized = 'true';
+    saveRestoreRect(win);
+    applyMaximizedLayout(win);
   }
   bringToFront(winId);
 }
