@@ -7,7 +7,7 @@
   <title>Emanuel Nader</title>
   <meta name="description"
     content="Emanuel Nader's personal portfolio — Software Engineering student at UCSD. Built with nostalgic Windows XP aesthetic." />
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=12" />
   <link rel="icon" href="assets/icons/computer.png" type="image/png" />
 </head>
 
@@ -114,22 +114,20 @@
     <!-- Taskbar -->
     <div class="taskbar" id="taskbar">
       <div class="taskbar-left">
-        <button class="start-btn start-img-btn" id="start-btn" onclick="toggleStartMenu(event)" aria-label="Start"
-          style="padding: 0; border: none; background: transparent; cursor: pointer; height: 42px; width: 85px;">
-          <img src="assets/icons/start.png" alt="Start"
-            style="height: 100%; width: 100%; display: block; object-fit: fill;" />
+        <button class="start-btn start-img-btn" id="start-btn" onclick="toggleStartMenu(event)" aria-label="Start">
+          <img src="assets/icons/start.png" alt="Start" />
         </button>
         <div class="taskbar-windows" id="taskbar-windows"></div>
       </div>
       <div class="taskbar-right systray">
         <!-- Volume icon -->
-        <svg class="tray-icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+        <svg class="tray-icon" width="22" height="22" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
           title="Volume">
           <polygon points="1,5 5,5 9,1 9,15 5,11 1,11" fill="#D0E0FF" stroke="#8BB0EE" stroke-width="0.5" />
           <path d="M11 4 Q14 8 11 12" fill="none" stroke="#D0E0FF" stroke-width="1.5" stroke-linecap="round" />
         </svg>
         <!-- Network icon -->
-        <svg class="tray-icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+        <svg class="tray-icon" width="22" height="22" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
           title="Network">
           <rect x="6" y="3" width="4" height="3" rx="0.5" fill="#D0E0FF" stroke="#8BB0EE" stroke-width="0.5" />
           <rect x="1" y="9" width="4" height="3" rx="0.5" fill="#D0E0FF" stroke="#8BB0EE" stroke-width="0.5" />
@@ -659,7 +657,7 @@
   </div>
 
   <!-- HOBBIES Window -->
-  <div class="xp-window hidden" id="win-hobbies" style="left:280px;top:140px;width:580px;height:460px;">
+  <div class="xp-window hidden" id="win-hobbies" style="left:150px;top:70px;width:980px;height:700px;">
     <div class="win-titlebar" onmousedown="startDrag(event,'win-hobbies')">
       <div class="win-titlebar-left">
         <div class="win-icon icon-hobbies"></div>
@@ -675,49 +673,23 @@
       <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn">&#9664; Back</button>
-      <button class="toolbar-btn">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
-      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+      <button class="toolbar-btn" id="hobbies-back" type="button" onclick="closeHobby()" disabled>&#9664; Back</button>
+      <button class="toolbar-btn" id="hobbies-previous" type="button" onclick="navigateHobbies(-1)" hidden>Previous</button>
+      <button class="toolbar-btn" id="hobbies-next" type="button" onclick="navigateHobbies(1)" hidden>Next</button>
+      <button class="toolbar-btn" id="hobbies-up" type="button" onclick="closeHobby()" disabled>&#8593; Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input id="hobbies-address" type="text"
           value="C:\Users\EmanuelNader\My Pictures\Hobbies" readonly /></div>
     </div>
     <div class="win-body">
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">File and Folder Tasks</div>
-          <div class="sidebar-link">See more</div>
+          <p class="hobby-sidebar-preview" id="hobbies-sidebar">Select a picture to see more details.</p>
         </div>
       </div>
-      <div class="win-content">
-        <div class="hobbies-grid">
-          <div class="hobby-card">
-            <div class="hobby-name">Motorcycle</div>
-            <div class="hobby-desc">I ride a 2006 Ninja Kawazaki ZX6r</div>
-          </div>
-          <div class="hobby-card">
-            <div class="hobby-name">Bodybuilding</div>
-            <div class="hobby-desc">Lost over 100 lbs and lift 5-6 times a week</div>
-          </div>
-          <div class="hobby-card">
-            <div class="hobby-name">Cooking</div>
-            <div class="hobby-desc">Enjoy cooking and preparing meals</div>
-          </div>
-          <div class="hobby-card">
-            <div class="hobby-name">Exploration</div>
-            <div class="hobby-desc">Love exploring random haunted buildings in the woods, and hiking for sunsets</div>
-          </div>
-          <div class="hobby-card">
-            <div class="hobby-name">Watching Anime / Reading manga</div>
-            <div class="hobby-desc">Love One Piece, Tokyo Ghoul</div>
-          </div>
-          <div class="hobby-card">
-            <div class="hobby-name">Gaming</div>
-            <div class="hobby-desc">Play solo video games such as Persona, Minecraft, Terraria</div>
-          </div>
-        </div>
-      </div>
+      <div class="win-content hobbies-content" id="hobbies-content"></div>
     </div>
-    <div class="win-statusbar">6 objects</div>
+    <div class="win-statusbar" id="hobbies-status">6 pictures</div>
   </div>
 
   <!-- RESUME Window -->
@@ -911,7 +883,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=13"></script>
 </body>
 
 </html>

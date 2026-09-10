@@ -1,6 +1,10 @@
 /* ==========================================================================
    GLOBAL RESET & FONTS
    ========================================================================== */
+:root {
+  --taskbar-h: 64px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -266,8 +270,7 @@ a:hover {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 42px;
-  /* leaves 42px for taskbar */
+  bottom: var(--taskbar-h);
   background: #004E98 url('assets/icons/bliss.jpg') center/cover no-repeat;
   z-index: 1;
 }
@@ -407,14 +410,14 @@ a:hover {
 }
 
 /* ==========================================================================
-   TASKBAR (STRICT 30PX LUNA)
+   TASKBAR
    ========================================================================== */
 .taskbar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 42px;
+  height: var(--taskbar-h);
   background: linear-gradient(to bottom, #245EDC 0%, #3f8cf3 9%, #245EDC 18%, #245EDC 92%, #1B4FB5 100%);
   display: flex;
   justify-content: space-between;
@@ -436,6 +439,22 @@ a:hover {
   display: flex;
   align-items: center;
   z-index: 10001;
+}
+
+.start-img-btn {
+  height: var(--taskbar-h);
+  width: calc(var(--taskbar-h) * 85 / 42);
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.start-img-btn img {
+  height: 100%;
+  width: 100%;
+  display: block;
+  object-fit: fill;
 }
 
 .start-btn:hover {
@@ -460,14 +479,14 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 2px;
   color: white;
-  height: 30px;
-  min-width: 120px;
-  max-width: 160px;
-  margin: 0 2px;
-  padding: 0 8px;
+  height: calc(var(--taskbar-h) - 16px);
+  min-width: 140px;
+  max-width: 190px;
+  margin: 0 3px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 1px rgba(0, 0, 0, 0.2);
 }
@@ -479,32 +498,32 @@ a:hover {
 }
 
 .tb-icon {
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   background-size: cover;
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 .taskbar-right.systray {
   background: linear-gradient(to bottom, #11A9ED 0%, #2CB1E1 10%, #1693D4 90%, #0D83BF 100%);
   border-left: 1px solid #1042AF;
   height: 100%;
-  padding: 0 10px;
+  padding: 0 14px;
   display: flex;
   align-items: center;
   color: white;
-  font-size: 11px;
+  font-size: 13px;
   box-shadow: inset 1px 0 1px rgba(255, 255, 255, 0.4);
 }
 
 .tray-icon {
-  margin-right: 8px;
+  margin-right: 10px;
   filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
 }
 
 .systray-clock {
-  margin-left: 12px;
-  font-size: 12px;
+  margin-left: 14px;
+  font-size: 15px;
   font-weight: bold;
 }
 
@@ -513,7 +532,7 @@ a:hover {
    ========================================================================== */
 .start-menu {
   position: fixed;
-  bottom: 42px;
+  bottom: var(--taskbar-h);
   left: 0;
   width: 380px;
   background: white;
@@ -1180,31 +1199,198 @@ p {
   border-left: 4px solid #0058EE;
 }
 
-/* Hobbies Specific */
+/* Hobbies — XP My Pictures filmstrip */
+.hobbies-content {
+  padding: 16px 20px 24px;
+}
+
 .hobbies-grid {
+  max-width: 980px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 22px;
 }
 
-.hobby-card {
-  background: white;
-  border: 1px solid #ddd;
-  padding: 16px 14px;
+.hobby-thumb {
+  min-width: 0;
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 7px;
+  color: #111;
+  font: inherit;
   text-align: left;
-  border-radius: 4px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 
-.hobby-name {
-  font-weight: bold;
-  margin-bottom: 6px;
-  font-size: 13px;
+.hobby-thumb:hover {
+  border-color: #b7c9e6;
+  background: #f3f7ff;
 }
 
-.hobby-desc {
+.hobby-thumb.selected {
+  border-color: #316ac5;
+  background: #316ac5;
+  color: #fff;
+  outline: 1px dotted #fff;
+  outline-offset: -4px;
+}
+
+.hobby-thumb img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 1px #8c8c8c;
+}
+
+.hobby-thumb span,
+.hobby-thumb small {
+  display: block;
+  margin-top: 6px;
+}
+
+.hobby-thumb span {
+  font-weight: 700;
+}
+
+.hobby-thumb small {
+  margin-top: 2px;
   color: #666;
-  font-size: 11px;
+}
+
+.hobby-thumb.selected small {
+  color: #fff;
+}
+
+.hobby-sidebar-preview {
+  margin: 0;
+  padding: 8px;
+  line-height: 1.4;
+}
+
+.hobby-filmstrip {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.hobby-filmstrip figure {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 520px) minmax(180px, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.hobby-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #111;
+  border: 1px solid #7f9db9;
+  overflow: hidden;
+}
+
+.hobby-photo-frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.hobby-photo-frame .tone-night {
+  filter: brightness(1.45) contrast(1.12);
+}
+
+.hobby-photo-arrow {
+  position: absolute;
+  top: 50%;
+  width: 34px;
+  height: 48px;
+  margin-top: -24px;
+  border: 1px solid rgba(0, 0, 0, .55);
+  background: rgba(239, 239, 226, .88);
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080;
+  cursor: pointer;
+}
+
+.hobby-photo-arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-top: -8px;
+}
+
+.hobby-photo-prev {
+  left: 8px;
+}
+
+.hobby-photo-next {
+  right: 8px;
+}
+
+.hobby-photo-prev::before {
+  margin-left: -6px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 11px solid #003399;
+}
+
+.hobby-photo-next::before {
+  margin-left: -4px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 11px solid #003399;
+}
+
+.hobby-photo-arrow:hover {
+  background: #fff;
+}
+
+.hobby-photo-caption {
+  color: #111;
+  font-weight: 700;
+}
+
+.hobby-filmstrip figcaption {
+  display: grid;
+  gap: 8px;
+  padding-top: 4px;
+  line-height: 1.45;
+}
+
+.hobby-filmstrip figcaption strong {
+  color: #003399;
+  font-size: 16px;
+}
+
+.hobby-filmstrip figcaption small {
+  color: #666;
+}
+
+.filmstrip-thumbs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(80px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #aca899;
+}
+
+.filmstrip-thumbs .hobby-thumb {
+  padding: 4px;
+}
+
+.filmstrip-thumbs .hobby-thumb span {
+  font-size: 10px;
+}
+
+.filmstrip-thumbs .hobby-thumb small {
+  display: none;
 }
 
 /* Resume Paper */
@@ -1563,6 +1749,10 @@ body.shutdown-active #login-screen {
    MOBILE / NARROW VIEWPORTS
    ========================================================================== */
 @media (max-width: 640px) {
+  :root {
+    --taskbar-h: 72px;
+  }
+
   body {
     width: 100vw;
     height: 100vh;
@@ -1660,7 +1850,7 @@ body.shutdown-active #login-screen {
 
   /* —— Desktop: touch icon grid —— */
   .desktop {
-    bottom: 52px;
+    bottom: var(--taskbar-h);
   }
 
   .desktop-icons {
@@ -1700,32 +1890,22 @@ body.shutdown-active #login-screen {
     line-height: 1.2;
   }
 
-  .taskbar {
-    height: 52px;
-  }
-
-  .start-img-btn {
-    height: 52px !important;
-    width: 104px !important;
-  }
-
   .taskbar-win-btn {
-    height: 40px;
-    font-size: 12px;
-    max-width: 120px;
-    padding: 0 8px;
+    font-size: 14px;
+    max-width: 140px;
+    padding: 0 10px;
   }
 
   .systray-clock {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   /* —— Start menu: full-width sheet —— */
   .start-menu {
     width: 100vw;
     max-width: 100%;
-    bottom: 52px;
-    max-height: calc(100vh - 52px);
+    bottom: var(--taskbar-h);
+    max-height: calc(100vh - var(--taskbar-h));
   }
 
   .sm-body {
@@ -1837,15 +2017,44 @@ body.shutdown-active #login-screen {
     font-size: 13px;
   }
 
-  .projects-grid,
-  .hobbies-grid {
+  .projects-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
+  .hobbies-content {
+    padding: 10px;
+  }
+
+  .hobbies-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .hobby-thumb {
+    min-height: 44px;
+    padding: 5px;
+  }
+
+  .hobby-filmstrip figure {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .hobby-photo-frame {
+    max-height: 42vh;
+  }
+
+  .filmstrip-thumbs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .filmstrip-thumbs .hobby-thumb {
+    min-height: 44px;
+  }
+
   .contact-item,
   .exp-item,
-  .hobby-card,
   .project-card {
     font-size: 13px;
   }
@@ -1866,4 +2075,32 @@ body.shutdown-active #login-screen {
   .run-dialog {
     width: min(360px, calc(100vw - 24px));
   }
+
+  #win-hobbies .win-toolbar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(44px, auto)) minmax(0, 1fr);
+    align-items: center;
+  }
+
+  #win-hobbies .toolbar-btn {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  #win-hobbies .address-bar {
+    grid-column: 1 / -1;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 641px) {
+  .hobbies-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+[hidden] {
+  display: none !important;
 }
