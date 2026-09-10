@@ -3,8 +3,31 @@
 // ==========================================================================
 let activeWindowId = null;
 let zIndexCounter = 100;
+const WELCOME_STORAGE_KEY = 'emanuel-portfolio.welcome-seen.v1';
+const projectApi = window.PortfolioProjects;
+const projectUi = window.PortfolioProjectsUi;
+const profileApi = window.PortfolioProfile;
+const profileUi = window.PortfolioProfileUi;
+let projectNavigator = projectApi ? projectApi.createProjectNavigator(projectApi.PROJECTS) : null;
+let selectedProjectId = projectApi ? projectApi.getFeaturedProjects(projectApi.PROJECTS)[0]?.id || null : null;
+let activeProjectId = null;
+let selectedHobbyId = profileApi?.HOBBIES[0]?.id || null;
+let activeHobbyId = null;
+let activeHobbyPhotoIndex = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // The icon assets carry the visual affordance; labels keep every caption
+  // control explicit for assistive technology without rendering text glyphs.
+  document.querySelectorAll('.win-btn').forEach((button) => {
+    const label = button.classList.contains('win-close')
+      ? 'Close'
+      : button.classList.contains('win-max')
+        ? 'Maximize'
+        : 'Minimize';
+    button.textContent = '';
+    button.setAttribute('aria-label', label);
+  });
+
   // Start clock
   updateClock();
   setInterval(updateClock, 1000);
@@ -62,8 +85,147 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initializeHobbies();
+  initializeProjectsExperience();
+  initializeProfileExperience();
 });
+
+function initializeProfileExperience() {
+  renderAbout();
+  renderExperience();
+  renderContact();
+  renderHobbies();
+
+  const hobbiesContent = document.getElementById('hobbies-content');
+  if (hobbiesContent) {
+    hobbiesContent.addEventListener('click', (event) => {
+      const photoControl = event.target.closest('[data-hobby-photo-direction]');
+      if (photoControl) {
+        event.preventDefault();
+        event.stopPropagation();
+        navigateHobbyPhotos(Number(photoControl.dataset.hobbyPhotoDirection));
+        return;
+      }
+      const button = event.target.closest('[data-hobby-id]');
+      if (!button) return;
+      if (isTouchFriendlyViewport() || activeHobbyId) openHobby(button.dataset.hobbyId);
+      else selectHobby(button.dataset.hobbyId);
+    });
+    hobbiesContent.addEventListener('dblclick', (event) => {
+      const button = event.target.closest('[data-hobby-id]');
+      if (button) openHobby(button.dataset.hobbyId);
+    });
+    hobbiesContent.addEventListener('keydown', (event) => {
+      const button = event.target.closest('[data-hobby-id]');
+      if (!button) return;
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        openHobby(button.dataset.hobbyId);
+      } else if (event.key === ' ') {
+        event.preventDefault();
+        selectHobby(button.dataset.hobbyId);
+      }
+    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && activeHobbyId && !document.getElementById('win-hobbies')?.classList.contains('hidden')) closeHobby();
+    if (!activeHobbyId || document.getElementById('win-hobbies')?.classList.contains('hidden')) return;
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      navigateHobbyPhotos(-1);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      navigateHobbyPhotos(1);
+    }
+  });
+}
+
+function renderAbout() { profileUi?.renderAbout(); }
+function renderExperience() { profileUi?.renderExperience(); }
+function renderContact() { profileUi?.renderContact(); }
+function renderHobbies() {
+  profileUi?.renderHobbies({ selectedId: selectedHobbyId, activeId: activeHobbyId, photoIndex: activeHobbyPhotoIndex });
+  updateHobbyChrome();
+}
+
+function selectHobby(hobbyId) {
+  if (!profileApi?.HOBBIES.some((item) => item.id === hobbyId)) return;
+  selectedHobbyId = hobbyId;
+  document.querySelectorAll('#hobbies-content [data-hobby-id]').forEach((button) => {
+    const isSelected = button.dataset.hobbyId === hobbyId;
+    button.classList.toggle('selected', isSelected);
+    button.setAttribute('aria-pressed', String(isSelected));
+  });
+  updateHobbyChrome();
+}
+
+function openHobby(hobbyId) {
+  if (!profileApi?.HOBBIES.some((item) => item.id === hobbyId)) return;
+  selectedHobbyId = hobbyId;
+  activeHobbyId = hobbyId;
+  activeHobbyPhotoIndex = 0;
+  renderHobbies();
+  const content = document.getElementById('hobbies-content');
+  if (content) content.scrollTop = 0;
+  document.querySelector('#hobbies-content .hobby-thumb.selected')?.focus({ preventScroll: true });
+}
+
+function closeHobby() {
+  activeHobbyId = null;
+  activeHobbyPhotoIndex = 0;
+  renderHobbies();
+  const content = document.getElementById('hobbies-content');
+  if (content) content.scrollTop = 0;
+  document.querySelector(`#hobbies-content [data-hobby-id="${selectedHobbyId}"]`)?.focus({ preventScroll: true });
+}
+
+function navigateHobbies(direction) {
+  if (!profileApi?.HOBBIES.length) return;
+  const current = Math.max(0, profileApi.HOBBIES.findIndex((item) => item.id === activeHobbyId));
+  const next = (current + direction + profileApi.HOBBIES.length) % profileApi.HOBBIES.length;
+  openHobby(profileApi.HOBBIES[next].id);
+}
+
+function navigateHobbyPhotos(direction) {
+  const active = profileApi?.HOBBIES.find((item) => item.id === activeHobbyId);
+  const count = active?.photos?.length || 0;
+  if (count < 2) return;
+
+  activeHobbyPhotoIndex = (activeHobbyPhotoIndex + direction + count) % count;
+  renderHobbies();
+  const content = document.getElementById('hobbies-content');
+  if (content) content.scrollTop = 0;
+}
+
+function updateHobbyChrome() {
+  if (!profileApi) return;
+  const selected = profileApi.HOBBIES.find((item) => item.id === selectedHobbyId) || profileApi.HOBBIES[0];
+  const active = profileApi.HOBBIES.find((item) => item.id === activeHobbyId);
+  const activePhotos = active?.photos?.length ? active.photos : active ? [active.image] : [];
+  const activePhoto = activePhotos[activeHobbyPhotoIndex] || activePhotos[0];
+  const sidebar = document.getElementById('hobbies-sidebar');
+  const address = document.getElementById('hobbies-address');
+  const status = document.getElementById('hobbies-status');
+  if (sidebar && selected) sidebar.textContent = selected.detail;
+  if (address) address.value = active ? `C:\\Users\\EmanuelNader\\My Pictures\\Hobbies\\${active.name}` : 'C:\\Users\\EmanuelNader\\My Pictures\\Hobbies';
+  if (status) {
+    const imageKind = activePhoto?.kind === 'personal photo' ? 'Personal photo' : activePhoto?.kind === 'supplied media' ? 'Supplied media' : 'Illustrative image';
+    status.textContent = active ? `${activeHobbyPhotoIndex + 1} of ${activePhotos.length} pictures • ${active.name} • ${imageKind}` : `${profileApi.HOBBIES.length} folders • Mixed personal and supplied images`;
+  }
+  ['hobbies-back', 'hobbies-up'].forEach((id) => { const el = document.getElementById(id); if (el) el.disabled = !active; });
+  ['hobbies-previous', 'hobbies-next'].forEach((id) => { const el = document.getElementById(id); if (el) el.hidden = !active; });
+}
+
+async function copyContactValue(value, label) {
+  const live = document.getElementById('contact-live');
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(value);
+    if (live) live.textContent = `${label} copied to the clipboard.`;
+  } catch (_error) {
+    if (live) live.textContent = `Could not copy ${label.toLowerCase()}. Please select it manually.`;
+  }
+}
 
 // ==========================================================================
 // CLOCK
@@ -98,7 +260,38 @@ function doLogin() {
   setTimeout(() => {
     loginScreen.classList.add('hidden');
     desktop.classList.remove('hidden');
+    handlePostLoginRoute();
   }, 500);
+}
+
+function handlePostLoginRoute() {
+  if (window.location.hash.startsWith('#projects')) {
+    window.history.replaceState({ section: 'about' }, '', '#about');
+  }
+
+  openWindow('about');
+}
+
+function hasSeenWelcome() {
+  try {
+    return window.localStorage.getItem(WELCOME_STORAGE_KEY) === '1';
+  } catch (_error) {
+    return false;
+  }
+}
+
+function markWelcomeSeen() {
+  try {
+    window.localStorage.setItem(WELCOME_STORAGE_KEY, '1');
+  } catch (_error) {
+    // The portfolio remains usable when storage is blocked.
+  }
+}
+
+function dismissWelcomeAndOpen(windowId) {
+  markWelcomeSeen();
+  closeWindow('win-about');
+  openWindow(windowId);
 }
 
 // ==========================================================================
@@ -221,7 +414,215 @@ function doRestart() {
   window.location.reload();
 }
 
+// ===========================================================================
+// PROJECT EXPLORER
 // ==========================================================================
+function initializeProjectsExperience() {
+  if (!projectApi || !projectUi) return;
+
+  const validationErrors = projectApi.validateProjects(projectApi.PROJECTS);
+  if (validationErrors.length) {
+    console.error('Project data failed validation:', validationErrors);
+  }
+
+  renderProjectList();
+
+  const content = document.getElementById('projects-content');
+  const sidebar = document.getElementById('projects-sidebar');
+
+  content.addEventListener('click', event => {
+    const projectButton = event.target.closest('[data-project-id]');
+    if (projectButton) {
+      const projectId = projectButton.dataset.projectId;
+      selectProject(projectId);
+      if (isTouchFriendlyViewport()) openProject(projectId);
+      return;
+    }
+
+    const thumbnail = event.target.closest('[data-screenshot-src]');
+    if (thumbnail) selectProjectScreenshot(thumbnail);
+  });
+
+  content.addEventListener('dblclick', event => {
+    const projectButton = event.target.closest('[data-project-id]');
+    if (projectButton) openProject(projectButton.dataset.projectId);
+  });
+
+  content.addEventListener('keydown', event => {
+    const projectButton = event.target.closest('[data-project-id]');
+    if (!projectButton) {
+      if (event.key === 'Escape' && activeProjectId) closeProject();
+      return;
+    }
+
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      openProject(projectButton.dataset.projectId);
+    } else if (event.key === ' ') {
+      event.preventDefault();
+      selectProject(projectButton.dataset.projectId);
+    }
+  });
+
+  sidebar.addEventListener('click', event => {
+    const action = event.target.closest('[data-project-action]')?.dataset.projectAction;
+    if (action === 'back') closeProject();
+    if (action === 'open' && selectedProjectId) openProject(selectedProjectId);
+  });
+
+  window.addEventListener('popstate', () => {
+    if (window.location.hash.startsWith('#projects')) syncProjectRoute();
+  });
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash.startsWith('#projects')) syncProjectRoute();
+  });
+
+  if (window.location.hash.startsWith('#projects')) syncProjectRoute();
+}
+
+function renderProjectList() {
+  if (!projectApi || !projectUi) return;
+  const content = document.getElementById('projects-content');
+  const sidebar = document.getElementById('projects-sidebar');
+  if (!content || !sidebar) return;
+
+  activeProjectId = null;
+  content.innerHTML = projectUi.renderProjectListMarkup(projectApi.PROJECTS, selectedProjectId);
+  const selectedProject = projectApi.getProjectById(selectedProjectId, projectApi.PROJECTS);
+  sidebar.innerHTML = projectUi.renderProjectSidebarMarkup(selectedProject, 'list');
+  updateProjectChrome(null);
+}
+
+function selectProject(projectId) {
+  const project = projectApi?.getProjectById(projectId, projectApi.PROJECTS);
+  if (!project || activeProjectId) return false;
+
+  selectedProjectId = projectId;
+  document.querySelectorAll('#projects-content [data-project-id]').forEach(button => {
+    const selected = button.dataset.projectId === projectId;
+    button.classList.toggle('selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+  document.getElementById('projects-sidebar').innerHTML = projectUi.renderProjectSidebarMarkup(project, 'list');
+  document.getElementById('projects-status').textContent = `${project.name} selected — double-click to open`;
+  return true;
+}
+
+function openProject(projectId, options = {}) {
+  const project = projectApi?.getProjectById(projectId, projectApi.PROJECTS);
+  if (!project || !projectNavigator.open(projectId)) return false;
+
+  selectedProjectId = projectId;
+  activeProjectId = projectId;
+  renderProjectDetail(project);
+
+  if (!options.skipRoute && window.location.hash !== projectApi.projectRouteFor(projectId)) {
+    window.history.pushState({ projectId }, '', projectApi.projectRouteFor(projectId));
+  }
+  return true;
+}
+
+function closeProject(options = {}) {
+  if (!projectApi || !projectNavigator) return;
+
+  if (activeProjectId) projectNavigator.close();
+  renderProjectList();
+
+  if (!options.skipRoute && window.location.hash !== projectApi.projectRouteFor()) {
+    window.history.pushState({ projectId: null }, '', projectApi.projectRouteFor());
+  }
+  document.getElementById('projects-content')?.focus();
+}
+
+function navigateProjects(direction) {
+  if (!projectNavigator) return;
+  const projectId = projectNavigator.navigate(direction);
+
+  if (projectId) {
+    const project = projectApi.getProjectById(projectId, projectApi.PROJECTS);
+    selectedProjectId = projectId;
+    activeProjectId = projectId;
+    renderProjectDetail(project);
+  } else {
+    renderProjectList();
+  }
+
+  window.history.replaceState({ projectId }, '', projectApi.projectRouteFor(projectId));
+  document.getElementById('projects-content')?.focus();
+}
+
+function syncProjectRoute() {
+  if (!projectApi || !projectUi) return;
+  const route = projectApi.parseProjectRoute(window.location.hash, projectApi.PROJECTS);
+  const canonicalHash = projectApi.canonicalProjectRoute(window.location.hash, projectApi.PROJECTS);
+  if (window.location.hash !== canonicalHash) {
+    window.history.replaceState({ projectId: route.projectId }, '', canonicalHash);
+  }
+
+  if (route.view === 'detail') {
+    if (projectNavigator.current() !== route.projectId) projectNavigator.open(route.projectId);
+    openProject(route.projectId, { skipRoute: true });
+  } else {
+    if (projectNavigator.current() !== null) projectNavigator.close();
+    renderProjectList();
+  }
+}
+
+function renderProjectDetail(project) {
+  const content = document.getElementById('projects-content');
+  const sidebar = document.getElementById('projects-sidebar');
+  if (!content || !sidebar) return;
+
+  content.innerHTML = projectUi.renderProjectDetailMarkup(project);
+  sidebar.innerHTML = projectUi.renderProjectSidebarMarkup(project, 'detail');
+  updateProjectChrome(project);
+  content.scrollTop = 0;
+}
+
+function updateProjectChrome(project) {
+  const projectWindow = document.getElementById('win-projects');
+  const title = project ? `${project.name} — My Projects` : 'My Projects';
+  const address = project
+    ? `C:\\Users\\EmanuelNader\\My Projects\\${project.name}`
+    : 'C:\\Users\\EmanuelNader\\My Projects';
+
+  const titleElement = projectWindow?.querySelector('.win-title');
+  const addressElement = document.getElementById('projects-address');
+  const statusElement = document.getElementById('projects-status');
+  if (titleElement) titleElement.textContent = title;
+  if (addressElement) addressElement.value = address;
+  if (statusElement) statusElement.textContent = project ? `1 object — ${project.name}` : `${projectApi.PROJECTS.length} objects`;
+
+  const backButton = document.getElementById('projects-back');
+  const forwardButton = document.getElementById('projects-forward');
+  const upButton = document.getElementById('projects-up');
+  if (backButton) backButton.disabled = !projectNavigator?.canGoBack();
+  if (forwardButton) forwardButton.disabled = !projectNavigator?.canGoForward();
+  if (upButton) upButton.disabled = !project;
+
+  const taskbarTitle = document.querySelector('#tb-btn-win-projects .taskbar-win-title');
+  if (taskbarTitle) taskbarTitle.textContent = title;
+}
+
+function selectProjectScreenshot(thumbnail) {
+  const hero = document.querySelector('#projects-content .project-hero-image');
+  const caption = document.querySelector('#projects-content .project-gallery-caption');
+  if (!hero) return;
+
+  hero.src = thumbnail.dataset.screenshotSrc;
+  hero.alt = thumbnail.dataset.screenshotAlt;
+  if (caption) caption.textContent = thumbnail.dataset.screenshotCaption;
+  document.querySelectorAll('#projects-content .project-thumbnail').forEach(button => {
+    button.classList.toggle('selected', button === thumbnail);
+  });
+}
+
+function printResume() {
+  openWindow('resume');
+  window.print();
+}
+
+// ===========================================================================
 // WINDOW MANAGEMENT
 // ==========================================================================
 function isTouchFriendlyViewport() {
@@ -233,8 +634,11 @@ function clampWindowToDesktop(win) {
   const desk = document.getElementById('desktop');
   if (!desk || !win) return;
   const deskRect = desk.getBoundingClientRect();
-  const maxW = Math.max(280, deskRect.width - 8);
-  const maxH = Math.max(200, deskRect.height - 8);
+  const pageZoom = parseFloat(window.getComputedStyle(document.body).zoom) || 1;
+  const desktopWidth = deskRect.width / pageZoom;
+  const desktopHeight = deskRect.height / pageZoom;
+  const maxW = Math.max(280, desktopWidth - 8);
+  const maxH = Math.max(200, desktopHeight - 8);
   const style = win.style;
   const w = Math.min(parseFloat(style.width) || win.offsetWidth, maxW);
   const h = Math.min(parseFloat(style.height) || win.offsetHeight, maxH);
@@ -242,8 +646,8 @@ function clampWindowToDesktop(win) {
   style.height = h + 'px';
   let left = parseFloat(style.left) || 0;
   let top = parseFloat(style.top) || 0;
-  left = Math.min(Math.max(0, left), Math.max(0, deskRect.width - w));
-  top = Math.min(Math.max(0, top), Math.max(0, deskRect.height - h));
+  left = Math.min(Math.max(0, left), Math.max(0, desktopWidth - w));
+  top = Math.min(Math.max(0, top), Math.max(0, desktopHeight - h));
   style.left = left + 'px';
   style.top = top + 'px';
 }
@@ -264,29 +668,38 @@ function openWindow(id) {
 
   if (isTouchFriendlyViewport()) {
     win.dataset.maximized = 'true';
+  } else if (win.dataset.openMode === 'maximized' && win.dataset.maximized !== 'true') {
+    maximizeWindow(winId);
   } else {
     clampWindowToDesktop(win);
   }
 
   bringToFront(winId);
   hideStartMenu();
+
+  if (id === 'projects' && projectApi) {
+    if (!window.location.hash.startsWith('#projects')) {
+      window.history.pushState({ projectId: null }, '', projectApi.projectRouteFor());
+    }
+    syncProjectRoute();
+  }
 }
 
 function closeWindow(winId) {
   const win = document.getElementById(winId);
+  if (!win) return;
   win.classList.add('hidden');
+
+  if (winId === 'win-about') markWelcomeSeen();
   
   // Remove from taskbar
   const tbBtn = document.getElementById(`tb-btn-${winId}`);
   if (tbBtn) tbBtn.remove();
-
-  if (winId === 'win-hobbies') {
-    closeHobby();
-  }
 }
 
 function minimizeWindow(winId) {
   const win = document.getElementById(winId);
+  if (!win) return;
   win.classList.add('hidden');
   
   const tbBtn = document.getElementById(`tb-btn-${winId}`);
@@ -315,8 +728,7 @@ function maximizeWindow(winId) {
     win.style.left = '0px';
     win.style.top = '0px';
     win.style.width = '100%';
-    const taskbarH = getComputedStyle(document.getElementById('taskbar')).height;
-    win.style.height = `calc(100% - ${taskbarH})`;
+    win.style.height = '100%'; // #desktop already excludes the taskbar
     win.dataset.maximized = 'true';
   }
   bringToFront(winId);
@@ -407,7 +819,7 @@ function createTaskbarButton(winId, type) {
   if (document.getElementById(`tb-btn-${winId}`)) return;
   
   const titleMap = {
-    'about': 'About Emanuel',
+    'about': 'About Emanuel Nader',
     'projects': 'My Projects',
     'experience': 'Experience',
     'skills': 'Skills',
@@ -416,10 +828,11 @@ function createTaskbarButton(winId, type) {
     'resume': 'Resume.pdf'
   };
   
-  const btn = document.createElement('div');
+  const btn = document.createElement('button');
+  btn.type = 'button';
   btn.id = `tb-btn-${winId}`;
   btn.className = 'taskbar-win-btn active';
-  btn.innerHTML = `<div class="tb-icon icon-${type}"></div><span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${titleMap[type]}</span>`;
+  btn.innerHTML = `<span class="tb-icon icon-${type}" aria-hidden="true"></span><span class="taskbar-win-title">${titleMap[type]}</span>`;
   
   btn.addEventListener('click', () => {
     const win = document.getElementById(winId);
@@ -434,257 +847,6 @@ function createTaskbarButton(winId, type) {
   });
   
   tbContainer.appendChild(btn);
-}
-
-// ==========================================================================
-// HOBBIES (XP My Pictures filmstrip)
-// ==========================================================================
-const HOBBY_ROOT = 'C:\\Users\\EmanuelNader\\My Pictures\\Hobbies';
-
-const HOBBIES = [
-  {
-    id: 'motorcycle',
-    name: 'Motorcycle',
-    summary: 'Kawasaki Ninja ZX-6R',
-    detail: 'I ride a 2006 Ninja Kawazaki ZX6r',
-    photos: [
-      { src: 'assets/hobbies/motorcycle-personal.png', alt: 'Black sport motorcycle parked on wet pavement at night with a helmet on the seat', kind: 'personal photo', caption: 'Night ride' }
-    ]
-  },
-  {
-    id: 'bodybuilding',
-    name: 'Bodybuilding',
-    summary: 'My working set',
-    detail: 'Lost over 100 lbs and lift 5-6 times a week',
-    photos: [
-      { src: 'assets/hobbies/bench-press-working-set.png', alt: 'Loaded bench press bar with multiple black plates in a gym', kind: 'personal photo', caption: 'My working set' }
-    ]
-  },
-  {
-    id: 'cooking',
-    name: 'Cooking',
-    summary: 'Meals I made',
-    detail: 'Enjoy cooking and preparing meals',
-    photos: [
-      { src: 'assets/hobbies/cooking-yogurt-bites.jpg', alt: 'Frozen yogurt fruit bites with granola', kind: 'personal photo', caption: 'Yogurt fruit bites' },
-      { src: 'assets/hobbies/cooking-ribs.jpg', alt: 'Smoked ribs and beef on a foil tray', kind: 'personal photo', caption: 'Smoked ribs' },
-      { src: 'assets/hobbies/cooking-katsu-curry.jpg', alt: 'Chicken katsu curry with rice, corn, and cucumber salad', kind: 'personal photo', caption: 'Katsu curry' },
-      { src: 'assets/hobbies/cooking-cookie-ice-cream.jpg', alt: 'Cookies and cream ice cream on a cookie bar', kind: 'personal photo', caption: 'Cookie ice cream' }
-    ]
-  },
-  {
-    id: 'exploration',
-    name: 'Exploration',
-    summary: 'Haunted buildings and sunsets',
-    detail: 'Love exploring random haunted buildings in the woods, and hiking for sunsets',
-    photos: [
-      { src: 'assets/hobbies/exploration-personal.png', alt: 'Blue evening view of the ocean, beach, and distant coastline from above', kind: 'personal photo', caption: 'Evening coastline' },
-      { src: 'assets/hobbies/exploration-night-stairs.png', alt: 'Dark outdoor stairs at night with a bright handrail leading into shadow', kind: 'personal photo', caption: 'Night stairs', position: '64% 50%', tone: 'night' },
-      { src: 'assets/hobbies/exploration-golden-gate.png', alt: 'Golden Gate Bridge spanning across the bay under cloudy skies', kind: 'personal photo', caption: 'Golden Gate' },
-      { src: 'assets/hobbies/exploration-night-gate.png', alt: 'Open chain-link gate at night with branches and dirt lit by a flashlight', kind: 'personal photo', caption: 'Night gate', tone: 'night' }
-    ]
-  },
-  {
-    id: 'manga-anime',
-    name: 'Manga & anime',
-    summary: 'One Piece, Tokyo Ghoul, and more',
-    detail: 'I love tons of manga and anime like One Piece, Tokyo Ghoul and way more.',
-    photos: [
-      { src: 'assets/hobbies/one-piece.png', alt: 'One Piece volume 103 cover, Liberation Warrior', kind: 'supplied media', caption: 'One Piece' },
-      { src: 'assets/hobbies/tokyo-ghoul.png', alt: 'Tokyo Ghoul manga cover featuring Kaneki seated on a chair', kind: 'supplied media', caption: 'Tokyo Ghoul' }
-    ]
-  },
-  {
-    id: 'gaming',
-    name: 'Gaming',
-    summary: 'Persona 5, Minecraft, and Terraria',
-    detail: 'I love open world survival games and story games like Persona 5, Minecraft, and Terraria.',
-    photos: [
-      { src: 'assets/hobbies/terraria.png', alt: 'Terraria cover art with an armored character carrying a torch and pickaxe', kind: 'supplied media', caption: 'Terraria' },
-      { src: 'assets/hobbies/minecraft.png', alt: 'Minecraft cover art with Steve, Alex, a creeper, and a pig', kind: 'supplied media', caption: 'Minecraft' },
-      { src: 'assets/hobbies/persona-5-royal.jpg', alt: 'Persona 5 Royal cover featuring Joker and the Phantom Thieves', kind: 'supplied media', caption: 'Persona 5 Royal' }
-    ]
-  }
-];
-
-let selectedHobbyId = HOBBIES[0].id;
-let activeHobbyId = null;
-let activeHobbyPhotoIndex = 0;
-
-function escapeHtml(value) {
-  return String(value ?? '').replace(/[&<>'"]/g, (char) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    "'": '&#39;',
-    '"': '&quot;'
-  }[char]));
-}
-
-function initializeHobbies() {
-  renderHobbies();
-
-  const hobbiesContent = document.getElementById('hobbies-content');
-  if (hobbiesContent) {
-    hobbiesContent.addEventListener('click', (event) => {
-      const photoControl = event.target.closest('[data-hobby-photo-direction]');
-      if (photoControl) {
-        event.preventDefault();
-        event.stopPropagation();
-        navigateHobbyPhotos(Number(photoControl.dataset.hobbyPhotoDirection));
-        return;
-      }
-      const button = event.target.closest('[data-hobby-id]');
-      if (!button) return;
-      if (isTouchFriendlyViewport() || activeHobbyId) openHobby(button.dataset.hobbyId);
-      else selectHobby(button.dataset.hobbyId);
-    });
-    hobbiesContent.addEventListener('dblclick', (event) => {
-      const button = event.target.closest('[data-hobby-id]');
-      if (button) openHobby(button.dataset.hobbyId);
-    });
-    hobbiesContent.addEventListener('keydown', (event) => {
-      const button = event.target.closest('[data-hobby-id]');
-      if (!button) return;
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        openHobby(button.dataset.hobbyId);
-      } else if (event.key === ' ') {
-        event.preventDefault();
-        selectHobby(button.dataset.hobbyId);
-      }
-    });
-  }
-
-  document.addEventListener('keydown', (event) => {
-    const hobbiesWin = document.getElementById('win-hobbies');
-    if (!hobbiesWin || hobbiesWin.classList.contains('hidden')) return;
-    if (event.key === 'Escape' && activeHobbyId) {
-      closeHobby();
-      return;
-    }
-    if (!activeHobbyId) return;
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      navigateHobbyPhotos(-1);
-    } else if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      navigateHobbyPhotos(1);
-    }
-  });
-}
-
-function hobbyThumbMarkup(item, selectedId) {
-  const image = item.photos[0];
-  return `<button class="hobby-thumb${item.id === selectedId ? ' selected' : ''}" type="button" data-hobby-id="${escapeHtml(item.id)}" aria-pressed="${item.id === selectedId}">
-      <img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.alt)}"><span>${escapeHtml(item.name)}</span><small>${escapeHtml(item.summary)}</small></button>`;
-}
-
-function renderHobbies() {
-  const target = document.getElementById('hobbies-content');
-  if (!target) return;
-  const selected = HOBBIES.find((item) => item.id === selectedHobbyId) || HOBBIES[0];
-  const active = HOBBIES.find((item) => item.id === activeHobbyId);
-  if (!active) {
-    target.innerHTML = `<div class="hobbies-grid">${HOBBIES.map((item) => hobbyThumbMarkup(item, selected.id)).join('')}</div>`;
-    updateHobbyChrome();
-    return;
-  }
-
-  const photos = active.photos;
-  const photoIndex = Math.min(Math.max(0, activeHobbyPhotoIndex), photos.length - 1);
-  const activePhoto = photos[photoIndex];
-  const imageNote = activePhoto.kind === 'personal photo'
-    ? 'Personal photo.'
-    : activePhoto.kind === 'supplied media'
-      ? 'Supplied media.'
-      : 'Illustrative image.';
-  const photoCaption = activePhoto.caption ? `<span class="hobby-photo-caption">${escapeHtml(activePhoto.caption)}</span>` : '';
-  const photoControls = photos.length > 1
-    ? `<button class="hobby-photo-arrow hobby-photo-prev" type="button" data-hobby-photo-direction="-1" aria-label="Previous photo"></button><button class="hobby-photo-arrow hobby-photo-next" type="button" data-hobby-photo-direction="1" aria-label="Next photo"></button>`
-    : '';
-  const imageClass = `hobby-photo-image${activePhoto.tone ? ` tone-${escapeHtml(activePhoto.tone)}` : ''}`;
-  const imageStyle = activePhoto.position ? ` style="object-position:${escapeHtml(activePhoto.position)}"` : '';
-
-  target.innerHTML = `<div class="hobby-filmstrip">
-      <figure><div class="hobby-photo-frame"><img class="${imageClass}" src="${escapeHtml(activePhoto.src)}" alt="${escapeHtml(activePhoto.alt)}"${imageStyle}>${photoControls}</div><figcaption><strong>${escapeHtml(active.name)}</strong>${photoCaption}<span>${escapeHtml(active.detail)}</span><small>${escapeHtml(imageNote)}</small></figcaption></figure>
-      <div class="filmstrip-thumbs">${HOBBIES.map((item) => hobbyThumbMarkup(item, active.id)).join('')}</div></div>`;
-  updateHobbyChrome();
-}
-
-function selectHobby(hobbyId) {
-  if (!HOBBIES.some((item) => item.id === hobbyId)) return;
-  selectedHobbyId = hobbyId;
-  document.querySelectorAll('#hobbies-content [data-hobby-id]').forEach((button) => {
-    const isSelected = button.dataset.hobbyId === hobbyId;
-    button.classList.toggle('selected', isSelected);
-    button.setAttribute('aria-pressed', String(isSelected));
-  });
-  updateHobbyChrome();
-}
-
-function openHobby(hobbyId) {
-  if (!HOBBIES.some((item) => item.id === hobbyId)) return;
-  selectedHobbyId = hobbyId;
-  activeHobbyId = hobbyId;
-  activeHobbyPhotoIndex = 0;
-  renderHobbies();
-  const content = document.getElementById('hobbies-content');
-  if (content) content.scrollTop = 0;
-  document.querySelector('#hobbies-content .hobby-thumb.selected')?.focus({ preventScroll: true });
-}
-
-function closeHobby() {
-  activeHobbyId = null;
-  activeHobbyPhotoIndex = 0;
-  renderHobbies();
-  const content = document.getElementById('hobbies-content');
-  if (content) content.scrollTop = 0;
-  document.querySelector(`#hobbies-content [data-hobby-id="${selectedHobbyId}"]`)?.focus({ preventScroll: true });
-}
-
-function navigateHobbies(direction) {
-  const current = Math.max(0, HOBBIES.findIndex((item) => item.id === activeHobbyId));
-  const next = (current + direction + HOBBIES.length) % HOBBIES.length;
-  openHobby(HOBBIES[next].id);
-}
-
-function navigateHobbyPhotos(direction) {
-  const active = HOBBIES.find((item) => item.id === activeHobbyId);
-  const count = active?.photos?.length || 0;
-  if (count < 2) return;
-  activeHobbyPhotoIndex = (activeHobbyPhotoIndex + direction + count) % count;
-  renderHobbies();
-  const content = document.getElementById('hobbies-content');
-  if (content) content.scrollTop = 0;
-}
-
-function updateHobbyChrome() {
-  const selected = HOBBIES.find((item) => item.id === selectedHobbyId) || HOBBIES[0];
-  const active = HOBBIES.find((item) => item.id === activeHobbyId);
-  const activePhotos = active?.photos || [];
-  const activePhoto = activePhotos[activeHobbyPhotoIndex] || activePhotos[0];
-  const sidebar = document.getElementById('hobbies-sidebar');
-  const address = document.getElementById('hobbies-address');
-  const status = document.getElementById('hobbies-status');
-  if (sidebar) sidebar.textContent = (active || selected).detail;
-  if (address) address.value = active ? `${HOBBY_ROOT}\\${active.name}` : HOBBY_ROOT;
-  if (status) {
-    if (active) {
-      const imageKind = activePhoto?.kind === 'personal photo' ? 'Personal photo' : 'Supplied media';
-      status.textContent = `${activeHobbyPhotoIndex + 1} of ${activePhotos.length} pictures • ${active.name} • ${imageKind}`;
-    } else {
-      status.textContent = `${HOBBIES.length} pictures`;
-    }
-  }
-  ['hobbies-back', 'hobbies-up'].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.disabled = !active;
-  });
-  ['hobbies-previous', 'hobbies-next'].forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) el.hidden = !active;
-  });
 }
 
 // ==========================================================================

@@ -7,7 +7,7 @@
   <title>Emanuel Nader</title>
   <meta name="description"
     content="Emanuel Nader's personal portfolio — Software Engineering student at UCSD. Built with nostalgic Windows XP aesthetic." />
-  <link rel="stylesheet" href="style.css?v=12" />
+  <link rel="stylesheet" href="style.css?v=16" />
   <link rel="icon" href="assets/icons/computer.png" type="image/png" />
 </head>
 
@@ -115,19 +115,19 @@
     <div class="taskbar" id="taskbar">
       <div class="taskbar-left">
         <button class="start-btn start-img-btn" id="start-btn" onclick="toggleStartMenu(event)" aria-label="Start">
-          <img src="assets/icons/start.png" alt="Start" />
+          <img src="assets/icons/start.png" alt="Start" width="54" height="29" />
         </button>
         <div class="taskbar-windows" id="taskbar-windows"></div>
       </div>
       <div class="taskbar-right systray">
         <!-- Volume icon -->
-        <svg class="tray-icon" width="22" height="22" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+        <svg class="tray-icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
           title="Volume">
           <polygon points="1,5 5,5 9,1 9,15 5,11 1,11" fill="#D0E0FF" stroke="#8BB0EE" stroke-width="0.5" />
           <path d="M11 4 Q14 8 11 12" fill="none" stroke="#D0E0FF" stroke-width="1.5" stroke-linecap="round" />
         </svg>
         <!-- Network icon -->
-        <svg class="tray-icon" width="22" height="22" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+        <svg class="tray-icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
           title="Network">
           <rect x="6" y="3" width="4" height="3" rx="0.5" fill="#D0E0FF" stroke="#8BB0EE" stroke-width="0.5" />
           <rect x="1" y="9" width="4" height="3" rx="0.5" fill="#D0E0FF" stroke="#8BB0EE" stroke-width="0.5" />
@@ -213,7 +213,7 @@
     <div class="win-titlebar" onmousedown="startDrag(event,'win-about')">
       <div class="win-titlebar-left">
         <div class="win-icon icon-about"></div>
-        <span class="win-title">About Emanuel — My Documents</span>
+        <span class="win-title">About Emanuel Nader</span>
       </div>
       <div class="win-controls">
         <button class="win-btn win-min" onclick="minimizeWindow('win-about')" title="Minimize">&#8211;</button>
@@ -225,58 +225,34 @@
       <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn" onclick="">&#9664; Back</button>
-      <button class="toolbar-btn" onclick="">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
+      <button class="toolbar-btn" type="button" disabled>Back</button>
+      <button class="toolbar-btn" type="button" disabled>Forward</button>
+      <button class="toolbar-btn" type="button" disabled>Up</button>
       <div class="address-bar"><span class="address-label">Address</span><input type="text"
-          value="C:\Users\EmanuelNader\My Documents\About" readonly /></div>
+          value="C:\Users\EmanuelNader\About" readonly /></div>
     </div>
     <div class="win-body">
       <div class="win-sidebar">
         <div class="sidebar-section">
-          <div class="sidebar-title">File and Folder Tasks</div>
-          <div class="sidebar-link">Make a new folder</div>
-          <div class="sidebar-link">Publish this folder</div>
-          <div class="sidebar-link">Share this folder</div>
+          <div class="sidebar-title">Quick Links</div>
+          <button class="sidebar-link sidebar-button" type="button" onclick="dismissWelcomeAndOpen('projects')">Explore projects</button>
+          <button class="sidebar-link sidebar-button" type="button" onclick="dismissWelcomeAndOpen('resume')">View résumé</button>
+          <button class="sidebar-link sidebar-button" type="button" onclick="dismissWelcomeAndOpen('contact')">Contact Emanuel</button>
         </div>
         <div class="sidebar-section">
-          <div class="sidebar-title">Other Places</div>
-          <div class="sidebar-link">My Documents</div>
-          <div class="sidebar-link">My Computer</div>
-          <div class="sidebar-link">Network</div>
+          <div class="sidebar-title">Current</div>
+          <p class="welcome-sidebar-note">UC San Diego Math–CS<br />Tesla Chassis Controls<br />Open to software engineering opportunities</p>
         </div>
       </div>
       <div class="win-content">
-        <div class="about-content">
-          <div class="about-header">
-            <img class="about-avatar" src="assets/icons/face.jpg" style="object-fit: cover; object-position: top;" alt="Emanuel Nader" />
-            <div class="about-intro">
-              <h1>Emanuel Nader</h1>
-              <p class="about-subtitle">Mathematics-Computer Science Student &bull; UC San Diego</p>
-            </div>
-          </div>
-          <div class="about-body">
-            <p>Hey! I'm Emanuel — a Math-CS student at <strong>UC San Diego</strong> and currently a Technical Program
-              Manager Intern on Chassis Controls at <strong>Tesla</strong>.</p>
-            <p>I build full-stack systems, internal tools, and AI-powered workflows — from fleet-planning consoles to
-              agentic booking pipelines. Always open to cool project ideas and collaborations.</p>
-            <div class="about-facts">
-              <div class="fact-row"><span class="fact-label">Location</span><span>San Diego / Palo Alto, CA</span></div>
-              <div class="fact-row"><span class="fact-label">School</span><span>UC San Diego — B.S.
-                  Mathematics-Computer Science (Expected June 2028)</span></div>
-              <div class="fact-row"><span class="fact-label">Status</span><span>TPM Intern @ Tesla — Chassis Controls</span></div>
-              <div class="fact-row"><span class="fact-label">Email</span><span><a
-                    href="mailto:EmanuelSNader@gmail.com">EmanuelSNader@gmail.com</a></span></div>
-            </div>
-          </div>
-        </div>
+        <div class="about-content" id="about-content"></div>
       </div>
     </div>
-    <div class="win-statusbar">1 object selected</div>
+    <div class="win-statusbar">About Emanuel Nader • Updated August 2026</div>
   </div>
 
   <!-- PROJECTS Window -->
-  <div class="xp-window hidden" id="win-projects" style="left:120px;top:60px;width:760px;height:580px;">
+  <div class="xp-window hidden" id="win-projects" style="left:174px;top:66px;width:1200px;height:830px;">
     <div class="win-titlebar" onmousedown="startDrag(event,'win-projects')">
       <div class="win-titlebar-left">
         <div class="win-icon icon-projects"></div>
@@ -289,147 +265,30 @@
       </div>
     </div>
     <div class="win-menubar">
-      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn">&#9664; Back</button>
-      <button class="toolbar-btn">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
-      <div class="address-bar"><span class="address-label">Address</span><input type="text"
-          value="C:\Users\EmanuelNader\My Projects" readonly /></div>
+      <button class="toolbar-btn toolbar-back" id="projects-back" type="button" onclick="navigateProjects(-1)" disabled>Back</button>
+      <button class="toolbar-btn toolbar-forward" id="projects-forward" type="button" onclick="navigateProjects(1)" disabled>Forward</button>
+      <span class="toolbar-separator" aria-hidden="true"></span>
+      <button class="toolbar-btn toolbar-up" id="projects-up" type="button" onclick="closeProject()" disabled>Up</button>
+      <span class="toolbar-separator" aria-hidden="true"></span>
+      <div class="address-bar"><span class="address-label">Address</span><span class="address-folder-icon" aria-hidden="true"></span><input type="text"
+          id="projects-address" value="C:\Users\EmanuelNader\My Projects" readonly aria-label="Project location" /></div>
+      <button class="toolbar-go" type="button" onclick="syncProjectRoute()" aria-label="Go to typed address"><span aria-hidden="true"></span>Go</button>
     </div>
-    <div class="win-body">
-      <div class="win-sidebar">
+    <div class="win-body projects-window-body">
+      <aside class="win-sidebar projects-sidebar" id="projects-sidebar" aria-live="polite">
         <div class="sidebar-section">
-          <div class="sidebar-title">File and Folder Tasks</div>
-          <div class="sidebar-link">&#128193; Open project</div>
-          <div class="sidebar-link">&#128279; View on GitHub</div>
-          <div class="sidebar-link">&#128190; Share project</div>
+          <div class="sidebar-title">Project Details</div>
+          <p class="project-sidebar-empty">Select a project to see its role, outcome, and stack.</p>
         </div>
-        <div class="sidebar-section">
-          <div class="sidebar-title">Details</div>
-          <p style="font-size:11px;color:#333;padding:4px 8px;">8 featured projects<br />Resume + side projects</p>
-        </div>
-      </div>
-      <div class="win-content">
-        <div class="projects-grid">
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-blue"></div>
-              <div class="project-header-text">
-                <div class="project-name">ShortStack</div>
-                <div class="project-type">Platform Architecture &bull; April 2026</div>
-              </div>
-            </div>
-            <p class="project-desc">A production-style URL shortener with Redis caching, load-balanced Nginx, Dockerized services, and a full CI pipeline with Prometheus/Grafana monitoring.</p>
-            <div class="project-tags">
-              <span class="tag">Flask</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Nginx</span><span class="tag">Docker</span><span class="tag">Prometheus</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-green"></div>
-              <div class="project-header-text">
-                <div class="project-name">HealthBook</div>
-                <div class="project-type">AI + Automation &bull; March 2026</div>
-              </div>
-            </div>
-            <p class="project-desc">An AI agent that books medical appointments for you — browsing sites like Zocdoc and placing real phone calls via OpenAI Realtime API, with semantic memory so you don’t re-enter health history every time.</p>
-            <div class="project-tags">
-              <span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">Browser Use SDK</span><span class="tag">OpenAI</span><span class="tag">pgvector</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-orange"></div>
-              <div class="project-header-text">
-                <div class="project-name">Nutribase</div>
-                <div class="project-type">IoT Tracking &bull; May 2025</div>
-              </div>
-            </div>
-            <p class="project-desc">A smart-fridge tracker that watches what’s in your fridge. ESP32 weight sensors stream live data into a MERN app with role-based auth and waste/analytics dashboards.</p>
-            <div class="project-tags">
-              <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">C++</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon"></div>
-              <div class="project-header-text">
-                <div class="project-name">Quizki</div>
-                <div class="project-type">Fullstack Application</div>
-              </div>
-            </div>
-            <p class="project-desc">A gamified study platform with progress dashboards, Auth0 login, and Gemini-powered personalized study prompts so sessions are quicker to start and more fun to finish.</p>
-            <div class="project-tags">
-              <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Google Gemini API</span><span class="tag">Auth0</span><span class="tag">MongoDB</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-blue"></div>
-              <div class="project-header-text">
-                <div class="project-name">AutoBook</div>
-                <div class="project-type">Automation Engine</div>
-              </div>
-            </div>
-            <p class="project-desc">A Selenium bot that grabs hard-to-get UCSD library rooms the moment they open — no more clicking through a five-step booking flow by hand.</p>
-            <div class="project-tags">
-              <span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">WebDriver</span><span class="tag">REST APIs</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-green"></div>
-              <div class="project-header-text">
-                <div class="project-name">LockedIn</div>
-                <div class="project-type">IoT &amp; Fullstack</div>
-              </div>
-            </div>
-            <p class="project-desc">An IoT + web stack that connects ESP32 devices to a React/Node backend for real-time monitoring and automated workflow triggers.</p>
-            <div class="project-tags">
-              <span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">MongoDB</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon"></div>
-              <div class="project-header-text">
-                <div class="project-name">discord-internship-job-board-bot</div>
-                <div class="project-type">Discord Bot &bull; Scraping + Alerts</div>
-              </div>
-            </div>
-            <p class="project-desc">A Discord bot that scrapes internship, co-op, and fellowship postings, dedupes them, and drops each new listing into the right role-family channel with optional title ping roles.</p>
-            <div class="project-tags">
-              <span class="tag">Discord.js</span><span class="tag">Node.js</span><span class="tag">Web Scraping</span><span class="tag">Automation</span>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-icon-bar">
-              <div class="project-folder-icon project-folder-blue"></div>
-              <div class="project-header-text">
-                <div class="project-name">ShotClock</div>
-                <div class="project-type">Mobile App &bull; In Progress</div>
-              </div>
-            </div>
-            <p class="project-desc">A social memory-keeping app for nights out with friends — capture moments, people, and stories from a night in one place. iOS-first MVP on Expo, React Native, and Supabase.</p>
-            <div class="project-tags">
-              <span class="tag">Expo</span><span class="tag">React Native</span><span class="tag">Supabase</span><span class="tag">iOS</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
+      </aside>
+      <main class="win-content projects-content" id="projects-content" tabindex="-1">
+        <noscript>JavaScript is required to browse project case studies.</noscript>
+      </main>
     </div>
-    <div class="win-statusbar">8 objects</div>
+    <div class="win-statusbar" id="projects-status" aria-live="polite">9 objects</div>
   </div>
 
   <!-- EXPERIENCE Window -->
@@ -449,9 +308,9 @@
       <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn">&#9664; Back</button>
-      <button class="toolbar-btn">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
+      <button class="toolbar-btn" type="button" disabled>Back</button>
+      <button class="toolbar-btn" type="button" disabled>Forward</button>
+      <button class="toolbar-btn" type="button" disabled>Up</button>
       <div class="address-bar"><span class="address-label">Address</span><input type="text"
           value="C:\Users\EmanuelNader\Experience" readonly /></div>
     </div>
@@ -459,43 +318,14 @@
       <div class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">File and Folder Tasks</div>
-          <div class="sidebar-link">&#128196; View resume</div>
-          <div class="sidebar-link">&#128231; Contact me</div>
+          <button class="sidebar-link sidebar-button" type="button" onclick="openWindow('resume')">View résumé</button>
+          <a class="sidebar-link sidebar-button" href="assets/resume/Emanuel_Nader_resume.pdf" download>Download PDF</a>
+          <button class="sidebar-link sidebar-button" type="button" onclick="openWindow('contact')">Contact me</button>
         </div>
       </div>
-      <div class="win-content">
-        <div class="experience-list">
-          <div class="exp-item">
-            <div class="exp-dot"></div>
-            <div class="exp-content">
-              <div class="exp-role">Technical Program Manager Intern — Chassis Controls</div>
-              <div class="exp-company">Tesla &bull; Palo Alto, CA</div>
-              <div class="exp-date">Jun 2026 – Present</div>
-              <p class="exp-desc">Rebuilt an internal fleet-planning console in React/Vite/Tailwind on Flask/SQLite for 7 Vehicle Software teams (75% less manual cross-checking); designed a weighted release-scoring algorithm ranking 350+ vehicles; reconciled 3 systems into 4-stage source-of-truth tables.</p>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-dot"></div>
-            <div class="exp-content">
-              <div class="exp-role">Software Engineering Extern (Technical Analyst)</div>
-              <div class="exp-company">HP Tech Ventures &bull; Remote</div>
-              <div class="exp-date">Feb 2026 – Apr 2026</div>
-              <p class="exp-desc">Cut due diligence cycle time by 40% (15+ hrs/week) with Python scrapers over 10,000+ market records; audited 20+ startup stacks for scalability; built an LLM research tool that halved competitive-brief write time.</p>
-            </div>
-          </div>
-          <div class="exp-item">
-            <div class="exp-dot"></div>
-            <div class="exp-content">
-              <div class="exp-role">Software Project Lead</div>
-              <div class="exp-company">Theta Tau — Professional Engineering Fraternity &bull; San Diego, CA</div>
-              <div class="exp-date">May 2025 – Present</div>
-              <p class="exp-desc">Led Agile delivery of Garnett (React/Node) for 70+ members at 99%+ uptime and 500+ monthly transactions; cut notification latency 30% with Firebase; mentored 12 engineers across Nutribase and LockedIn.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="win-content" id="experience-content"></div>
     </div>
-    <div class="win-statusbar">3 objects</div>
+    <div class="win-statusbar">3 positions • Updated August 2026</div>
   </div>
 
   <!-- SKILLS Window -->
@@ -515,9 +345,9 @@
       <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn">&#9664; Back</button>
-      <button class="toolbar-btn">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
+      <button class="toolbar-btn" type="button" disabled>Back</button>
+      <button class="toolbar-btn" type="button" disabled>Forward</button>
+      <button class="toolbar-btn" type="button" disabled>Up</button>
       <div class="address-bar"><span class="address-label">Address</span><input type="text"
           value="C:\Users\EmanuelNader\Skills" readonly /></div>
     </div>
@@ -543,12 +373,10 @@
           <div class="skills-category">
             <div class="skills-cat-title">Frameworks & Libraries</div>
             <div class="skills-tags">
-              <span class="skill-tag">React</span><span class="skill-tag">React Native</span>
-              <span class="skill-tag">Expo</span><span class="skill-tag">Vite</span>
+              <span class="skill-tag">React</span><span class="skill-tag">Vite</span>
               <span class="skill-tag">Tailwind</span><span class="skill-tag">Node.js</span>
               <span class="skill-tag">Express.js</span><span class="skill-tag">Next.js</span>
               <span class="skill-tag">Flask</span><span class="skill-tag">FastAPI</span>
-              <span class="skill-tag">Discord.js</span><span class="skill-tag">Selenium</span>
               <span class="skill-tag">OpenAI API</span>
             </div>
           </div>
@@ -565,26 +393,25 @@
           <div class="skills-category">
             <div class="skills-cat-title">DevOps & Tools</div>
             <div class="skills-tags">
-              <span class="skill-tag">Docker</span><span class="skill-tag">Docker Compose</span>
+              <span class="skill-tag">Docker</span>
               <span class="skill-tag">Nginx</span><span class="skill-tag">GitHub Actions</span>
               <span class="skill-tag">Prometheus</span><span class="skill-tag">Grafana</span>
               <span class="skill-tag">Locust</span><span class="skill-tag">CI/CD</span>
-              <span class="skill-tag">Git</span><span class="skill-tag">Linux</span>
+              <span class="skill-tag">Git</span><span class="skill-tag">Linux</span><span class="skill-tag">Figma</span>
             </div>
           </div>
           <div class="skills-category">
             <div class="skills-cat-title">Concepts</div>
             <div class="skills-tags">
-              <span class="skill-tag">REST APIs</span><span class="skill-tag">Microservices</span>
+              <span class="skill-tag">REST APIs</span><span class="skill-tag">Microservices</span><span class="skill-tag">Kalman Filtering</span>
               <span class="skill-tag">Unit/Integration Testing</span><span class="skill-tag">pytest</span>
               <span class="skill-tag">System Design</span><span class="skill-tag">Agile/Scrum</span>
-              <span class="skill-tag">Web Scraping</span><span class="skill-tag">IoT</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="win-statusbar">48 skills listed</div>
+    <div class="win-statusbar">45 skills • Updated August 2026</div>
   </div>
 
   <!-- CONTACT Window -->
@@ -604,54 +431,25 @@
       <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn">&#9664; Back</button>
-      <button class="toolbar-btn">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
+      <button class="toolbar-btn" type="button" disabled>Back</button>
+      <button class="toolbar-btn" type="button" disabled>Forward</button>
+      <button class="toolbar-btn" type="button" disabled>Up</button>
       <div class="address-bar"><span class="address-label">Address</span><input type="text"
           value="C:\Users\EmanuelNader\Contact" readonly /></div>
     </div>
     <div class="win-body">
       <div class="win-sidebar">
         <div class="sidebar-section">
-          <div class="sidebar-title">File and Folder Tasks</div>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=EmanuelSNader@gmail.com" target="_blank" class="sidebar-link">Send email</a>
-          <a href="https://linkedin.com/in/emanuelnader" target="_blank" class="sidebar-link">Open LinkedIn</a>
+          <div class="sidebar-title">Contact Tasks</div>
+          <a href="mailto:EmanuelSNader@gmail.com" class="sidebar-link">Send Email</a>
+          <button class="sidebar-link sidebar-button" type="button" onclick="copyContactValue('EmanuelSNader@gmail.com','Email')">Copy Email</button>
+          <a href="https://linkedin.com/in/emanuelnader" target="_blank" rel="noopener noreferrer" class="sidebar-link">Open LinkedIn</a>
+          <a href="https://github.com/EmanuelNader" target="_blank" rel="noopener noreferrer" class="sidebar-link">Open GitHub</a>
+          <a href="https://emanuelnader.dev" target="_blank" rel="noopener noreferrer" class="sidebar-link">Visit Website</a>
+          <a href="assets/resume/Emanuel_Nader_resume.pdf" download class="sidebar-link">Download Résumé</a>
         </div>
       </div>
-      <div class="win-content">
-        <div class="contact-content">
-          <div class="contact-item">
-            <div class="contact-detail">
-              <div class="contact-label">Email</div>
-              <a href="mailto:EmanuelSNader@gmail.com" class="contact-value">EmanuelSNader@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-detail">
-              <div class="contact-label">LinkedIn</div>
-              <a href="https://linkedin.com/in/emanuelnader" class="contact-value"
-                target="_blank">linkedin.com/in/emanuelnader</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-detail">
-              <div class="contact-label">GitHub</div>
-              <a href="https://github.com/EmanuelNader" class="contact-value"
-                target="_blank">github.com/EmanuelNader</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-detail">
-              <div class="contact-label">University</div>
-              <span class="contact-value">UC San Diego — B.S. Mathematics-Computer Science</span>
-            </div>
-          </div>
-          <div class="contact-message">
-            <p>I'm always open to <strong>internships</strong>, <strong>collaborations</strong>, and <strong>cool
-                project ideas</strong>. Feel free to reach out!</p>
-          </div>
-        </div>
-      </div>
+      <div class="win-content contact-content" id="contact-content"></div>
     </div>
     <div class="win-statusbar">4 contact methods</div>
   </div>
@@ -673,12 +471,12 @@
       <span>File</span><span>Edit</span><span>View</span><span>Help</span>
     </div>
     <div class="win-toolbar">
-      <button class="toolbar-btn" id="hobbies-back" type="button" onclick="closeHobby()" disabled>&#9664; Back</button>
+      <button class="toolbar-btn" id="hobbies-back" type="button" onclick="closeHobby()" disabled>Back</button>
       <button class="toolbar-btn" id="hobbies-previous" type="button" onclick="navigateHobbies(-1)" hidden>Previous</button>
       <button class="toolbar-btn" id="hobbies-next" type="button" onclick="navigateHobbies(1)" hidden>Next</button>
-      <button class="toolbar-btn" id="hobbies-up" type="button" onclick="closeHobby()" disabled>&#8593; Up</button>
-      <div class="address-bar"><span class="address-label">Address</span><input id="hobbies-address" type="text"
-          value="C:\Users\EmanuelNader\My Pictures\Hobbies" readonly /></div>
+      <button class="toolbar-btn" id="hobbies-up" type="button" onclick="closeHobby()" disabled>Up</button>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text"
+          id="hobbies-address" value="C:\Users\EmanuelNader\My Pictures\Hobbies" readonly /></div>
     </div>
     <div class="win-body">
       <div class="win-sidebar">
@@ -689,148 +487,43 @@
       </div>
       <div class="win-content hobbies-content" id="hobbies-content"></div>
     </div>
-    <div class="win-statusbar" id="hobbies-status">6 pictures</div>
+    <div class="win-statusbar" id="hobbies-status">6 pictures • Illustrative images</div>
   </div>
 
   <!-- RESUME Window -->
-  <div class="xp-window hidden" id="win-resume" style="left:300px;top:60px;width:640px;height:520px;">
+  <div class="xp-window hidden" id="win-resume" data-open-mode="maximized" style="left:300px;top:60px;width:760px;height:620px;">
     <div class="win-titlebar" onmousedown="startDrag(event,'win-resume')">
-      <div class="win-titlebar-left">
-        <div class="win-icon icon-resume"></div>
-        <span class="win-title">Resume.pdf — My Documents</span>
-      </div>
+      <div class="win-titlebar-left"><div class="win-icon icon-resume"></div><span class="win-title">Emanuel_Nader_resume.pdf — My Documents</span></div>
       <div class="win-controls">
         <button class="win-btn win-min" onclick="minimizeWindow('win-resume')" title="Minimize">&#8211;</button>
         <button class="win-btn win-max" onclick="maximizeWindow('win-resume')" title="Maximize">&#9744;</button>
         <button class="win-btn win-close" onclick="closeWindow('win-resume')" title="Close">&#10005;</button>
       </div>
     </div>
-    <div class="win-menubar">
-      <span>File</span><span>Edit</span><span>View</span><span>Help</span>
-    </div>
+    <div class="win-menubar"><span>File</span><span>Edit</span><span>View</span><span>Help</span></div>
     <div class="win-toolbar">
-      <button class="toolbar-btn">&#9664; Back</button>
-      <button class="toolbar-btn">Forward &#9654;</button>
-      <button class="toolbar-btn">&#8593; Up</button>
-      <div class="address-bar"><span class="address-label">Address</span><input type="text"
-          value="C:\Users\EmanuelNader\Resume.pdf" readonly /></div>
+      <a class="toolbar-action" href="assets/resume/Emanuel_Nader_resume.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+      <a class="toolbar-action" href="assets/resume/Emanuel_Nader_resume.pdf" download>Download PDF</a>
+      <div class="address-bar"><span class="address-label">Address</span><input type="text" value="C:\Users\EmanuelNader\My Documents\Emanuel_Nader_resume.pdf" readonly></div>
     </div>
-    <div class="win-body">
-      <div class="win-sidebar">
+    <div class="win-body resume-window-body">
+      <aside class="win-sidebar">
         <div class="sidebar-section">
           <div class="sidebar-title">File Tasks</div>
-          <a href="https://drive.google.com/file/d/12qmSAv8rQL_nfXtM_3afR9jc3vgwNkXZ/view?usp=sharing" target="_blank" class="sidebar-link">&#128229; Download PDF</a>
-          <div class="sidebar-link">&#128231; Email resume</div>
-          <div class="sidebar-link">&#128196; Print</div>
+          <a href="assets/resume/Emanuel_Nader_resume.pdf" target="_blank" rel="noopener noreferrer" class="sidebar-link">Open PDF</a>
+          <a href="assets/resume/Emanuel_Nader_resume.pdf" download class="sidebar-link">Download PDF</a>
+          <a class="sidebar-link" href="mailto:EmanuelSNader@gmail.com?subject=Emanuel%20Nader%20Résumé">Email résumé</a>
         </div>
-      </div>
-      <div class="win-content">
-        <div class="resume-content">
-          <div class="resume-paper">
-            <div class="resume-header">
-              <h2>Emanuel Nader</h2>
-              <p style="font-size:12px; margin-top:5px; text-align:center;">
-                818-624-7395 | EmanuelSNader@gmail.com | in/emanuelnader<br>
-                gh/EmanuelNader | emanuel-nader.tech
-              </p>
-            </div>
-            <div class="resume-section">
-              <div class="resume-section-title">EDUCATION</div>
-              <div class="resume-entry">
-                <div class="resume-entry-header">
-                  <strong>University of California, San Diego</strong>
-                  <span>Expected June 2028</span>
-                </div>
-                <div>B.S. in Mathematics-Computer Science &bull; La Jolla, CA</div>
-                <div style="font-size:11px;color:#555;">Relevant Coursework: Data Structures, Design and Analysis of
-                  Algorithms, Systems Programming, Object-Oriented Design</div>
-              </div>
-            </div>
-            <div class="resume-section">
-              <div class="resume-section-title">TECHNICAL SKILLS</div>
-              <div style="font-size:11px;line-height:1.4;">
-                <strong>Languages:</strong> Python, TypeScript, JavaScript, Java, C, C++, SQL, HTML/CSS<br>
-                <strong>Frameworks/Libraries:</strong> React, Vite, Tailwind, Node.js, Express.js, Next.js, Flask, FastAPI, OpenAI API<br>
-                <strong>Cloud and Databases:</strong> AWS, PostgreSQL, MongoDB, SQLite, Redis, Firebase, Supabase, pgvector, Vercel<br>
-                <strong>DevOps and Tools:</strong> Docker, Docker Compose, Nginx, GitHub Actions, Prometheus, Grafana, Locust, CI/CD, Git, Linux<br>
-                <strong>Concepts:</strong> REST APIs, Microservices, Unit/Integration Testing, pytest, System Design, Agile/Scrum
-              </div>
-            </div>
-            <div class="resume-section">
-              <div class="resume-section-title">EXPERIENCE</div>
-              <div class="resume-entry">
-                <div class="resume-entry-header">
-                  <strong>Tesla</strong>
-                  <span>Jun 2026 – Present</span>
-                </div>
-                <div style="font-size:11px;color:#555;">Technical Program Manager Intern — Chassis Controls &bull; Palo Alto, CA</div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Rebuilt and shipped internal fleet-planning console in React/Vite/Tailwind on a Flask REST API and SQLite, consolidating 4 planner workflows into one interface and cutting manual cross-checking by 75% for 7 Vehicle Software teams.</li>
-                  <li>Engineered a vehicle adapter layer normalizing sparse relational rows and nested JSON configuration into a single 12+ attribute UI model, eliminating per-view parsing logic across 4 console views.</li>
-                  <li>Designed a weighted release-scoring algorithm ranking 350+ vehicles 0 to 100 on 5 metrics with scarcity-protection caps, turning quarterly decommission review into a ranked list guiding 25–45 releases per quarter.</li>
-                  <li>Implemented config-driven eligibility validation on hardware-pedigree and firmware-branch predicates, flagging a significant share of the campaign population as unsupported.</li>
-                  <li>Reconciled 3 internal systems into 4-stage source-of-truth tables tracking approval, parts, technician, and completion.</li>
-                </ul>
-              </div>
-              <div class="resume-entry">
-                <div class="resume-entry-header">
-                  <strong>HP Tech Ventures</strong>
-                  <span>Feb 2026 – Apr 2026</span>
-                </div>
-                <div style="font-size:11px;color:#555;">Software Engineering Extern (Technical Analyst) &bull; Remote</div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Cut due diligence cycle time by 40%, saving 15+ hours/week, by building Python scrapers that aggregated and cleaned 10,000+ market records into structured investment reports.</li>
-                  <li>Improved investment screening efficiency by 25% by performing technical architectural audits on 20+ startup stacks to evaluate system scalability, high availability, and code robustness.</li>
-                  <li>Halved technical risk analysis time (4 hrs to under 2 hrs/report) by building an LLM-powered research tool using NLP pipelines to auto-generate structured competitive landscape briefs.</li>
-                </ul>
-              </div>
-              <div class="resume-entry">
-                <div class="resume-entry-header">
-                  <strong>Theta Tau - Professional Engineering Fraternity</strong>
-                  <span>May 2025 – Present</span>
-                </div>
-                <div style="font-size:11px;color:#555;">Software Project Lead &bull; San Diego, CA</div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Led Agile delivery of Garnett, a production React/Node.js app for 70+ members, maintaining 99%+ uptime and supporting 500+ monthly transactions across dues, events, and merit tracking.</li>
-                  <li>Reduced real-time notification latency by 30% (sub-200ms) for merit tracking by architecting full-stack solutions integrated with Firebase and optimizing event-driven data sync.</li>
-                  <li>Drove 100% on-time delivery across 2 full-stack projects (Nutribase, LockedIn) by mentoring 12 engineers through structured code reviews, sprint planning, and technical design sessions.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="resume-section">
-              <div class="resume-section-title">PROJECTS</div>
-              <div class="resume-entry">
-                <div class="resume-entry-header"><strong>ShortStack</strong> &bull; <em>Flask, PostgreSQL, Redis, Nginx, Docker, Prometheus, GitHub Actions</em> &bull; April 2026</div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Reduced redirect latency by 93% (30ms → &lt;2ms on cache hits) by integrating Redis caching across 3 load-balanced Nginx replicas, validated under 500 concurrent users via Locust load testing.</li>
-                  <li>Achieved 84% test coverage across 25 automated tests by building a full CI pipeline with GitHub Actions and orchestrating 7 Docker containers with health checks, auto-restart policies, and Prometheus/Grafana monitoring.</li>
-                </ul>
-              </div>
-              <div class="resume-entry">
-                <div class="resume-entry-header"><strong>HealthBook</strong> &bull; <em>Next.js, FastAPI, Browser Use SDK, OpenAI Realtime API</em> &bull; March 2026</div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Reduced medical appointment booking time 90% (30 min to under 3 min) by orchestrating a Browser Use SDK agent to automate Zocdoc navigation and trigger real AI phone calls to doctor offices via OpenAI Realtime API and Twilio.</li>
-                  <li>Eliminated repeated health history entry across sessions by engineering a pgvector semantic memory pipeline in Supabase, retrieving the top 3 relevant memory chunks via cosine similarity and injecting them into each agent task prompt.</li>
-                </ul>
-              </div>
-              <div class="resume-entry">
-                <div class="resume-entry-header"><strong>Nutribase</strong> &bull; <em>MongoDB, Express.js, React, Node.js, C++</em> &bull; May 2025</div>
-                <ul style="font-size:11px;margin:4px 0 0 16px;">
-                  <li>Reduced food waste tracking errors and unauthorized access by 60% by engineering a MERN-stack Smart Fridge Tracker with secure, role-based authentication and user analytics dashboards.</li>
-                  <li>Programmed custom ESP32 firmware in C++ to stream real-time weight data (10+ payloads/second) to a scalable Node.js backend via low-latency MQTT/HTTP pipelines.</li>
-                </ul>
-              </div>
-            </div>
-            <div class="resume-download-btn">
-              <a href="https://drive.google.com/file/d/12qmSAv8rQL_nfXtM_3afR9jc3vgwNkXZ/view?usp=sharing" target="_blank" class="btn-download">📄 Download Full Resume (PDF)</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        <div class="sidebar-section"><div class="sidebar-title">Details</div><p class="resume-description">Single-page résumé preview. Open or download the PDF for the original document.</p></div>
+      </aside>
+      <main class="win-content resume-viewer">
+        <a class="resume-preview-link" href="assets/resume/Emanuel_Nader_resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Emanuel Nader résumé PDF">
+          <img src="assets/resume/Emanuel_Nader_resume-preview.png" alt="Preview of Emanuel Nader's one-page August 2026 software engineering résumé">
+        </a>
+      </main>
     </div>
-    <div class="win-statusbar">1 object — Resume.pdf (148 KB)</div>
+    <div class="win-statusbar">1 object • Emanuel_Nader_resume.pdf (119 KB) • Updated August 2026</div>
   </div>
-
   </div><!-- end #desktop -->
 
   <!-- Shutdown overlay (Authentic XP Mode) — outside #desktop so grayscale doesn't wash it out -->
@@ -865,7 +558,7 @@
     <div class="run-dialog" role="dialog" aria-label="Run">
       <div class="run-titlebar">
         <span>Run</span>
-        <button class="run-close" onclick="hideRunDialog()" title="Close">&#10005;</button>
+        <button class="run-close" onclick="hideRunDialog()" title="Close" aria-label="Close"><img src="assets/icons/lucide-x.svg" alt="" aria-hidden="true"></button>
       </div>
       <div class="run-body">
         <img class="run-icon" src="assets/icons/computer.png" alt="" />
@@ -883,7 +576,11 @@
     </div>
   </div>
 
-  <script src="script.js?v=13"></script>
+  <script src="profile-data.js?v=5"></script>
+  <script src="profile-ui.js?v=5"></script>
+  <script src="projects-data.js?v=5"></script>
+  <script src="projects-ui.js?v=5"></script>
+  <script src="script.js?v=10"></script>
 </body>
 
 </html>
