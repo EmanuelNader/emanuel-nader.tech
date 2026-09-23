@@ -288,7 +288,13 @@
       stack: ['Discord.js', 'Node.js', 'Web Scraping', 'Automation'],
       repositoryUrl: 'https://github.com/EmanuelNader/discord-internship-job-board-bot',
       demoUrl: null,
-      screenshots: []
+      screenshots: [
+        {
+          src: 'assets/projects/internship-job-board/mascot.png',
+          alt: 'Cute blue robot mascot in a graduation cap with a Discord logo, holding a wrench beside job-board and code icons',
+          caption: 'Bot mascot — Discord internship, co-op, and fellowship alerts.'
+        }
+      ]
     },
     {
       id: 'shotclock',

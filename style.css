@@ -12,10 +12,10 @@
 
 :root {
   --xp-taskbar-height: 40px;
-  --xp-start-width: 54px;
-  --xp-start-height: 29px;
   --xp-desktop-inset: var(--xp-taskbar-height);
   --xp-start-menu-offset: var(--xp-taskbar-height);
+  /* Classic Luna Start crop is 97x30; keep that ratio as the taskbar scales. */
+  --xp-start-width: calc(var(--xp-taskbar-height) * 97 / 30);
 }
 
 * {
@@ -482,78 +482,110 @@ a:hover {
 
 .taskbar-left {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex: 1;
+  min-width: 0;
 }
 
 .start-btn {
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  position: relative;
   z-index: 10001;
-  justify-content: center;
+  width: var(--xp-start-width);
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
-.start-img-btn {
-  width: var(--xp-start-width);
-  height: var(--xp-taskbar-height);
-}
-
-.start-img-btn img {
-  width: var(--xp-start-width);
-  height: var(--xp-start-height);
+.start-btn img {
+  width: 100%;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: fill;
+  object-position: left center;
+  pointer-events: none;
+  /* Avoid browser soft-upscale mush on the Luna bitmap */
+  image-rendering: -webkit-optimize-contrast;
 }
 
-.start-btn:hover {
-  filter: brightness(1.05);
+.start-btn:hover:not(.active):not(:active) {
+  filter: brightness(1.06);
 }
 
-.start-btn:active,
-.start-btn.active {
-  filter: brightness(0.9);
+.start-btn:active img,
+.start-btn.active img {
+  filter: brightness(0.72) saturate(1.05) contrast(1.08);
+  /* Keep the left of "start" inside the clip when pressed */
+  transform: translate(0, 1px);
 }
 
 .taskbar-windows {
   display: flex;
-  margin-left: 6px;
+  margin-left: 4px;
   flex: 1;
   align-items: center;
-  /* Center horizontally within taskbar */
+  gap: 3px;
+  min-width: 0;
+  height: 100%;
 }
 
 .taskbar-win-btn {
-  background: linear-gradient(to bottom, #3f8ff1 0%, #2867d8 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-  color: white;
-  height: 28px;
-  min-width: 180px;
-  max-width: 250px;
-  margin: 0 2px;
-  padding: 0 8px;
+  height: calc(var(--xp-taskbar-height) - 8px);
+  min-width: 0;
+  width: 160px;
+  max-width: 160px;
+  margin: 0;
+  padding: 0 8px 0 5px;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  flex: 0 1 160px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #8eb8f5 #163e8c #12408f #6aa6f0;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #4b94f0 0%, #3782e8 45%, #2b6fdc 100%);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-family: Tahoma, 'Segoe UI', sans-serif;
   font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 1px 1px 0 rgba(0, 20, 60, 0.45);
   cursor: pointer;
-  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.1), inset -1px -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .taskbar-win-btn.active {
-  background: #1e4b85;
-  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.3);
-  font-weight: bold;
+  /* Luna pressed: muted inset blue, not neon — sits into the taskbar */
+  border-color: #0c2a68 #5a9ae8 #6aa6f0 #0c2a68;
+  background: linear-gradient(
+    to bottom,
+    #2a5fc9 0%,
+    #326edc 22%,
+    #3778e8 55%,
+    #326ed8 100%
+  );
+  box-shadow: inset 1px 1px 3px rgba(0, 25, 70, 0.45);
+  font-weight: 700;
 }
 
 .tb-icon {
-  width: 14px;
-  height: 14px;
-  background-size: cover;
+  width: 16px;
+  height: 16px;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
   margin-right: 5px;
+  flex: 0 0 16px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .taskbar-right.systray {
@@ -1054,11 +1086,54 @@ a:hover {
 .win-statusbar {
   height: 20px;
   border-top: 1px solid #ACA899;
-  padding: 2px 10px;
+  padding: 2px 18px 2px 10px;
   color: #333;
   display: flex;
   align-items: center;
   background: #ECE9D8;
+}
+
+.win-resize-grip {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 16px;
+  height: 16px;
+  z-index: 3;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: nwse-resize;
+}
+
+.win-resize-grip::before {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  box-shadow:
+    1px 1px 0 #808080,
+    -4px 0 0 #fff, -3px 1px 0 #808080,
+    0 -4px 0 #fff, 1px -3px 0 #808080,
+    -8px 0 0 #fff, -7px 1px 0 #808080,
+    0 -8px 0 #fff, 1px -7px 0 #808080,
+    -4px -4px 0 #fff, -3px -3px 0 #808080,
+    -8px -4px 0 #fff, -7px -3px 0 #808080,
+    -4px -8px 0 #fff, -3px -7px 0 #808080;
+}
+
+.xp-window[data-maximized="true"] .win-resize-grip {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+html.resizing,
+html.resizing * {
+  cursor: nwse-resize !important;
+  user-select: none !important;
 }
 
 /* ==========================================================================
@@ -2156,15 +2231,12 @@ body.shutdown-active #login-screen {
     height: var(--xp-taskbar-height);
   }
 
-  .start-img-btn {
-    height: var(--xp-taskbar-height) !important;
-    width: var(--xp-start-width) !important;
-  }
-
   .taskbar-win-btn {
-    height: 40px;
+    height: calc(var(--xp-taskbar-height) - 8px);
     font-size: 12px;
-    max-width: 120px;
+    width: 140px;
+    max-width: 140px;
+    flex-basis: 140px;
     padding: 0 8px;
   }
 
@@ -2220,6 +2292,10 @@ body.shutdown-active #login-screen {
     max-width: none !important;
     max-height: none !important;
     box-shadow: none;
+  }
+
+  .win-resize-grip {
+    display: none !important;
   }
 
   .xp-window .win-titlebar {
@@ -2450,7 +2526,6 @@ body.shutdown-active #login-screen {
 
 .taskbar-right.systray { padding-block: 0; }
 .tray-icon { width: 16px; height: 16px; flex: 0 0 16px; }
-.start-img-btn img { flex: 0 0 auto; }
 
 .toolbar-action {
   min-height: 24px;

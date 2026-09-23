@@ -4,6 +4,14 @@
 let activeWindowId = null;
 let zIndexCounter = 100;
 const WELCOME_STORAGE_KEY = 'emanuel-portfolio.welcome-seen.v1';
+const XP_SOUNDS = {
+  startup: 'assets/sounds/xp-startup.mp3',
+  shutdown: 'assets/sounds/xp-shutdown.mp3',
+};
+const xpAudio = {
+  startup: null,
+  shutdown: null,
+};
 const projectApi = window.PortfolioProjects;
 const projectUi = window.PortfolioProjectsUi;
 const profileApi = window.PortfolioProfile;
@@ -31,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Start clock
   updateClock();
   setInterval(updateClock, 1000);
+  preloadXpSounds();
 
   // Desktop icon selection handling
   const icons = document.querySelectorAll('.desktop-icon');
@@ -87,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeProjectsExperience();
   initializeProfileExperience();
+  initializeWindowResizeHandles();
 });
 
 function initializeProfileExperience() {
@@ -249,14 +259,74 @@ function updateClock() {
 // ==========================================================================
 // LOGIN SCREEN TRANSITION
 // ==========================================================================
+function ensureXpAudio(name) {
+  if (!XP_SOUNDS[name]) return null;
+  if (!xpAudio[name]) {
+    const audio = new Audio(XP_SOUNDS[name]);
+    audio.preload = 'auto';
+    xpAudio[name] = audio;
+  }
+  return xpAudio[name];
+}
+
+function preloadXpSounds() {
+  Object.keys(XP_SOUNDS).forEach((name) => {
+    const audio = ensureXpAudio(name);
+    if (audio) {
+      // Kick off buffering without playing.
+      audio.load();
+    }
+  });
+}
+
+function playXpSound(name) {
+  const audio = ensureXpAudio(name);
+  if (!audio) return Promise.resolve();
+
+  try {
+    audio.pause();
+    audio.currentTime = 0;
+  } catch (_error) {
+    // Ignoring seek errors on freshly created audio elements.
+  }
+
+  const playAttempt = audio.play();
+  if (playAttempt && typeof playAttempt.catch === 'function') {
+    return playAttempt.catch(() => {
+      // Browsers may block autoplay until a user gesture; login/shutdown clicks count.
+    });
+  }
+  return Promise.resolve();
+}
+
+function stopXpSounds() {
+  Object.values(xpAudio).forEach((audio) => {
+    if (!audio) return;
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+    } catch (_error) {
+      // no-op
+    }
+  });
+}
+
+function showBlackScreen() {
+  document.body.innerHTML = '<div style="background:#000;width:100vw;height:100vh;margin:0;"></div>';
+  document.body.style.margin = '0';
+  document.documentElement.style.background = '#000';
+}
+
 function doLogin() {
   const loginScreen = document.getElementById('login-screen');
   const desktop = document.getElementById('desktop');
-  
-  // Fade out login audio effect usually plays here (optional)
+
+  // Login click unlocks autoplay — play the classic XP startup chime.
+  playXpSound('startup');
+
   loginScreen.style.transition = 'opacity 0.5s ease-out';
   loginScreen.style.opacity = '0';
-  
+
   setTimeout(() => {
     loginScreen.classList.add('hidden');
     desktop.classList.remove('hidden');
@@ -401,17 +471,27 @@ function hideShutdown() {
 
 function doStandBy() {
   hideShutdown();
-  document.body.innerHTML = '<div style="background:black;width:100vw;height:100vh;"></div>';
+  showBlackScreen();
 }
 
 function doTurnOff() {
   hideShutdown();
-  document.body.innerHTML = '<div style="background:black;width:100vw;height:100vh;"></div>';
+  // Keep Audio objects alive in JS memory so the chime continues after the black screen.
+  playXpSound('shutdown');
+  showBlackScreen();
 }
 
 function doRestart() {
   hideShutdown();
-  window.location.reload();
+  playXpSound('shutdown');
+  const audio = ensureXpAudio('shutdown');
+  const reload = () => window.location.reload();
+  if (audio) {
+    audio.addEventListener('ended', reload, { once: true });
+    setTimeout(reload, 4000);
+  } else {
+    reload();
+  }
 }
 
 // ===========================================================================
@@ -642,8 +722,12 @@ function parseStyleSize(value, fallback) {
   return parsed;
 }
 
+function getPageZoom() {
+  return parseFloat(window.getComputedStyle(document.body).zoom) || 1;
+}
+
 function saveRestoreRect(win) {
-  if (!win || parseStyleSize(win.dataset.origWidth, 0) >= 280) return;
+  if (!win || isMaximized(win)) return;
   const computed = window.getComputedStyle(win);
   const width = parseStyleSize(win.style.width, win.offsetWidth || parseStyleSize(computed.width, 760));
   const height = parseStyleSize(win.style.height, win.offsetHeight || parseStyleSize(computed.height, 520));
@@ -675,7 +759,7 @@ function clampWindowToDesktop(win) {
   const desk = document.getElementById('desktop');
   if (!desk || !win) return;
   const deskRect = desk.getBoundingClientRect();
-  const pageZoom = parseFloat(window.getComputedStyle(document.body).zoom) || 1;
+  const pageZoom = getPageZoom();
   const desktopWidth = deskRect.width / pageZoom;
   const desktopHeight = deskRect.height / pageZoom;
   const maxW = Math.max(280, desktopWidth - 8);
@@ -764,45 +848,66 @@ function maximizeWindow(winId) {
 }
 
 function bringToFront(winId) {
-  // Reset all active states
+  // Start menu stacks above windows but must not clear the focused window's
+  // taskbar "pressed" tab — real XP keeps that tab inset while Start is open.
+  if (winId === 'start-menu') {
+    const sm = document.getElementById('start-menu');
+    if (sm && !sm.classList.contains('hidden')) {
+      zIndexCounter++;
+      sm.style.zIndex = zIndexCounter;
+    }
+    return;
+  }
+
   document.querySelectorAll('.xp-window').forEach(w => {
     w.classList.remove('active');
   });
   document.querySelectorAll('.taskbar-win-btn').forEach(btn => {
     btn.classList.remove('active');
   });
-  
+
   const win = document.getElementById(winId);
   if (win) {
     zIndexCounter++;
     win.style.zIndex = zIndexCounter;
     win.classList.add('active');
-    win.classList.remove('hidden'); // In case it was minimized
+    win.classList.remove('hidden');
   }
-  
-  // Highlight taskbar button
+
   const tbBtn = document.getElementById(`tb-btn-${winId}`);
   if (tbBtn) tbBtn.classList.add('active');
-  
-  // If Start Menu is frontmost, it needs a higher stack
-  const sm = document.getElementById('start-menu');
-  if (sm && !sm.classList.contains('hidden') && winId === 'start-menu') {
-    zIndexCounter++;
-    sm.style.zIndex = zIndexCounter;
-  }
 }
 
 // ==========================================================================
-// WINDOW DRAGGING
+// WINDOW DRAGGING + RESIZE
 // ==========================================================================
 let isDragging = false;
 let currentDragWin = null;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
+let isResizing = false;
+let currentResizeWin = null;
+let resizeStartX = 0;
+let resizeStartY = 0;
+let resizeStartW = 0;
+let resizeStartH = 0;
+
+function initializeWindowResizeHandles() {
+  document.querySelectorAll('.xp-window').forEach((win) => {
+    if (win.querySelector('.win-resize-grip')) return;
+    const grip = document.createElement('div');
+    grip.className = 'win-resize-grip';
+    grip.title = 'Resize';
+    grip.setAttribute('aria-hidden', 'true');
+    grip.addEventListener('mousedown', (event) => startResize(event, win.id));
+    win.appendChild(grip);
+  });
+}
 
 function startDrag(e, winId) {
   // Prevent dragging if maximizing/minimizing/closing buttons clicked
   if (e.target.tagName.toLowerCase() === 'button') return;
+  if (e.target.closest('.win-resize-grip')) return;
   
   const win = document.getElementById(winId);
   if (win.dataset.maximized === 'true') return; // Cannot drag maximized windows
@@ -819,7 +924,33 @@ function startDrag(e, winId) {
   e.preventDefault();
 }
 
+function startResize(e, winId) {
+  if (e.button != null && e.button !== 0) return;
+  const win = document.getElementById(winId);
+  if (!win || isMaximized(win) || isTouchFriendlyViewport()) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+  isResizing = true;
+  currentResizeWin = win;
+  const zoom = getPageZoom();
+  resizeStartX = e.clientX;
+  resizeStartY = e.clientY;
+  resizeStartW = parseStyleSize(win.style.width, win.offsetWidth / zoom);
+  resizeStartH = parseStyleSize(win.style.height, win.offsetHeight / zoom);
+  document.documentElement.classList.add('resizing');
+  bringToFront(winId);
+}
+
 document.addEventListener('mousemove', (e) => {
+  if (isResizing && currentResizeWin) {
+    const zoom = getPageZoom();
+    currentResizeWin.style.width = `${resizeStartW + (e.clientX - resizeStartX) / zoom}px`;
+    currentResizeWin.style.height = `${resizeStartH + (e.clientY - resizeStartY) / zoom}px`;
+    clampWindowToDesktop(currentResizeWin);
+    return;
+  }
+
   if (!isDragging || !currentDragWin) return;
   
   // New position
@@ -836,6 +967,9 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseup', () => {
   isDragging = false;
   currentDragWin = null;
+  isResizing = false;
+  currentResizeWin = null;
+  document.documentElement.classList.remove('resizing');
 });
 
 // ==========================================================================

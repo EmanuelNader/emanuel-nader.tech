@@ -23,7 +23,7 @@ test('login opens About even when the previous tab hash pointed at a project', a
   }
 });
 
-test('desktop taskbar is slightly taller while the Start asset stays native-sized', async () => {
+test('desktop Start button fills the taskbar height and extends to authentic Luna width', async () => {
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   const page = await browser.newPage({ viewport: { width: 1440, height: 1024 } });
   try {
@@ -36,20 +36,25 @@ test('desktop taskbar is slightly taller while the Start asset stays native-size
     const geometry = await page.evaluate(() => {
       const taskbar = document.getElementById('taskbar').getBoundingClientRect();
       const desktop = document.getElementById('desktop').getBoundingClientRect();
-      const startImage = document.querySelector('.start-img-btn img').getBoundingClientRect();
+      const startButton = document.querySelector('.start-btn').getBoundingClientRect();
+      const startImage = document.querySelector('.start-btn img');
       return {
         taskbarHeight: taskbar.height,
         desktopBottom: desktop.bottom,
         taskbarTop: taskbar.top,
-        startWidth: startImage.width,
-        startHeight: startImage.height,
+        startLeft: startButton.left,
+        startButtonHeight: startButton.height,
+        startWidth: startButton.width,
+        startImageSrc: startImage?.getAttribute('src') || '',
       };
     });
 
     assert.equal(geometry.taskbarHeight, 40);
     assert.equal(geometry.desktopBottom, geometry.taskbarTop);
-    assert.equal(geometry.startWidth, 54);
-    assert.equal(geometry.startHeight, 29);
+    assert.equal(geometry.startLeft, 0);
+    assert.equal(geometry.startButtonHeight, 40);
+    assert.match(geometry.startImageSrc, /start\.png/);
+    assert.ok(Math.abs(geometry.startWidth - (40 * 97) / 30) < 2);
   } finally {
     await browser.close();
   }
